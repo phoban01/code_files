@@ -34,7 +34,7 @@ flare_width = {
 	(let* (
 		(dir (ly:grob-property grob 'direction))
 		(up-padding 1.1)
-		(down-padding 0.1)
+		(down-padding 0.9)
 	)
 	(if (= dir 1)
 		up-padding
@@ -210,9 +210,12 @@ normal_staff = {
 	\revert Staff.NoteHead.no-ledgers
 	\revert Staff.Accidental.stencil
 	\unset Staff.middleCPosition
+	\set Staff.forceClef = ##t
 }
 
 single_line_staff = {
+		\override Staff.Accidental.stencil = ##f
+		\override Staff.Clef.stencil = ##f
 		\override Staff.StaffSymbol #'line-count = 1
 		\override Staff.BarLine #'bar-extent = #'(-2 . 2)
 		\set Staff.middleCPosition = #0
@@ -222,8 +225,11 @@ body_staff = {
 		\override Staff.StaffSymbol #'line-positions = #'(-6 6)
 		\override Staff.NoteHead.no-ledgers = ##t	
 		\override Staff.Accidental.stencil = ##f	
+		\override Staff.Rest.Y-offset = #0
 		\set Staff.middleCPosition = #1
 		\body-clef #'fingerboard-small
+		\set Staff.forceClef = ##t
+
 }
 
 pizz_staff = {
@@ -237,6 +243,7 @@ pizz_staff = {
 % 		\override Staff.Dots #'staff-position = #set-dot-position
 % 		\override Staff.Accidental #'stencil = ##f
 		\body-clef #'fingerboard
+		\set Staff.forceClef = ##t
 }
 
 switch-staff = #(define-music-function (layout position settings) (ly:music?)
@@ -244,7 +251,6 @@ switch-staff = #(define-music-function (layout position settings) (ly:music?)
 			\stopStaff
 			$settings
 			\startStaff
-			\set Staff.forceClef = ##t
 		#}
 )
 %%%%END SWITCH STAFF TEMPLATES
@@ -576,7 +582,9 @@ ppos = #(define-music-function (layout props pos music) (number? ly:music?)
 #(set-default-paper-size "a3" 'portrait)
 
 \paper {
-	system-system-spacing = #'((basic-distance . 40) (minimum-distance . 20) (padding . 0))
+% 	system-system-spacing = #'((basic-distance . 40) (minimum-distance . 20) (padding . 0))
+	system-system-spacing = #'((basic-distance . 20) (minimum-distance . 20) (padding . 0))
+
 }
 
 \header {

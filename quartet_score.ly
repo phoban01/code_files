@@ -20,23 +20,23 @@
 	\new StaffGroup <<
 		#(set-accidental-style 'dodecaphonic 'StaffGroup)
 		%%%VIOLIN I
-% 		\new Staff = "violin_1" \with {
-% 			instrumentName = "VIOLON I"
-% 			shortInstrumentName = "VNO. I"
+		\new Staff = "violin_1" \with {
+			instrumentName = "VIOLON I"
+			shortInstrumentName = "VNO. I"
 
-% 		} {
-% 			\violin_I_pizz_intro
-% 		}
-% 		%%%VIOLIN II
-% 		\new Staff = "violin_2" \with {
-% 			\remove "Bar_number_engraver"			
-% 			instrumentName = "VIOLON II"
-% 			shortInstrumentName = "VNO. 2"
+		} {
+			\violin_I_pizz_intro
+		}
+		%%%VIOLIN II
+		\new Staff = "violin_2" \with {
+			\remove "Bar_number_engraver"			
+			instrumentName = "VIOLON II"
+			shortInstrumentName = "VNO. 2"
 
-% 		} {		
-% 			\violin_II_pizz_intro
-% 		}
-		%%%VIOLA
+		} {		
+			\violin_II_pizz_intro
+		}
+		%%VIOLA
 		\new Staff = "viola" \with {
 % 			\remove "Bar_number_engraver"
 			instrumentName = "ALTO"
@@ -52,16 +52,16 @@
 				}
 			>>	
 		}
-% 		%%%CELLO
-% 		\new Staff = "cello" \with {
-% 			instrumentName = "VIOLONCELLE"
-% 			shortInstrumentName = "VC."
+		%%CELLO
+		\new Staff = "cello" \with {
+			instrumentName = "VIOLONCELLE"
+			shortInstrumentName = "VC."
 
-% 			\override BarNumber #'direction = #DOWN
+			\override BarNumber #'direction = #DOWN
 
-% 		} {
-% 			\cello_pizz_intro
-% 		}		
+		} {
+			\cello_pizz_intro
+		}		
 	>>
 % 	\midi {} 
 }

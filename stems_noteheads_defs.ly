@@ -21,7 +21,7 @@
 		(mult (magstep fsz))
 		(stencil (grob-interpret-markup grob 
 					(markup
-						#:scale '(0.5 . 0.55)
+						#:scale '(0.6 . 0.65)
 						#:override '(line-join-style . miter)
 						#:override '(filled . #f)
 						#:path 0.35

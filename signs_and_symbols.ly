@@ -247,6 +247,67 @@ down_bow_light = \markup {
 % 	\epsfile #Y #1 #"/pieces/diotima_quartet/eps_files/down_bow_light.eps"
 % }
 
+frog = \markup {
+	\center-align
+	\override #'(thickness . 0.5)
+	\box
+	\scale #'(0.7 . 0.7)
+	\epsfile #Y #1 #"/pieces/diotima_quartet/eps_files/frog.eps"
+}
+
+midbow = \markup {
+	\center-align
+	\override #'(thickness . 0.5)	
+	\box
+	\scale #'(0.6 . 0.6)
+	\epsfile #Y #1 #"/pieces/diotima_quartet/eps_files/midbow.eps"
+}
+
+tip = \markup {
+	\center-align
+	\override #'(thickness . 0.5)	
+	\box
+	\pad-markup #-0.1
+	\scale #'(0.8 . 0.8)
+	\epsfile #Y #1 #"/pieces/diotima_quartet/eps_files/tip.eps"
+}
+
+bow = \markup {
+	\center-align
+	\scale #'(2 . 2)
+	\epsfile #Y #1 #"/pieces/diotima_quartet/eps_files/bow.eps"
+}
+
+clockwise = \markup {
+	\center-align
+	\scale #'(2.75 . 2.75)
+	\epsfile #Y #1 #"/pieces/diotima_quartet/eps_files/clockwise.eps"
+}
+
+anticlockwise = \markup {
+	\center-align
+	\scale #'(2.5 . 2.8)
+	\epsfile #Y #1 #"/pieces/diotima_quartet/eps_files/anticlockwise.eps"
+}
+
+clockhead = {
+	\once \override NoteHead #'stencil = #ly:text-interface::print
+	\once \override NoteHead #'text = \markup {\translate #'(0 . -1) \clockwise}
+	\once \override NoteHead #'stem-attachment = #'(0 . 0.3)
+}
+
+anti-clockhead = {
+	\once \override NoteHead #'stencil = #ly:text-interface::print
+	\once \override NoteHead #'text = \markup {\translate #'(0 . -1.25) \anticlockwise}
+	\once \override NoteHead #'stem-attachment = #'(0 . 0.5)
+}
+
+% \score {
+% 	\new Staff \with {\override StaffSymbol #'line-count = #1 middleCPosition = #0 } {
+% 		\clockhead c'8 [ \anti-clockhead c'8 ^\tip ]
+% 	}
+% }
+
 up_bow_heavy = \markup {
 	\center-align
 	\scale #'(1.7 . 1.7)
@@ -255,19 +316,19 @@ up_bow_heavy = \markup {
 
 down_bow_heavy = \markup {
 	\center-align
-	\scale #'(1.5 . 1.5)
+	\scale #'(2.5 . 2.5)
 	\epsfile #Y #1 #"/pieces/diotima_quartet/eps_files/down_bow_heavy.eps"
 }
 
 up_bow_very_heavy = \markup {
 	\center-align
-	\scale #'(1.5 . 1.5)
+	\scale #'(2 . 2)
 	\epsfile #Y #1 #"/pieces/diotima_quartet/eps_files/up_bow_very_heavy.eps"
 }
 
 down_bow_very_heavy = \markup {
 	\center-align
-	\scale #'(1.5 . 1.5)
+	\scale #'(2 . 2)
 	\epsfile #Y #1 #"/pieces/diotima_quartet/eps_files/down_bow_very_heavy.eps"
 }
 
