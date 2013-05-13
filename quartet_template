@@ -1,0 +1,201 @@
+#(define (circle-head grob)
+	(let* 
+		(
+			(layout (ly:grob-layout grob))
+			(props (ly:grob-alist-chain grob (ly:output-def-lookup layout 'text-font-defaults)))
+			(fsz  (ly:grob-property grob 'font-size 0.0))
+			(mult (magstep fsz))
+			(custom-note (markup
+					#:draw-circle 0.35 0.5 #t
+				))
+			(my-stencil (ly:text-interface::interpret-markup layout props custom-note))
+		)
+		(set! (ly:grob-property grob 'stem-attachment) '(0 . 0))
+		(set! (ly:grob-property grob 'stencil) (ly:stencil-scale my-stencil mult mult))
+	)
+)
+
+#(define (arc-head grob)
+	(let* 
+		(
+			(layout (ly:grob-layout grob))
+			(props (ly:grob-alist-chain grob (ly:output-def-lookup layout 'text-font-defaults)))
+			(fsz  (ly:grob-property grob 'font-size 0.0))
+			(mult (magstep fsz))
+			(custom-note (markup
+					#:override '(line-cap-style . square)
+					#:path 0.25
+					'(
+						(moveto -1 0)
+						(curveto -1 0 0 1 1 0)
+					)
+				))
+			(my-stencil (ly:text-interface::interpret-markup layout props custom-note))
+		)
+		(set! (ly:grob-property grob 'stem-attachment) '(0 . 0.5))
+		(set! (ly:grob-property grob 'stencil) (ly:stencil-scale my-stencil mult mult))
+	)
+)
+
+#(define (pizz-string-stem grob input-text)
+	(let* 
+		(
+		(notehead (ly:grob-property grob 'cause))
+		(notehead-pos (* (ly:grob-staff-position notehead) 0.5))
+		(notehead-sign (if (> notehead-pos 0) -3 1))
+		(stem (ly:stem::print grob))
+      	(text (markup 
+      			#:translate (cons 0 (+ notehead-pos 4.5))
+      			#:center-align
+      			#:override '(font-name . "AdobeCaslonPro")
+      			#:fontsize -4.5
+      			#:override '(thickness . 1)
+      			#:whiteout 
+      			#:with-color blue
+      			#:circle
+      			#:with-color black      			
+      			#:pad-markup 0.15 input-text
+      			
+      	))
+      	(text (grob-interpret-markup grob text))
+		)
+		(ly:stencil-add stem text)
+	)
+)
+
+#(define (pizz-string-stem-two grob first second)
+	(let* 
+		(
+		(notehead (ly:grob-property grob 'cause))
+		(notehead-pos (* (ly:grob-staff-position notehead) 0.5))
+		(notehead-sign (if (> notehead-pos 0) -3 1))
+		(stem (ly:stem::print grob))
+      	(text (markup 
+      			#:center-align
+      			#:translate (cons 0 (+ notehead-pos 4.5))
+      			#:override '(font-name . "AdobeCaslonPro")
+      			#:fontsize -5
+      			#:whiteout
+      			#:override '(thickness . 1)    
+      			#:with-color blue
+      			#:box
+      			#:with-color black
+      			#:center-column (
+      			#:pad-markup 0.1 #:whiteout first #:pad-markup 0.1 #:whiteout second
+      			)
+      			
+      	))
+      	(text (grob-interpret-markup grob text))
+		)
+		(ly:stencil-add stem text)
+	)
+)
+
+#(define (pizz-string-stem-three grob first second third)
+	(let* 
+		(
+		(notehead (ly:grob-property grob 'cause))
+		(notehead-pos (* (ly:grob-staff-position notehead) 0.5))
+		(notehead-sign (if (> notehead-pos 0) -3 1))
+		(stem (ly:stem::print grob))
+      	(text (markup 
+      			#:center-align
+      			#:translate (cons 0 (+ notehead-pos 4.5))
+      			#:override '(font-name . "AdobeCaslonPro")
+      			#:fontsize -7
+      			#:whiteout
+      			#:override '(thickness . 1)     
+      			#:with-color blue
+      			#:box
+      			#:with-color black
+      			#:center-column (
+      			#:pad-markup 0.1 #:whiteout first #:whiteout second #:pad-markup 0.1 #:whiteout third
+      			)
+      			
+      	))
+      	(text (grob-interpret-markup grob text))
+		)
+		(ly:stencil-add stem text)
+	)
+)
+
+#(define (pizz-string-stem-four grob first second third fourth)
+	(let* 
+		(
+		(notehead (ly:grob-property grob 'cause))
+		(notehead-pos (* (ly:grob-staff-position notehead) 0.5))
+		(notehead-sign (if (> notehead-pos 0) -3 1))
+		(stem (ly:stem::print grob))
+      	(text (markup 
+      			#:center-align
+      			#:translate (cons 0 (+ notehead-pos 4.5))
+      			#:override '(font-name . "AdobeCaslonPro")
+      			#:fontsize -8.5
+      			#:whiteout
+      			#:override '(thickness . 1)   
+      			#:with-color blue
+      			#:box
+      			#:with-color black
+      			#:center-column (
+      			#:pad-markup 0.1 #:whiteout first #:whiteout second #:whiteout third #:pad-markup 0.1 #:whiteout fourth
+      			)
+      			
+      	))
+      	(text (grob-interpret-markup grob text))
+		)
+		(ly:stencil-add stem text)
+	)
+)
+
+pizz_strings_one = #(define-music-function (parser location text) (string?)
+	#{
+		\once \override Stem #'stencil = #(lambda (grob) (pizz-string-stem text))
+	#}
+)
+
+\layout {
+	\context {
+		\Score
+		\accepts "PizzStaff"
+	}
+
+	\context {
+		\Staff
+		\alias "Staff"
+		\name "PizzStaff"
+		\remove "Ledger_line_engraver"
+		\accepts "LeftHandVoice"
+		\accepts "RightHandVoice"
+
+		\numericTimeSignature
+
+		middleCPosition =  #0
+
+		\override StaffSymbol #'line-positions = #'(-12 12)
+		\override Clef #'stencil = #ly:text-interface::print
+		\override Clef #'text = \markup {
+				\translate #'(0 . -5.85)
+				\scale #'(13.5 . 13.5)
+				\epsfile #Y #1 #"/pieces/diotima_quartet/clefs/fingerboard.eps"
+		}
+		\override TimeSignature #'font-size = #3
+		\override Glissando #'thickness = #3
+	}
+	\context {
+		\Voice
+		\alias "Voice"
+		\name "LeftHandVoice"
+		\override NoteHead #'stencil = #circle-head
+		\override Stem #'direction = #DOWN
+		\override Beam #'positions = #'(-13 . -13)
+	}
+	\context {
+		\Voice
+		\alias "Voice"
+		\name "RightHandVoice"
+		\override NoteHead #'stencil = #arc-head
+		\override Stem #'direction = #UP
+		\override Beam #'positions = #'(9 . 9)
+		\override Stem #'stencil = #(lambda (grob) (pizz-string-stem-three grob "IV" "III" "I"))
+	}	
+}
