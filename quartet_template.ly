@@ -145,7 +145,7 @@ offset_dyn = #(define-music-function (layout props y) (number?)
 
 slash_grace = {
   #(remove-grace-property 'Voice 'Stem 'direction)
-  \once \override Stem #'length = #10
+  \once \override Stem #'length = #7
   \once \override NoteHead #'stencil = #pizz-circle-head-grace
   \once \override Flag #'stroke-style = #"grace"
   \temporary \override Flag #'stencil = #normal-flag
@@ -467,6 +467,8 @@ ppos = #(define-music-function (layout props pos music) (number? ly:music?)
 
 % 		#(add-grace-property 'Voice 'Stem 'length set-stem-position-grace)
 
+		\override TupletBracket #'padding = #1
+
 		\override Beam #'breakable = ##t
 		\override Glissando #'breakable = ##t
 
@@ -575,4 +577,8 @@ ppos = #(define-music-function (layout props pos music) (number? ly:music?)
 
 \paper {
 	system-system-spacing = #'((basic-distance . 40) (minimum-distance . 20) (padding . 0))
+}
+
+\header {
+	tagline = ""
 }

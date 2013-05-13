@@ -93,6 +93,8 @@
 				(cond 
 					((equal? (cdr extender-I) "dot")  
 						(markup #:translate (cons (+ (* extender-length (first extender-factors)) 4) 0) draw-dot))
+					((equal? (cdr extender-I) "mute")  
+						(markup #:translate (cons (+ (* extender-length (first extender-factors)) 4) 0) draw-mute))					
 					((equal? (cdr extender-I) "release")  
 						(markup #:translate (cons (+ (* extender-length (first extender-factors)) 4) 0) draw-release))
 					("")
@@ -132,6 +134,8 @@
 				(cond 
 					((equal? (cdr extender-II) "dot")  
 						(markup #:translate (cons (+ (* extender-length (second extender-factors)) 2.75) 0) draw-dot))
+					((equal? (cdr extender-II) "mute")  
+						(markup #:translate (cons (+ (* extender-length (second extender-factors)) 2.75) 0) draw-mute))					
 					((equal? (cdr extender-II) "release")  
 						(markup #:translate (cons (+ (* extender-length (second extender-factors)) 2.75) 0) draw-release))
 					("")
@@ -171,6 +175,8 @@
 				(cond 
 					((equal? (cdr extender-III) "dot")  
 						(markup #:translate (cons (+ (* extender-length (third extender-factors)) 1.25) 0) draw-dot))
+					((equal? (cdr extender-III) "mute")  
+						(markup #:translate (cons (+ (* extender-length (third extender-factors)) 1.25) 0) draw-mute))					
 					((equal? (cdr extender-III) "release")  
 						(markup #:translate (cons (+ (* extender-length (third extender-factors)) 1.25) 0) draw-release))
 					("")
@@ -210,6 +216,8 @@
 				(cond 
 					((equal? (cdr extender-IV) "dot")  
 						(markup #:translate (cons (+ (* extender-length (fourth extender-factors)) 0) 0) draw-dot))
+					((equal? (cdr extender-IV) "mute")  
+						(markup #:translate (cons (+ (* extender-length (fourth extender-factors)) 0) 0) draw-mute))					
 					((equal? (cdr extender-IV) "release")  
 						(markup #:translate (cons (+ (* extender-length (fourth extender-factors)) 0) 0) draw-release))
 					("")
