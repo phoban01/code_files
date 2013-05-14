@@ -512,7 +512,7 @@ ppos = #(define-music-function (layout props pos music) (number? ly:music?)
 % 		\override Stem #'layer = #1
 		\override Stem #'direction = #UP
 % 		\override Stem #'length = #(lambda (grob) (set-stem-position grob 8))
-		\override Beam #'positions = #'(11 . 11)
+		\override Beam #'positions = #'(12 . 12)
 		\override Rest #'font-size = #-2
 
 	}
@@ -524,7 +524,6 @@ ppos = #(define-music-function (layout props pos music) (number? ly:music?)
 		\remove "Ledger_line_engraver"
 		\remove "Time_signature_engraver"
 		\remove "Accidental_engraver"
-
 		\override Accidental.stencil = ##f
 
 		\override StaffSymbol #'transparent = ##t

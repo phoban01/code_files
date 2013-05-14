@@ -19,55 +19,55 @@
 \score {
 	\new StaffGroup <<
 		#(set-accidental-style 'dodecaphonic 'StaffGroup)
-% 		%%%VIOLIN I
-% 		\new Staff = "violin_1" \with {
-% 			instrumentName = "VIOLON I"
-% 			shortInstrumentName = "VNO. I"
-
-% 		} {
-% % 			\violin_I_pizz_intro
-% 			<<
-% 				\new RightHandVoice = "upper" {
-% 					\violin_I_pizz_right
-% 				} 
-% 				\new LeftHandVoice = "lower" {
-% 					\violin_I_pizz_left
-% 				}
-% 			>>	
-% 		}
-% 		%%VIOLIN II
-% 		\new Staff = "violin_2" \with {
-% 			\remove "Bar_number_engraver"			
-% 			instrumentName = "VIOLON II"
-% 			shortInstrumentName = "VNO. 2"
-
-% 		} {		
-% % 			\violin_II_pizz_intro
-% 			<<
-% 				\new RightHandVoice = "upper" {
-% 					\violin_II_pizz_right
-% 				} 
-% 				\new LeftHandVoice = "lower" {
-% 					\violin_II_pizz_left
-% 				}
-% 			>>				
-% 		}
-		%%VIOLA
-		\new Staff = "viola" \with {
-% 			\remove "Bar_number_engraver"
-			instrumentName = "ALTO"
-			shortInstrumentName = "VLA."
+		%%%VIOLIN I
+		\new Staff = "violin_1" \with {
+			instrumentName = "VIOLON I"
+			shortInstrumentName = "VNO. I"
 
 		} {
+% 			\violin_I_pizz_intro
 			<<
 				\new RightHandVoice = "upper" {
-					\viola_pizz_right
+					\violin_I_pizz_right
 				} 
 				\new LeftHandVoice = "lower" {
-					\viola_pizz_left
+					\violin_I_pizz_left
 				}
 			>>	
 		}
+		%%VIOLIN II
+		\new Staff = "violin_2" \with {
+			\remove "Bar_number_engraver"			
+			instrumentName = "VIOLON II"
+			shortInstrumentName = "VNO. 2"
+
+		} {		
+% 			\violin_II_pizz_intro
+			<<
+				\new RightHandVoice = "upper" {
+					\violin_II_pizz_right
+				} 
+				\new LeftHandVoice = "lower" {
+					\violin_II_pizz_left
+				}
+			>>				
+		}
+		%%VIOLA
+% 		\new Staff = "viola" \with {
+% % 			\remove "Bar_number_engraver"
+% 			instrumentName = "ALTO"
+% 			shortInstrumentName = "VLA."
+
+% 		} {
+% 			<<
+% 				\new RightHandVoice = "upper" {
+% 					\viola_pizz_right
+% 				} 
+% 				\new LeftHandVoice = "lower" {
+% 					\viola_pizz_left
+% 				}
+% 			>>	
+% 		}
 		%%CELLO
 % 		\new Staff = "cello" \with {
 % 			instrumentName = "VIOLONCELLE"
