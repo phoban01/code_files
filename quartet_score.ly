@@ -8,14 +8,13 @@
 \pointAndClickOff
 
 %%%%MUSIC
-\include "/pieces/diotima_quartet/music_files/violin_I_pizz_intro.ly"
-\include "/pieces/diotima_quartet/music_files/violin_II_pizz_intro.ly"
-\include "/pieces/diotima_quartet/music_files/cello_pizz_intro.ly"
 \include "/pieces/diotima_quartet/music_files/violin_I_pizz.ly"
 \include "/pieces/diotima_quartet/music_files/violin_II_pizz.ly"
 \include "/pieces/diotima_quartet/music_files/viola_pizz.ly"
 \include "/pieces/diotima_quartet/music_files/cello_pizz.ly"
-
+\include "/pieces/diotima_quartet/music_files/violin_I_pizz_intro.ly"
+\include "/pieces/diotima_quartet/music_files/violin_II_pizz_intro.ly"
+\include "/pieces/diotima_quartet/music_files/cello_pizz_intro.ly"
 \score {
 	\new StaffGroup <<
 		#(set-accidental-style 'dodecaphonic 'StaffGroup)
@@ -25,43 +24,37 @@
 			shortInstrumentName = "VNO. I"
 
 		} {
-% 			\violin_I_pizz_intro
-			\violin_I_first_pizz
+			\violin_I_pizz_intro
+% 			\violin_I_first_pizz
 % 			\violin_I_second_pizz
 		}
-% 		%%VIOLIN II
+		%%VIOLIN II
 % 		\new Staff = "violin_2" \with {
 % 			\remove "Bar_number_engraver"			
 % 			instrumentName = "VIOLON II"
 % 			shortInstrumentName = "VNO. 2"
 
 % 		} {		
-% % 			\violin_II_pizz_intro
-% 			<<
-% 				\new RightHandVoice = "upper" {
-% 					\violin_II_pizz_right
-% 				} 
-% 				\new LeftHandVoice = "lower" {
-% 					\violin_II_pizz_left
-% 				}
-% 			>>				
+% 			\violin_II_pizz_intro
+% 			\violin_II_first_pizz
+% 			\violin_I_second_pizz			
 % 		}
-		%%VIOLA
-% 		\new Staff = "viola" \with {
-% % 			\remove "Bar_number_engraver"
-% 			instrumentName = "ALTO"
-% 			shortInstrumentName = "VLA."
+		%VIOLA
+		\new Staff = "viola" \with {
+% 			\remove "Bar_number_engraver"
+			instrumentName = "ALTO"
+			shortInstrumentName = "VLA."
 
-% 		} {
-% 			<<
-% 				\new RightHandVoice = "upper" {
-% 					\viola_pizz_right
-% 				} 
-% 				\new LeftHandVoice = "lower" {
-% 					\viola_pizz_left
-% 				}
-% 			>>	
-% 		}
+		} {
+			<<
+				\new RightHandVoice = "upper" {
+					\viola_pizz_right
+				} 
+				\new LeftHandVoice = "lower" {
+					\viola_pizz_left
+				}
+			>>	
+		}
 % 		CELLO
 % 		\new Staff = "cello" \with {
 % 			instrumentName = "VIOLONCELLE"

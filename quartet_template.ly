@@ -403,6 +403,8 @@ ppos = #(define-music-function (layout props pos music) (number? ly:music?)
 
 		\override InstrumentName #'font-name = #"Optima"
 % 		\override StemTremolo #'slope = #0.1
+
+
 	}
 
 	\context {

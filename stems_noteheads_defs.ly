@@ -209,7 +209,8 @@
 )
 
 #(define (if-not-rest grob)
-	(if (equal? (ly:grob-object grob 'noteheads) '()) grob (cluster-stem-split grob))
+	;(display (equal? (ly:grob-object grob 'note-heads) '())) (newline)
+	(if (equal? (ly:grob-object grob 'note-heads) '()) grob (cluster-stem-split grob))
 )
 
 % needs to work with dots...check if both dot and accidental are present and if so add more space
