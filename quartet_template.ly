@@ -145,10 +145,12 @@ offset_dyn = #(define-music-function (layout props y) (number?)
 
 slash_grace = {
   #(remove-grace-property 'Voice 'Stem 'direction)
-  \once \override Stem #'length = #7
+%   \once \override Stem #'length = #7
   \once \override NoteHead #'stencil = #pizz-circle-head-grace
-  \once \override Flag #'stroke-style = #"grace"
-  \temporary \override Flag #'stencil = #normal-flag
+%   \once \override Flag #'stroke-style = #"grace"
+%   \temporary \override Flag #'stencil = #normal-flag
+	\once \override Stem #'transparent = ##t
+	\once \override Flag #'transparent = ##t
 }
 %%%
 
