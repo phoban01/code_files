@@ -441,6 +441,12 @@ tilt_bow = \markup {
 	"90º"
 }
 
+ear = \markup {
+	\left-align
+	\scale #'(5.5 . 5.5)
+	\epsfile #Y #1 #"/pieces/diotima_quartet/eps_files/listen.eps"
+}
+
 mute-sign = \markup {
 	\combine
 	\draw-circle #1 #0.2 ##f
@@ -538,3 +544,10 @@ draw_tuning_arrow = #(define-music-function (parser location start end) (markup?
 	)
 	(interpret-markup layout props (markup #:override '(font-name . "AdobeCaslonPro") #:translate (cons (+ -5 offset-x)  (+ 0 offset-y)) output)))
 )
+
+% \score {
+% 	\new Staff {
+% 		c'4 ^\markup {\line { \ear "ecoute"}}
+% 	}
+% }
+

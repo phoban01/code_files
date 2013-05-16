@@ -309,8 +309,8 @@
 )
 
 diamonds = {
+	\override Staff.Tie.extra-offset = #'(0.75 . -0.25)	
 	\override NoteHead #'stencil =  #diamond-head
-
 }
 
 squares = {
@@ -318,10 +318,89 @@ squares = {
 }
 
 circles = {
+	\override Staff.Tie.extra-offset = #'(0 . -0.25)		
 	\override NoteHead #'stencil =  #circle-head
 }
 
 
+highest_harmonic = {
+	\once \override Staff.Tie.extra-offset = #'(1 . -0.25)	
+	\once\override NoteColumn #'X-offset = #0.35
+	\once\override NoteHead #'no-ledgers = ##t
+	\once\override NoteHead #'stem-attachment = #'(0.26 . -0.3)
+	\once\override NoteHead #'stencil = #ly:text-interface::print
+	\once\override NoteHead #'text = \markup {
+						\combine
+						\scale #'(0.6 . 0.65)
+						\override #'(line-join-style . miter)
+						\override #'(filled . #f)
+						\path #0.35
+						#'(
+							(moveto 0 1)
+							(lineto 1 0)
+							(lineto 0 -1)
+							(lineto -1 0)
+							(closepath))
+						\combine
+						\override #'(line-cap-style . square)
+						\path #0.35
+						#'(
+							(moveto -1.15 1)
+							(lineto 0 2)
+							(lineto 1.15 1))
+						\combine
+						\path #0.1
+							#'((moveto 0 0.6)
+							(lineto 0 2))
+						\translate #'(-1.5 . 2.5)							
+						\italic \tiny "poss."
+
+
+	}
+}
+
+natural_notehead = {
+	\once \override Staff.Tie.extra-offset = #'(0.6 . -0.25)	
+% 	\once\override NoteColumn #'X-offset = #0.35
+	\once\override NoteHead #'no-ledgers = ##t
+	\once\override NoteHead #'stem-attachment = #'(0 . 1)
+	\once\override NoteHead #'stencil = #ly:text-interface::print
+	\once \override NoteHead #'text = \markup {
+						\scale #'(1.35 . 1.35) \natural
+	}
+}
+
+flat_notehead = {
+	\once \override Staff.Tie.extra-offset = #'(1 . -0.25)	
+% 	\once\override NoteColumn #'X-offset = #0.35
+	\once\override NoteHead #'no-ledgers = ##t
+	\once\override NoteHead #'stem-attachment = #'(0 . 1)
+	\once\override NoteHead #'stencil = #ly:text-interface::print
+	\once \override NoteHead #'text = \markup {
+						\whiteout \scale #'(1.35 . 1.35) \flat
+	}
+}
+
+sharp_notehead = {
+	\once \override Staff.Tie.extra-offset = #'(1 . -0.25)	
+% 	\once\override NoteColumn #'X-offset = #0.35
+	\once\override NoteHead #'no-ledgers = ##t
+	\once\override NoteHead #'stem-attachment = #'(0 . 1)
+	\once\override NoteHead #'stencil = #ly:text-interface::print
+	\once \override NoteHead #'text = \markup {
+						\whiteout \scale #'(1.35 . 1.35) \sharp
+	}
+}
+
+% \score {
+% 	<<
+% 	\new Staff {
+% 			\natural_notehead c'''4 \flat_notehead c'''4 \sharp_notehead c'''4
+% 	}
+% 	\new Staff {
+% 		c'''4
+% 	} >>
+% }
 
 
 % \score {

@@ -179,3 +179,50 @@ wavy_vibrato = #(define-music-function (parser location scale) (number?)
 		\once \override Glissando #'after-line-breaking = #(lambda (grob) (wavy-vibrato grob scale))
 	#}
 )
+
+%%wavy line
+#(define (wavy-line grob scale)
+	(let* (
+		(line-thickness 0.25)
+		(left-bound (ly:grob-property grob 'left-bound-info))
+		(right-bound (ly:grob-property grob 'right-bound-info))
+		(stencil (ly:grob-property grob 'stencil))
+		(left-start-Y (cdr (assoc 'Y left-bound)))
+		(x-ext (ly:stencil-extent stencil X))
+		(right-end  (+ (cdr x-ext) 0.85))			
+		(stencil (ly:make-stencil (list 'embedded-ps
+				   (ly:format "gsave
+				   	  /line-width ~4f def
+				   	  /ypos ~4f def
+				   	  /scalar ~4f def
+				   	  /end-x ~4f def
+				      currentpoint translate
+				      newpath
+				   	  0 ypos translate
+				      1 setlinecap
+				      1 setlinejoin
+				      line-width setlinewidth
+				      0.75 0 moveto
+				      0.75 0 end-x 0.25 mul 2 end-x 0.75 mul -2 end-x 0 curveto
+				      stroke
+				      grestore" 
+				line-thickness 
+				left-start-Y
+				(* 0.5 scale)
+				(* right-end 1)
+				))
+  			  (cons 0 1.3125)
+    		  (cons -.75 .75))
+		))
+	(ly:grob-set-property! grob 'stencil stencil)
+	)
+)                 
+
+wavy_line = #(define-music-function (parser location scale) (number?)
+	#{
+		\once \override Dots #'extra-offset = #'(-0.25 . -0.85)
+		\once \override Glissando #'after-line-breaking = #(lambda (grob) (wavy-line grob scale))
+	#}
+)
+
+

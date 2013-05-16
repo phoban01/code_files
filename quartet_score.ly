@@ -25,16 +25,16 @@
 
 		} {
 			\violin_I_pizz_intro
-% 			\violin_I_second_pizz
+			\violin_I_second_pizz
 		}
-		%VIOLIN II
+% 		%VIOLIN II
 		\new Staff = "violin_2" \with {
 % 			\remove "Bar_number_engraver"			
 			instrumentName = "VIOLON II"
 			shortInstrumentName = "VNO. 2"
 		} {		
 			\violin_II_pizz_intro
-% 			\violin_I_second_pizz			
+			\violin_II_second_pizz			
 		}
 		%VIOLA
 		\new Staff = "viola" \with {
@@ -52,7 +52,7 @@
 				}
 			>>	
 		}
-% 		CELLO
+		%CELLO
 		\new Staff = "cello" \with {
 			instrumentName = "VIOLONCELLE"
 			shortInstrumentName = "VC."
@@ -60,14 +60,7 @@
 
 		} {
 			\cello_pizz_intro
-% 			<<
-% 				\new RightHandVoice = "upper" {
-% 					\cello_pizz_right
-% 				} 
-% 				\new LeftHandVoice = "lower" {
-% 					\cello_pizz_left
-% 				}
-% 			>>	
+			\cello_pizz_section
 		}		
 	>>
 

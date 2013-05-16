@@ -108,6 +108,25 @@ effort = #(define-event-function (parser location arg) (markup?)
 %%%
 
 %%%MISC
+
+fposs = #(make-dynamic-script (markup
+				  #:override '(word-space . 0.25)
+				  #:line (
+				  	#:dynamic "f"
+				  	#:fontsize -1
+				  	#:normal-text #:italic #:lower 0.5 "poss"
+				  ) 
+	))
+
+pposs = #(make-dynamic-script (markup
+				  #:override '(word-space . 0.25)
+				  #:line (
+				  	#:dynamic "p"
+				  	#:fontsize -1
+				  	#:normal-text #:italic #:lower 0.5 "poss"
+				  ) 
+	))
+
 hideNote = {
 	\once \override Accidental #'stencil = ##f
 	\once \override NoteHead #'transparent = ##t
@@ -212,10 +231,20 @@ normal_staff = {
 	\revert Staff.NoteHead.no-ledgers
 	\revert Staff.Accidental.stencil
 	\unset Staff.middleCPosition
-	\set Staff.forceClef = ##t
+% 	\set Staff.forceClef = ##t
+}
+
+no_line_staff = {
+		\override Staff.NoteHead.no-ledgers = ##t	
+		\override Staff.Accidental.stencil = ##f
+		\override Staff.Clef.stencil = ##f
+		\override Staff.StaffSymbol #'line-count = #0
+		\override Staff.BarLine #'bar-extent = #'(-2 . 2)
+		\set Staff.middleCPosition = #0
 }
 
 single_line_staff = {
+		\override Staff.NoteHead.no-ledgers = ##t	
 		\override Staff.Accidental.stencil = ##f
 		\override Staff.Clef.stencil = ##f
 		\override Staff.StaffSymbol #'line-count = 1
@@ -230,7 +259,7 @@ body_staff = {
 		\override Staff.Rest.Y-offset = #0
 		\set Staff.middleCPosition = #1
 		\body-clef #'fingerboard-small
-		\set Staff.forceClef = ##t
+% 		\set Staff.forceClef = ##t
 
 }
 
@@ -588,8 +617,8 @@ ppos = #(define-music-function (layout props pos music) (number? ly:music?)
 
 \paper {
 % 	system-system-spacing = #'((basic-distance . 40) (minimum-distance . 20) (padding . 0))
-	system-system-spacing = #'((basic-distance . 20) (minimum-distance . 20) (padding . 0))
-
+% 	system-system-spacing = #'((basic-distance . 8) (minimum-distance . 8) (padding . 0))
+	systems-per-page = #2
 }
 
 \header {
