@@ -25,20 +25,17 @@
 
 		} {
 			\violin_I_pizz_intro
-% 			\violin_I_first_pizz
 % 			\violin_I_second_pizz
 		}
-		%%VIOLIN II
-% 		\new Staff = "violin_2" \with {
+		%VIOLIN II
+		\new Staff = "violin_2" \with {
 % 			\remove "Bar_number_engraver"			
-% 			instrumentName = "VIOLON II"
-% 			shortInstrumentName = "VNO. 2"
-
-% 		} {		
-% 			\violin_II_pizz_intro
-% 			\violin_II_first_pizz
+			instrumentName = "VIOLON II"
+			shortInstrumentName = "VNO. 2"
+		} {		
+			\violin_II_pizz_intro
 % 			\violin_I_second_pizz			
-% 		}
+		}
 		%VIOLA
 		\new Staff = "viola" \with {
 % 			\remove "Bar_number_engraver"
@@ -56,14 +53,13 @@
 			>>	
 		}
 % 		CELLO
-% 		\new Staff = "cello" \with {
-% 			instrumentName = "VIOLONCELLE"
-% 			shortInstrumentName = "VC."
+		\new Staff = "cello" \with {
+			instrumentName = "VIOLONCELLE"
+			shortInstrumentName = "VC."
+			\override BarNumber #'direction = #DOWN
 
-% 			\override BarNumber #'direction = #DOWN
-
-% 		} {
-% % 			\cello_pizz_intro
+		} {
+			\cello_pizz_intro
 % 			<<
 % 				\new RightHandVoice = "upper" {
 % 					\cello_pizz_right
@@ -72,7 +68,7 @@
 % 					\cello_pizz_left
 % 				}
 % 			>>	
-% 		}		
+		}		
 	>>
-% 	\midi {} 
+
 }

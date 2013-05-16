@@ -243,9 +243,9 @@ pizz_staff = {
 		\override Staff.NoteHead.no-ledgers = ##t
 		\override Staff.BarLine #'bar-extent = #'(-6 . 6)		
 % 		\override Staff.Dots #'staff-position = #set-dot-position
-% 		\override Staff.Accidental #'stencil = ##f
+		\override Staff.Accidental #'stencil = ##f
 		\body-clef #'fingerboard
-		\set Staff.forceClef = ##t
+% 		\set Staff.forceClef = ##t
 }
 
 switch-staff = #(define-music-function (layout position settings) (ly:music?)
@@ -439,6 +439,8 @@ ppos = #(define-music-function (layout props pos music) (number? ly:music?)
 		barNumberVisibility = #(every-nth-bar-number-visible 1)
 
 		\override TupletBracket #'padding = #padding-function
+
+		\override Tie #'extra-offset = #'(0 . -0.5)
 	}
 
 	\context {

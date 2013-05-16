@@ -481,10 +481,12 @@ draw_bracket = #(define-music-function (parser location symbol) (markup?)
 )
 
 draw_line_arrow = #(define-music-function (parser location start end) (markup? markup?)
+	(let* (
+		(padded-right (markup #:center-align #:concat (" " #:hspace 0.75 end))))
 	#{
 		\override TextSpanner.bound-details.right.arrow = ##t			
 		\override TextSpanner.bound-details.left.text = $start
-		\override TextSpanner.bound-details.right.text = $end
+		\override TextSpanner.bound-details.right.text = $padded-right
 		\override TextSpanner.bound-details.left.stencil-align-dir-y = #0
 		\override TextSpanner.bound-details.right.stencil-align-dir-y = #0
 		\override TextSpanner.style = #'dashed-line
@@ -493,7 +495,7 @@ draw_line_arrow = #(define-music-function (parser location start end) (markup? m
 		\override TextSpanner.arrow-width = #0.25
 		\override TextSpanner.rotation = #'(0 0 0)
 	#}
-
+	)
 )
 
 draw_tuning_arrow = #(define-music-function (parser location start end) (markup? markup?)
