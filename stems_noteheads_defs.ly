@@ -1,5 +1,7 @@
 \language "english"
 \version "2.17.15"
+\include "/pieces/diotima_quartet/code_files/signs_and_symbols.ly"
+
 
 #(define (diamond-head grob)
 	(let* (
@@ -150,14 +152,26 @@
 						#t #f
 				) #f ))
 		(fsz  (ly:grob-property grob 'font-size 0.0))
-		(duration (ly:moment-main-denominator (ly:duration-length (ly:event-property (ly:grob-property grob 'cause) 'duration))))
-		(filled (if (< duration 4) #f #t))		
+		(duration (ly:duration-log (ly:event-property (ly:grob-property grob 'cause) 'duration)))
+		(filled (if (< duration 2) #f #t))		
 		(mult (magstep fsz))
 
-		(stencil (grob-interpret-markup grob 
-					(markup
-						#:draw-circle 0.475 0.15 filled
-					)
+		(stencil (cond
+				((>= duration 2) (grob-interpret-markup grob 
+									(markup
+										#:draw-circle 0.475 0.15 filled
+									)))
+				((= duration 1)
+					(grob-interpret-markup grob 
+									(markup
+										#:draw-circle 0.55 0.15 filled
+									)))
+				((= duration 0)
+					(grob-interpret-markup grob 
+									(markup
+										#:scale '(1.1 . 0)
+										#:draw-circle 0.55 0.15 filled
+									)))				
 		))                     
 
 		(notecol (ly:grob-parent   grob    X))
@@ -209,8 +223,9 @@
 )
 
 #(define (if-not-rest grob)
-	;(display (equal? (ly:grob-object grob 'note-heads) '())) (newline)
-	(if (equal? (ly:grob-object grob 'note-heads) '()) grob (cluster-stem-split grob))
+	(if (equal? (ly:grob-object grob 'note-heads) '()) grob 
+			(if (= 0 (ly:duration-log (ly:event-property (ly:grob-property (ly:grob-property grob 'cause) 'cause) 'duration))) grob (cluster-stem-split grob))
+	)
 )
 
 % needs to work with dots...check if both dot and accidental are present and if so add more space
@@ -359,47 +374,54 @@ highest_harmonic = {
 	}
 }
 
-natural_notehead = {
-	\once \override Staff.Tie.extra-offset = #'(0.6 . -0.25)	
+mute_head = {
+	\once \override Staff.Tie.extra-offset = #'(1 . -0.25)	
 % 	\once\override NoteColumn #'X-offset = #0.35
 	\once\override NoteHead #'no-ledgers = ##t
 	\once\override NoteHead #'stem-attachment = #'(0 . 1)
 	\once\override NoteHead #'stencil = #ly:text-interface::print
 	\once \override NoteHead #'text = \markup {
-						\scale #'(1.35 . 1.35) \natural
+						\lower #0.1 \mute-sign
+	}
+}
+
+natural_notehead = {
+	\once \override Staff.Tie.extra-offset = #'(1 . -0.25)	
+% 	\once\override NoteColumn #'X-offset = #0.35
+	\once\override NoteHead #'no-ledgers = ##t
+	\once\override NoteHead #'stem-attachment = #'(0 . 1)
+	\once\override NoteHead #'stencil = #ly:text-interface::print
+	\once \override NoteHead #'text = \markup {
+						\rounded-box \pad-markup #0.1 \scale #'(1.1 . 1.1) \natural
 	}
 }
 
 flat_notehead = {
 	\once \override Staff.Tie.extra-offset = #'(1 . -0.25)	
-% 	\once\override NoteColumn #'X-offset = #0.35
+% 	\once\override NoteColumn #'X-offset = #0.1
 	\once\override NoteHead #'no-ledgers = ##t
-	\once\override NoteHead #'stem-attachment = #'(0 . 1)
+	\once\override NoteHead #'stem-attachment = #'(0 . 0.3)
 	\once\override NoteHead #'stencil = #ly:text-interface::print
 	\once \override NoteHead #'text = \markup {
-						\whiteout \scale #'(1.35 . 1.35) \flat
+						\rounded-box \pad-markup #0.1 \scale #'(1.1 . 1.1) \flat
 	}
 }
 
 sharp_notehead = {
 	\once \override Staff.Tie.extra-offset = #'(1 . -0.25)	
-% 	\once\override NoteColumn #'X-offset = #0.35
+% 	\once\override NoteColumn #'X-offset = #0.1
 	\once\override NoteHead #'no-ledgers = ##t
 	\once\override NoteHead #'stem-attachment = #'(0 . 1)
 	\once\override NoteHead #'stencil = #ly:text-interface::print
 	\once \override NoteHead #'text = \markup {
-						\whiteout \scale #'(1.35 . 1.35) \sharp
+						\rounded-box \pad-markup #0.1 \scale #'(1.1 . 1.1) \sharp
 	}
 }
 
 % \score {
-% 	<<
-% 	\new Staff {
-% 			\natural_notehead c'''4 \flat_notehead c'''4 \sharp_notehead c'''4
+% 	\new Staff \with {\override NoteColumn #'after-line-breaking = #if-not-rest }{
+% 			c'1
 % 	}
-% 	\new Staff {
-% 		c'''4
-% 	} >>
 % }
 
 

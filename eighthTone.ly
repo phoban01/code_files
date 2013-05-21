@@ -117,6 +117,8 @@ pitchnames = \makamPitchNames
 #(ly:parser-set-note-names parser makamPitchNames)
 
 eighthToneGlyphs = #'(
+    (-7/8 . "accidentals.mirroredflat.backslash")
+    (-3/4 . "accidentals.mirroredflat.flat")
     (-5/8 . "accidentals.flat.arrowdown")
     (-1/2 . "accidentals.flat")
     (-3/8 . "accidentals.flat.arrowup")

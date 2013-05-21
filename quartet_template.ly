@@ -7,6 +7,25 @@
 \include "/pieces/diotima_quartet/code_files/metronome_mark.ly"
 
 %%%
+#(define ((alter-lv-tie-curve offsets) grob)
+   (let ((coords (ly:semi-tie::calc-control-points grob)))
+
+     (define (add-offsets coords offsets)
+       (if (null? coords)
+       '()
+       (cons
+	 (cons (+ (caar coords) (car offsets))
+	       (+ (cdar coords) (cadr offsets)))
+	 (add-offsets (cdr coords) (cddr offsets)))))
+
+     (add-offsets coords offsets)))
+     
+shapeLVTie = #(define-music-function (parser location offsets) (list?)
+#{
+   \once \override LaissezVibrerTie #'control-points = #(alter-lv-tie-curve offsets)
+#})
+
+
 niente = {
 	\once \override Hairpin #'circled-tip = ##t
 }
@@ -230,7 +249,9 @@ normal_staff = {
 	\revert Staff.Clef #'stencil
 	\revert Staff.NoteHead.no-ledgers
 	\revert Staff.Accidental.stencil
+	\revert Staff.TimeSignature #'font-size
 	\unset Staff.middleCPosition
+	\stemNeutral
 % 	\set Staff.forceClef = ##t
 }
 
@@ -250,6 +271,7 @@ single_line_staff = {
 		\override Staff.StaffSymbol #'line-count = 1
 		\override Staff.BarLine #'bar-extent = #'(-2 . 2)
 		\set Staff.middleCPosition = #0
+		\stemUp
 }
 
 body_staff = {
@@ -289,12 +311,14 @@ switch-staff = #(define-music-function (layout position settings) (ly:music?)
 %%%%%BOW POSITION FUNCTIONS
 #(define bow-position-mapping
    (list
-    (cons (ly:make-pitch 0 5 NATURAL) altosulpont)
-    (cons (ly:make-pitch 0 4 NATURAL) sulpont)
-    (cons (ly:make-pitch 0 3 NATURAL) nat)
-    (cons (ly:make-pitch 0 2 NATURAL) sultasto)
-    (cons (ly:make-pitch 0 1 NATURAL) altosultasto)
-    (cons (ly:make-pitch 0 0 NATURAL) aldita)))
+    (cons (ly:make-pitch 0 6 NATURAL) altosulpont)
+    (cons (ly:make-pitch 0 5 NATURAL) sulpont)
+    (cons (ly:make-pitch 0 4 NATURAL) nat)
+    (cons (ly:make-pitch 0 3 NATURAL) sultasto)
+    (cons (ly:make-pitch 0 2 NATURAL) altosultasto)
+    (cons (ly:make-pitch 0 1 NATURAL) aldita)
+    (cons (ly:make-pitch 0 0 NATURAL) nut)
+    ))
 
 #(define (pitch-equals? p1 p2)
    (and
@@ -393,7 +417,9 @@ ppos = #(define-music-function (layout props pos music) (number? ly:music?)
 		\override Beam #'length-fraction = #1.55	
 		\override Stem #'stemlet-length = #1	
 
-		proportionalNotationDuration = #(ly:make-moment 1 50)
+% 		proportionalNotationDuration = #(ly:make-moment 1 50)
+		proportionalNotationDuration = #(ly:make-moment 1 35)
+
 % 		\override SpacingSpanner #'uniform-stretching = ##t
 
 		tupletFullLength = ##f
@@ -433,6 +459,11 @@ ppos = #(define-music-function (layout props pos music) (number? ly:music?)
 		\override InstrumentName #'font-name = #"Optima"
 % 		\override StemTremolo #'slope = #0.1
 
+
+		\override LaissezVibrerTie #'control-points = #(lambda (grob)
+		       (if (= UP (ly:grob-property grob 'direction))
+		       ((alter-lv-tie-curve '(0 0 0.75 0.7 2.25 0.7 3 0)) grob)
+		       ((alter-lv-tie-curve '(0 0 0.75 -0.7 2.25 -0.7 3 0)) grob)))
 
 	}
 
@@ -556,11 +587,16 @@ ppos = #(define-music-function (layout props pos music) (number? ly:music?)
 		\alias Staff
 		\name "BowPositionStaff"
 		\remove "Clef_engraver"
+		\remove "Bar_number_engraver"
 		\remove "Ledger_line_engraver"
 		\remove "Time_signature_engraver"
 		\remove "Accidental_engraver"
-		\override Accidental.stencil = ##f
+% 	    \consists "Timing_translator"
+% 	    \consists "Default_bar_line_engraver"
 
+		\override BarLine.transparent = ##t
+		\override Accidental.stencil = ##f
+		\override Stem #'direction = #UP
 		\override StaffSymbol #'transparent = ##t
 		\override StaffSymbol #'line-count = 3
 		middleCPosition = #-3
@@ -569,6 +605,8 @@ ppos = #(define-music-function (layout props pos music) (number? ly:music?)
 		\override NoteHead #'stem-attachment = #'(0 . 1)
 		\override Beam #'positions = #'(5 . 5)
 		\override Beam #'color = #grey
+		\override Beam.beam-thickness = #0.45
+		\override Beam.length-fraction = #0.85
 		\override Stem #'color = #grey
 		\override Glissando #'color = #grey 
 		\override Glissando #'layer = #-10
@@ -577,9 +615,9 @@ ppos = #(define-music-function (layout props pos music) (number? ly:music?)
 
 		\override TupletBracket #'color = #grey 
 		\override TupletNumber #'color = #grey 
-
+		\override TupletNumber #'font-size = #1
 		fontSize = #-4
-		\override StaffSymbol #'staff-space = #(magstep -4)
+		\override StaffSymbol #'staff-space = #(magstep 2)
 
 		\override VerticalAxisGroup #'staff-staff-spacing =
 			#'((basic-distance . 0)
@@ -618,7 +656,7 @@ ppos = #(define-music-function (layout props pos music) (number? ly:music?)
 \paper {
 % 	system-system-spacing = #'((basic-distance . 40) (minimum-distance . 20) (padding . 0))
 % 	system-system-spacing = #'((basic-distance . 8) (minimum-distance . 8) (padding . 0))
-	systems-per-page = #2
+% 	systems-per-page = #2
 }
 
 \header {

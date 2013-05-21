@@ -1,4 +1,6 @@
-violin_first = \markup {  \scale #'(0.5 . 0.5)
+violin_first = \markup {  
+					\center-align
+					\scale #'(0.75 . 0.75)
 					\score {
 						\new Staff \with {
 							\remove "Time_signature_engraver"
@@ -11,7 +13,9 @@ violin_first = \markup {  \scale #'(0.5 . 0.5)
 				}
 			}
 
-violin_second = \markup {  \scale #'(0.5 . 0.5)
+violin_second = \markup {  
+					\center-align
+					\scale #'(0.75 . 0.75)
 					\score {
 						\new Staff \with {
 							\remove "Time_signature_engraver"
@@ -24,20 +28,24 @@ violin_second = \markup {  \scale #'(0.5 . 0.5)
 				}
 			}
 
-violin_third = \markup {  \scale #'(0.5 . 0.5)
+violin_third = \markup {  
+					\center-align
+					\scale #'(0.75 . 0.75)
 					\score {
 						\new Staff \with {
 							\remove "Time_signature_engraver"
 							\override Stem #'stencil = ##f
 						}{
 							\clef treble
-							d'4 ^\markup {\box III}
+							d'4 ^\markup {\center-align \box III}
 						}
 					 \layout {} 
 				}
 			}
 
-violin_fourth = \markup {  \scale #'(0.5 . 0.5)
+violin_fourth = \markup {  
+					\center-align
+					\scale #'(0.75 . 0.75)
 					\score {
 						\new Staff \with {
 							\remove "Time_signature_engraver"
@@ -50,7 +58,9 @@ violin_fourth = \markup {  \scale #'(0.5 . 0.5)
 				}
 			}
 
-viola_first = \markup {  \scale #'(0.5 . 0.5)
+viola_first = \markup {  
+					\center-align
+					\scale #'(0.75 . 0.75)
 					\score {
 						\new Staff \with {
 							\remove "Time_signature_engraver"
@@ -63,7 +73,9 @@ viola_first = \markup {  \scale #'(0.5 . 0.5)
 				}
 			}
 
-viola_second = \markup {  \scale #'(0.5 . 0.5)
+viola_second = \markup {  
+					\center-align
+					\scale #'(0.75 . 0.75)
 					\score {
 						\new Staff \with {
 							\remove "Time_signature_engraver"
@@ -76,7 +88,9 @@ viola_second = \markup {  \scale #'(0.5 . 0.5)
 				}
 			}
 
-viola_third = \markup {  \scale #'(0.5 . 0.5)
+viola_third = \markup {  
+					\center-align
+					\scale #'(0.75 . 0.75)
 					\score {
 						\new Staff \with {
 							\remove "Time_signature_engraver"
@@ -89,7 +103,9 @@ viola_third = \markup {  \scale #'(0.5 . 0.5)
 				}
 			}
 
-viola_fourth = \markup {  \scale #'(0.5 . 0.5)
+viola_fourth = \markup {  
+					\center-align
+					\scale #'(0.75 . 0.75)
 					\score {
 						\new Staff \with {
 							\remove "Time_signature_engraver"
@@ -102,7 +118,9 @@ viola_fourth = \markup {  \scale #'(0.5 . 0.5)
 				}
 			}
 
-cello_first = \markup {  \scale #'(0.5 . 0.5)
+cello_first = \markup {  
+					\center-align
+					\scale #'(0.75 . 0.75)
 					\score {
 						\new Staff \with {
 							\remove "Time_signature_engraver"
@@ -115,7 +133,9 @@ cello_first = \markup {  \scale #'(0.5 . 0.5)
 				}
 			}
 
-cello_second = \markup {  \scale #'(0.5 . 0.5)
+cello_second = \markup {  
+					\center-align
+					\scale #'(0.75 . 0.75)
 					\score {
 						\new Staff \with {
 							\remove "Time_signature_engraver"
@@ -128,7 +148,9 @@ cello_second = \markup {  \scale #'(0.5 . 0.5)
 				}
 			}
 
-cello_third = \markup {  \scale #'(0.5 . 0.5)
+cello_third = \markup {  
+					\center-align
+					\scale #'(0.75 . 0.75)
 					\score {
 						\new Staff \with {
 							\remove "Time_signature_engraver"
@@ -141,7 +163,9 @@ cello_third = \markup {  \scale #'(0.5 . 0.5)
 				}
 			}
 
-cello_fourth = \markup {  \scale #'(0.5 . 0.5)
+cello_fourth = \markup {  
+					\center-align
+					\scale #'(0.75 . 0.75)
 					\score {
 						\new Staff \with {
 							\remove "Time_signature_engraver"
@@ -155,41 +179,45 @@ cello_fourth = \markup {  \scale #'(0.5 . 0.5)
 			}
 
 tuning_peg_first = \markup {
+	\center-align
 	\center-column {
 		\fontsize #-5
-		\box "I"
+		\box \normal-text "I"
 		\translate #'(-1 . 0)
-		\scale #'(3.5 . 3.5)
+		\scale #'(4.5 . 4.5)
 		\epsfile #Y #1 #"/pieces/diotima_quartet/eps_files/tuning.eps"
 	}
 }
 
 tuning_peg_second = \markup {
+	\center-align
 	\center-column {
 		\fontsize #-5
-		\box "II"
+		\box \normal-text "II"
 		\translate #'(-1 . 0)
-		\scale #'(3.5 . 3.5)
+		\scale #'(4.5 . 4.5)
 		\epsfile #Y #1 #"/pieces/diotima_quartet/eps_files/tuning.eps"
 	}
 }
 
 tuning_peg_third = \markup {
+	\center-align
 	\center-column {
 		\fontsize #-5
-		\box "III"
+		\box \normal-text "III"
 		\translate #'(-1 . 0)
-		\scale #'(3.5 . 3.5)
+		\scale #'(4.5 . 4.5)
 		\epsfile #Y #1 #"/pieces/diotima_quartet/eps_files/tuning.eps"
 	}
 }
 
 tuning_peg_fourth = \markup {
+	\center-align
 	\center-column {
 		\fontsize #-5
-		\box "IV"
+		\box \normal-text "IV"
 		\translate #'(-1 . 0)
-		\scale #'(3.5 . 3.5)
+		\scale #'(4.5 . 4.5)
 		\epsfile #Y #1 #"/pieces/diotima_quartet/eps_files/tuning.eps"
 	}
 }
@@ -363,6 +391,16 @@ angle_bow = \markup {
 	\epsfile #Y #1 #"/pieces/diotima_quartet/eps_files/angle_bow.eps"
 }
 
+nut = \markup {
+	\center-align	
+	\override #'(font-family . typewriter)
+	\fontsize #-1
+	\whiteout	
+	\box
+	\pad-markup #0.1	
+	"NUT"
+}
+
 sulpont = \markup {
 	\center-align	
 	\override #'(font-family . typewriter)
@@ -450,6 +488,7 @@ ear = \markup {
 mute-sign = \markup {
 	\combine
 	\draw-circle #1 #0.2 ##f
+	\override #'(thickness . 1.25)
 	\combine
 	\translate #'(-1.5 . 0)
 	\draw-line #'(3 . 0)
@@ -473,6 +512,10 @@ bow-mute = \markup {
   	\override #'(off . 0.2)
 	\draw-dashed-line #'(-3 . 0)
 
+}
+
+tuning_fermata = \markup {
+	\line {" " " " \musicglyph #"scripts.ufermata"}
 }
 
 draw_bracket = #(define-music-function (parser location symbol) (markup?)
@@ -506,6 +549,7 @@ draw_line_arrow = #(define-music-function (parser location start end) (markup? m
 
 draw_tuning_arrow = #(define-music-function (parser location start end) (markup? markup?)
 	#{
+		\override Voice.TextSpanner.outside-staff-priority = #1000
 		\override TextSpanner.bound-details.right.arrow = ##t			
 		\override TextSpanner.bound-details.left.text = $start
 		\override TextSpanner.bound-details.right.text = $end
@@ -516,7 +560,8 @@ draw_tuning_arrow = #(define-music-function (parser location start end) (markup?
 		\override TextSpanner.arrow-length = #0.5
 		\override TextSpanner.arrow-width = #0.25
 		\override TextSpanner.rotation = #'(0 0 0)
-		\override TextSpanner.bound-details.right.padding = #4.5
+		\override TextSpanner.bound-details.right.padding = #2
+		\override TextSpanner.bound-details.left.padding = #0
 	#}
 
 )

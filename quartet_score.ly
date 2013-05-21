@@ -15,6 +15,12 @@
 \include "/pieces/diotima_quartet/music_files/violin_I_pizz_intro.ly"
 \include "/pieces/diotima_quartet/music_files/violin_II_pizz_intro.ly"
 \include "/pieces/diotima_quartet/music_files/cello_pizz_intro.ly"
+\include "/pieces/diotima_quartet/music_files/violin_I_angle_bowing.ly"
+\include "/pieces/diotima_quartet/music_files/violin_II_angle_bowing.ly"
+\include "/pieces/diotima_quartet/music_files/viola_angle_bowing.ly"
+\include "/pieces/diotima_quartet/music_files/cello_angle_bowing.ly"
+
+
 \score {
 	\new StaffGroup <<
 		#(set-accidental-style 'dodecaphonic 'StaffGroup)
@@ -24,43 +30,40 @@
 			shortInstrumentName = "VNO. I"
 
 		} {
-			\violin_I_pizz_intro
-			\violin_I_second_pizz
+% 			\violin_I_pizz_intro
+% 			\violin_I_second_pizz
+			\violin_I_angles
 		}
-% 		%VIOLIN II
+		%VIOLIN II
 		\new Staff = "violin_2" \with {
 % 			\remove "Bar_number_engraver"			
 			instrumentName = "VIOLON II"
 			shortInstrumentName = "VNO. 2"
 		} {		
-			\violin_II_pizz_intro
-			\violin_II_second_pizz			
+% 			\violin_II_pizz_intro
+% 			\violin_II_second_pizz	 
+			\violin_II_angles		
 		}
-		%VIOLA
+% 		%VIOLA
 		\new Staff = "viola" \with {
 % 			\remove "Bar_number_engraver"
 			instrumentName = "ALTO"
 			shortInstrumentName = "VLA."
 
 		} {
-			<<
-				\new RightHandVoice = "upper" {
-					\viola_pizz_right
-				} 
-				\new LeftHandVoice = "lower" {
-					\viola_pizz_left
-				}
-			>>	
+% 			\viola_pizz
+			\viola_angles	
 		}
-		%CELLO
+% 		%CELLO
 		\new Staff = "cello" \with {
 			instrumentName = "VIOLONCELLE"
 			shortInstrumentName = "VC."
 			\override BarNumber #'direction = #DOWN
 
 		} {
-			\cello_pizz_intro
-			\cello_pizz_section
+% 			\cello_pizz_intro
+% 			\cello_pizz_section
+% 			\cello_angles
 		}		
 	>>
 
