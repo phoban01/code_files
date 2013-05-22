@@ -6,6 +6,39 @@
 \include "/pieces/diotima_quartet/code_files/fingering_diagram_markup.ly"
 \include "/pieces/diotima_quartet/code_files/metronome_mark.ly"
 
+%%%%%
+violin_frise_markup = \markup {
+				\center-align
+				\center-column {
+					\bracket
+					\scale #'(0.7 . 0.7)									
+					\score {
+					\new Staff \with {\remove "Time_signature_engraver"} {
+						\circles
+						\override TextScript #'padding = #10 
+						\override Beam.transparent = ##t \override Stem.transparent = ##t
+						\ottava #1
+						<\parenthesize e''' a''''>8 ^\markup {\general-align #Y #UP \center-align "I"}
+						<\parenthesize a'' d''''>8 ^\markup {\general-align #Y #UP  \center-align "II"}
+						\ottava #0
+						<\parenthesize d' g'''>8 ^\markup {\center-align "III"}
+						<\parenthesize g c'''>8 ^\markup {\center-align "IV"}
+
+					} \layout {} }
+					\override #'(font-name . "AdobeCaslonPro") 
+					\fontsize #-5  "(Chaotic, extremely fast trill " 
+					\override #'(font-name . "AdobeCaslonPro") 
+					\fontsize #-5 "between stopped note & open string.)" 
+					\vspace #0
+ 					\override #'(trills . (#t #t #t #t))
+					\fingering-diagram #'(("dot" . 0.5) ("dot" . 0.5) ("dot" . 0.5) ("dot" . 0.5))
+
+				}
+		}
+
+%%%%
+
+
 %%%
 #(define ((alter-lv-tie-curve offsets) grob)
    (let ((coords (ly:semi-tie::calc-control-points grob)))

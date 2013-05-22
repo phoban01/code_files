@@ -50,7 +50,9 @@ arp_pizz_head = #(define-music-function (layout props start stop) (string? strin
 			(fsz  (ly:grob-property grob 'font-size 0.0))
 			(mult (magstep fsz))
 			(split-string (string-split text #\space))
-			(str-length (length split-string))					
+			(str-length (length split-string))
+			(stem (ly:grob-object grob 'stem))
+			(dir (ly:grob-property stem 'direction))					
 			(custom-note (markup
 					#:center-align
 					#:fontsize -6
@@ -65,7 +67,7 @@ arp_pizz_head = #(define-music-function (layout props start stop) (string? strin
 			(my-stencil (ly:text-interface::interpret-markup layout props (markup #:translate '(0.5 . 0) custom-note)))
 		)
 		;(display (string-split text #\space)) (newline)
-		(set! (ly:grob-property grob 'stem-attachment) '(0 . 1))
+		(set! (ly:grob-property grob 'stem-attachment) (if (= dir 1) '(0 . 1) '(0 . -0.25)))
 		(set! (ly:grob-property grob 'stencil) (ly:stencil-scale my-stencil mult mult))
 	)
 )
