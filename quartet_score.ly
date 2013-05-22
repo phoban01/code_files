@@ -15,10 +15,14 @@
 \include "/pieces/diotima_quartet/music_files/violin_I_pizz_intro.ly"
 \include "/pieces/diotima_quartet/music_files/violin_II_pizz_intro.ly"
 \include "/pieces/diotima_quartet/music_files/cello_pizz_intro.ly"
-\include "/pieces/diotima_quartet/music_files/violin_I_angle_bowing.ly"
-\include "/pieces/diotima_quartet/music_files/violin_II_angle_bowing.ly"
-\include "/pieces/diotima_quartet/music_files/viola_angle_bowing.ly"
-\include "/pieces/diotima_quartet/music_files/cello_angle_bowing.ly"
+\include "/pieces/diotima_quartet/music_files/violin_I_tuning.ly"
+\include "/pieces/diotima_quartet/music_files/violin_II_tuning.ly"
+\include "/pieces/diotima_quartet/music_files/viola_tuning.ly"
+\include "/pieces/diotima_quartet/music_files/cello_tuning.ly"
+
+%TO DO 
+%FIX CLUSTER GRACE NOTES
+%ADD DYNAMICS AND MARKS TO PRETUNING, TUNING AND TUNING TRANSITION
 
 
 \score {
@@ -32,7 +36,7 @@
 		} {
 % 			\violin_I_pizz_intro
 % 			\violin_I_second_pizz
-			\violin_I_angles
+			\violin_I_tuning
 		}
 		%VIOLIN II
 		\new Staff = "violin_2" \with {
@@ -42,7 +46,7 @@
 		} {		
 % 			\violin_II_pizz_intro
 % 			\violin_II_second_pizz	 
-			\violin_II_angles		
+			\violin_II_tuning		
 		}
 % 		%VIOLA
 		\new Staff = "viola" \with {
@@ -52,7 +56,7 @@
 
 		} {
 % 			\viola_pizz
-			\viola_angles	
+			\viola_tuning	
 
 		}
 % 		%CELLO
@@ -60,12 +64,12 @@
 			instrumentName = "VIOLONCELLE"
 			shortInstrumentName = "VC."
 			\override BarNumber #'direction = #DOWN
-			
+
 		} {
 % 			\cello_pizz_intro
 % 			\cello_pizz_section
-			\cello_angles
+			\cello_tuning
 		}		
 	>>
-
+	\midi {}
 }

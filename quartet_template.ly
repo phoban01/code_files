@@ -418,7 +418,7 @@ ppos = #(define-music-function (layout props pos music) (number? ly:music?)
 		\override Stem #'stemlet-length = #1	
 
 % 		proportionalNotationDuration = #(ly:make-moment 1 50)
-		proportionalNotationDuration = #(ly:make-moment 1 35)
+		proportionalNotationDuration = #(ly:make-moment 1 18)
 
 % 		\override SpacingSpanner #'uniform-stretching = ##t
 
@@ -660,7 +660,7 @@ ppos = #(define-music-function (layout props pos music) (number? ly:music?)
 #(set-default-paper-size "a3" 'portrait)
 
 \paper {
-	system-system-spacing = #'((basic-distance . 50) (minimum-distance . 50) (padding . 0))
+	system-system-spacing = #'((basic-distance . 40) (minimum-distance . 40) (padding . 0))
 % 	system-system-spacing = #'((basic-distance . 30) (minimum-distance . 20) (padding . 5))
 }
 
