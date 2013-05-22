@@ -53,17 +53,18 @@
 		} {
 % 			\viola_pizz
 			\viola_angles	
+
 		}
 % 		%CELLO
 		\new Staff = "cello" \with {
 			instrumentName = "VIOLONCELLE"
 			shortInstrumentName = "VC."
 			\override BarNumber #'direction = #DOWN
-
+			
 		} {
 % 			\cello_pizz_intro
 % 			\cello_pizz_section
-% 			\cello_angles
+			\cello_angles
 		}		
 	>>
 

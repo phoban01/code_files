@@ -425,7 +425,7 @@ ppos = #(define-music-function (layout props pos music) (number? ly:music?)
 		tupletFullLength = ##f
 		tupletFullLengthNote = ##f
 
-		\override Tie #'stencil = #flare-tie
+% 		\override Tie #'stencil = #flare-tie
 		\override Flag.stencil = #modern-straight-flag
 		\override Glissando #'thickness = #3
 		\override Glissando.bound-details.right.end-on-accidental = ##t
@@ -441,10 +441,16 @@ ppos = #(define-music-function (layout props pos music) (number? ly:music?)
 		\override TupletNumber #'font-size = #'-3
 		\override TupletBracket #'staff-padding = #2
 
+% 		\override StaffGrouper #'staff-staff-spacing = #'(
+% 						(basic-distance . 35) 
+% 						(minimum-distance . 35) 
+% 						(padding . 0)
+% 					    (stretchability . 0)
+% 						)
 		\override StaffGrouper #'staff-staff-spacing = #'(
-						(basic-distance . 35) 
-						(minimum-distance . 35) 
-						(padding . 0)
+						(basic-distance . 5) 
+						(minimum-distance . 5) 
+						(padding . 10)
 					    (stretchability . 0)
 						)
 		\override VerticalAxisGroup #'staffgroup-staff-spacing =
@@ -654,9 +660,8 @@ ppos = #(define-music-function (layout props pos music) (number? ly:music?)
 #(set-default-paper-size "a3" 'portrait)
 
 \paper {
-% 	system-system-spacing = #'((basic-distance . 40) (minimum-distance . 20) (padding . 0))
-% 	system-system-spacing = #'((basic-distance . 8) (minimum-distance . 8) (padding . 0))
-% 	systems-per-page = #2
+	system-system-spacing = #'((basic-distance . 50) (minimum-distance . 50) (padding . 0))
+% 	system-system-spacing = #'((basic-distance . 30) (minimum-distance . 20) (padding . 5))
 }
 
 \header {
