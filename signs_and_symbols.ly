@@ -344,7 +344,7 @@ up_bow_heavy = \markup {
 
 down_bow_heavy = \markup {
 	\center-align
-	\scale #'(2.5 . 2.5)
+	\scale #'(2 . 2)
 	\epsfile #Y #1 #"/pieces/diotima_quartet/eps_files/down_bow_heavy.eps"
 }
 
@@ -520,9 +520,11 @@ tuning_fermata = \markup {
 
 draw_bracket = #(define-music-function (parser location symbol) (markup?)
 	#{
+		\override TextSpanner.bound-details.right.arrow = ##f	
 		\override TextSpanner.bound-details.left.text = $symbol
 		\override TextSpanner.bound-details.right.text = \markup {\draw-line #'(0 . -0.75)}
 		\override TextSpanner.bound-details.left.stencil-align-dir-y = #0
+		\override TextSpanner.bound-details.right.stencil-align-dir-y = #0		
 		\override TextSpanner.bound-details.right.padding = #-1
 		\override TextSpanner.style = #'solid
 	#}
