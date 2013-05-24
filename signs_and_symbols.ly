@@ -462,6 +462,7 @@ aldita = \markup {
 }
 
 flat_bow = \markup {
+	\upright
 	\center-align
 	\fontsize #-1
 	\whiteout	
@@ -471,6 +472,7 @@ flat_bow = \markup {
 }
 
 tilt_bow = \markup {
+	\upright
 	\center-align 
 	\fontsize #-1
 	\whiteout	

@@ -6,6 +6,11 @@
 \include "/pieces/diotima_quartet/code_files/fingering_diagram_markup.ly"
 \include "/pieces/diotima_quartet/code_files/metronome_mark.ly"
 
+%%%
+span-shift = {
+	\once \override TextSpanner.bound-details.left.padding = #2.5
+}
+
 %%%%%
 violin_frise_markup = \markup {
 				\center-align
@@ -250,13 +255,13 @@ body-clef = #(define-music-function (layout props clef-type) (symbol?)
 		(translate (cond
 			((equal? clef-type 'full) '(0 . -5))
 			((equal? clef-type 'fingerboard) '(0 . -5.4))
-			((equal? clef-type 'bow-area) '(0 . -5.6))
+			((equal? clef-type 'bow-area) '(0 . -7))
 			((equal? clef-type 'fingerboard-small) '(0 . -2.1))
 			))
 		(scale (cond
 			((equal? clef-type 'full) '(18 . 16))
 			((equal? clef-type 'fingerboard) '(18 . 15))
-			((equal? clef-type 'bow-area) '(15 . 15))
+			((equal? clef-type 'bow-area) '(16 . 20))
 			((equal? clef-type 'fingerboard-small) '(13 . 7.1))
 
 			))		
@@ -381,6 +386,19 @@ ppos = #(define-music-function (layout props pos music) (number? ly:music?)
 			music
 		))
 
+pposr = #(define-music-function (layout props pos music) (number? ly:music?)
+			(let* (
+				(gap-size 22)
+				(calc-position (inexact->exact (* gap-size (- 1 pos))))
+				(octave (floor (/ calc-position 7)))
+				(step (modulo (floor calc-position) 7))
+				(alter 0)
+				(new-pitch (ly:make-pitch (- octave 2) (+ step 3) alter))
+			)
+			(ly:music-set-property! music 'pitch new-pitch)
+			music
+		))
+
 #(define ((flared-tie coords) grob)
 
 (define (pair-to-list pair)
@@ -450,11 +468,12 @@ ppos = #(define-music-function (layout props pos music) (number? ly:music?)
 		\override Beam #'length-fraction = #1.55	
 		\override Stem #'stemlet-length = #1	
 
-% 		proportionalNotationDuration = #(ly:make-moment 1 50)
-		proportionalNotationDuration = #(ly:make-moment 1 18)
+		proportionalNotationDuration = #(ly:make-moment 1 60)
+% 		proportionalNotationDuration = #(ly:make-moment 1 18)
 
 % 		\override SpacingSpanner #'uniform-stretching = ##t
-
+		\override SpacingSpanner.strict-grace-spacing = ##t
+		
 		tupletFullLength = ##f
 		tupletFullLengthNote = ##f
 
@@ -497,7 +516,6 @@ ppos = #(define-music-function (layout props pos music) (number? ly:music?)
 
 		\override InstrumentName #'font-name = #"Optima"
 % 		\override StemTremolo #'slope = #0.1
-
 
 		\override LaissezVibrerTie #'control-points = #(lambda (grob)
 		       (if (= UP (ly:grob-property grob 'direction))
