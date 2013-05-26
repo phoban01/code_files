@@ -297,7 +297,7 @@ no_line_staff = {
 		\override Staff.NoteHead.no-ledgers = ##t	
 		\override Staff.Accidental.stencil = ##f
 		\override Staff.Clef.stencil = ##f
-		\override Staff.StaffSymbol #'line-count = #0
+		\override Staff.StaffSymbol #'line-positions = #'(-1)
 		\override Staff.BarLine #'bar-extent = #'(-2 . 2)
 		\set Staff.middleCPosition = #0
 }
@@ -468,7 +468,7 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 		\override Beam #'length-fraction = #1.55	
 		\override Stem #'stemlet-length = #1	
 
-		proportionalNotationDuration = #(ly:make-moment 1 60)
+		proportionalNotationDuration = #(ly:make-moment 1 40)
 % 		proportionalNotationDuration = #(ly:make-moment 1 18)
 
 % 		\override SpacingSpanner #'uniform-stretching = ##t
