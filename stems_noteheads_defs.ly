@@ -2,6 +2,31 @@
 \version "2.17.15"
 \include "/pieces/diotima_quartet/code_files/signs_and_symbols.ly"
 
+#(define (scratch-tone grob)
+	(let* 
+		(
+			(layout (ly:grob-layout grob))
+			(props (ly:grob-alist-chain grob (ly:output-def-lookup layout 'text-font-defaults)))
+			(fsz  (ly:grob-property grob 'font-size 0.0))
+			(stem (ly:grob-object grob 'stem))
+			(stem-dir (ly:grob-property stem 'direction))
+			(stem-attach (if (= stem-dir 1)  '(-0.4 . 0.8) '(0.5 . -2.7)))
+			(mult (magstep fsz))
+			(custom-note (markup
+					#:path 0.15
+					'(
+						(moveto 0 0)
+						(lineto 0 1)
+						(lineto 1 1)
+						(lineto 1 0)
+						(lineto 2 0))
+				))
+			(my-stencil (ly:text-interface::interpret-markup layout props custom-note))
+		)
+		(set! (ly:grob-property grob 'stem-attachment) stem-attach)
+		(set! (ly:grob-property grob 'stencil) (ly:stencil-scale my-stencil mult mult))
+	)
+)
 
 #(define (diamond-head grob)
 	(let* (

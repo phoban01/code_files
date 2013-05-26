@@ -12,7 +12,20 @@ span-shift = {
 }
 
 %%%%%
+fast-zigzag = {
+		\override Glissando.dash-fraction = #0.1
+		\override Glissando.dash-period = #0.8
+}
 
+med-zigzag = {
+		\override Glissando.dash-fraction = #0.1
+		\override Glissando.dash-period = #2.25
+}
+
+slow-zigzag = {
+		\override Glissando.dash-fraction = #0.1
+		\override Glissando.dash-period = #4
+}
 
 
 %%%
@@ -201,6 +214,17 @@ slash_grace = {
 }
 %%%
 
+#(define transpose-mapping
+   (list
+    (cons (ly:make-pitch 0 6 NATURAL) 2.5)
+    (cons (ly:make-pitch 0 5 NATURAL) 0)
+    (cons (ly:make-pitch 0 4 NATURAL) 1)
+    (cons (ly:make-pitch 0 3 NATURAL) 0)
+    (cons (ly:make-pitch 0 2 NATURAL) -0.5)
+    (cons (ly:make-pitch 0 1 NATURAL) 0)
+    (cons (ly:make-pitch 0 0 NATURAL) -2)
+    ))
+
 #(define (string-staff-transpose grob)
 	(let* (
 		(pitch (ly:event-property (event-cause grob) 'pitch))
@@ -263,6 +287,7 @@ body-clef = #(define-music-function (layout props clef-type) (symbol?)
 
 %%%%%%%%%%STAFF SWITCH TEMPLATES
 string-staff = {
+		\override Staff.TimeSignature.extra-offset = #'(0 . 0.25)
 		\override Staff.Accidental.stencil = ##f
 		\override Staff.NoteHead.Y-offset = #string-staff-transpose
 		\override Staff.Clef.stencil = #ly:text-interface::print
@@ -270,23 +295,24 @@ string-staff = {
 			\override #'(font-name . "AdobeCaslonPro")
 			\fontsize #-2
 			\combine
-			\translate #'(0.7 . 4.9)
+			\translate #'(0.7 . 2.75)
 			"I"
 			\combine
-			\translate #'(2.5 . 3.4)
+			\translate #'(2.5 . 1.25)
 			"II"
 			\combine
-			\translate #'(0 . 1.9)
+			\translate #'(0 . -0.25)
 			"III"
-			\translate #'(2.25 . 0.4)
+			\translate #'(2.25 . -1.75)
 			"IV"
 		}
 		\override Staff.Glissando.bound-details.left.padding = #0
 		\override Staff.Glissando.bound-details.right.padding = #0
-		\override Staff.StaffSymbol #'line-positions = #'(0 3 6 9)
+		\override Staff.StaffSymbol #'line-positions = #'(-4.25 -1.25 1.75 4.75)
 }
 
 normal_staff = {
+	\revert Staff.TimeSignature.extra-offset
 	\revert Staff.NoteHead.Y-offset
 	\revert Staff.StaffSymbol #'line-positions
 	\revert Staff.StaffSymbol #'line-count
@@ -314,6 +340,7 @@ single_line_staff = {
 		\override Staff.Accidental.stencil = ##f
 		\override Staff.Clef.stencil = ##f
 		\override Staff.StaffSymbol #'line-count = 1
+		\override Staff.StaffSymbol #'line-positions = #'(0)
 		\override Staff.BarLine #'bar-extent = #'(-2 . 2)
 		\set Staff.middleCPosition = #0
 		\stemUp
@@ -379,16 +406,7 @@ switch-staff = #(define-music-function (layout position settings) (ly:music?)
    (pitch-to-bow-position
     (ly:event-property (event-cause grob) 'pitch)))
 
-#(define transpose-mapping
-   (list
-    (cons (ly:make-pitch 0 6 NATURAL) 4.5)
-    (cons (ly:make-pitch 0 5 NATURAL) 0)
-    (cons (ly:make-pitch 0 4 NATURAL) 3)
-    (cons (ly:make-pitch 0 3 NATURAL) 0)
-    (cons (ly:make-pitch 0 2 NATURAL) 1.5)
-    (cons (ly:make-pitch 0 1 NATURAL) 0)
-    (cons (ly:make-pitch 0 0 NATURAL) 0)
-    ))
+
 
 
 %%%%%END BOW POSITION FUNCTIONS
@@ -731,33 +749,41 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 		\Staff
 		\alias Staff
 		\name "StringStaff"
+% 	    \consists "Timing_translator"
+% 	    \consists "Default_bar_line_engraver"		
 		\remove "Ledger_line_engraver"
-		\remove "Time_signature_engraver"
+		\remove "Bar_number_engraver"
 		\remove "Accidental_engraver"
 
-		\override NoteHead.stem-attachment = #'(0 . 0)
+		\override TimeSignature.extra-offset = #'(0 . 0)
+		\override Accidental.stencil = ##f
 		\override NoteHead.Y-offset = #string-staff-transpose
 		\override Clef.stencil = #ly:text-interface::print
 		\override Clef.text = \markup {
 			\override #'(font-name . "AdobeCaslonPro")
 			\fontsize #-2
 			\combine
-			\translate #'(0.7 . 4.9)
+			\translate #'(0.7 . 2.75)
 			"I"
 			\combine
-			\translate #'(2.5 . 3.4)
+			\translate #'(2.5 . 1.25)
 			"II"
 			\combine
-			\translate #'(0 . 1.9)
+			\translate #'(0 . -0.25)
 			"III"
-			\translate #'(2.25 . 0.4)
+			\translate #'(2.25 . -1.75)
 			"IV"
 		}
 		\override Glissando.bound-details.left.padding = #0
 		\override Glissando.bound-details.right.padding = #0
-		\override StaffSymbol #'line-positions = #'(0 3 6 9)
-		middleCPosition = #0
-
+		\override StaffSymbol #'line-positions = #'(-4.25 -1.25 1.75 4.75)
+		
+		\override VerticalAxisGroup #'staff-staff-spacing =
+			#'((basic-distance . 0)
+			(minimum-distance . 0)
+			(padding . 1)
+		    (stretchability . 0)
+			)
 	
 	}
 }

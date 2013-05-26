@@ -44,6 +44,27 @@ slow-zigzag = {
 		\override Glissando.dash-period = #3.5
 }
 
+#(define transpose-mapping
+   (list
+    (cons (ly:make-pitch 0 6 NATURAL) 2.5)
+    (cons (ly:make-pitch 0 5 NATURAL) 0)
+    (cons (ly:make-pitch 0 4 NATURAL) 1)
+    (cons (ly:make-pitch 0 3 NATURAL) 0)
+    (cons (ly:make-pitch 0 2 NATURAL) -0.5)
+    (cons (ly:make-pitch 0 1 NATURAL) 0)
+    (cons (ly:make-pitch 0 0 NATURAL) -2)
+    ))
+
+#(define (string-staff-transpose grob)
+	(let* (
+		(pitch (ly:event-property (event-cause grob) 'pitch))
+		(new-pitch (cdr (assoc pitch transpose-mapping)))
+	)
+		new-pitch
+	)
+
+)
+
 \score {
 	\new StaffGroup <<
 	\new Staff {
@@ -60,7 +81,29 @@ slow-zigzag = {
 		\fast-zigzag
 		\ppos #0.8 c'4 \glissando \ppos #0.2 c'4 \glissando \ppos #0.7 c'8
 	}
-	\new StringStaff {
+	\new Staff {
+		\override Staff.TimeSignature.extra-offset = #'(0 . 0.25)
+		\override Staff.Accidental.stencil = ##f
+		\override Staff.NoteHead.Y-offset = #string-staff-transpose
+		\override Staff.Clef.stencil = #ly:text-interface::print
+		\override Staff.Clef.text = \markup {
+			\override #'(font-name . "AdobeCaslonPro")
+			\fontsize #-2
+			\combine
+			\translate #'(0.7 . 2.75)
+			"I"
+			\combine
+			\translate #'(2.5 . 1.25)
+			"II"
+			\combine
+			\translate #'(0 . -0.25)
+			"III"
+			\translate #'(2.25 . -1.75)
+			"IV"
+		}
+		\override Staff.Glissando.bound-details.left.padding = #0
+		\override Staff.Glissando.bound-details.right.padding = #0
+		\override Staff.StaffSymbol #'line-positions = #'(-4.25 -1.25 1.75 4.75)		
 		\circles
 		c'4 \glissando <c' e'>4 \glissando <e' g'>4 \glissando <e' g'>4
 
