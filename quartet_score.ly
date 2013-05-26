@@ -37,9 +37,9 @@
 			shortInstrumentName = "VNO. I"
 
 		} {
-			\violin_I_pizz_intro
-			\violin_I_second_pizz
-			\violin_I_tuning
+% 			\violin_I_pizz_intro
+% 			\violin_I_second_pizz
+% 			\violin_I_tuning
 			\violin_I_bichon_frise
 		}
 % 		VIOLIN II
@@ -48,9 +48,9 @@
 			instrumentName = "VIOLON II"
 			shortInstrumentName = "VNO. 2"
 		} {		
-			\violin_II_pizz_intro
-			\violin_II_second_pizz	 
-			\violin_II_tuning		
+% 			\violin_II_pizz_intro
+% 			\violin_II_second_pizz	 
+% 			\violin_II_tuning		
 			\violin_II_bichon_frise
 		}
 		%VIOLA
@@ -59,8 +59,8 @@
 			instrumentName = "ALTO"
 			shortInstrumentName = "VLA."
 		} {
-			\viola_pizz
-			\viola_tuning	
+% 			\viola_pizz
+% 			\viola_tuning	
 			\viola_bichon_frise
 		}
 		%CELLO
@@ -69,9 +69,9 @@
 			shortInstrumentName = "VC."
 			\override BarNumber #'direction = #DOWN
 		} {
-			\cello_pizz_intro
-			\cello_pizz_section
-			\cello_tuning
+% 			\cello_pizz_intro
+% 			\cello_pizz_section
+% 			\cello_tuning
 			\cello_bichon_frise
 		}		
 	>>

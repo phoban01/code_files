@@ -12,36 +12,7 @@ span-shift = {
 }
 
 %%%%%
-violin_frise_markup = \markup {
-				\center-align
-				\center-column {
-					\bracket
-					\scale #'(0.7 . 0.7)									
-					\score {
-					\new Staff \with {\remove "Time_signature_engraver"} {
-						\circles
-						\override TextScript #'padding = #10 
-						\override Beam.transparent = ##t \override Stem.transparent = ##t
-						\ottava #1
-						<\parenthesize e''' a''''>8 ^\markup {\general-align #Y #UP \center-align "I"}
-						<\parenthesize a'' d''''>8 ^\markup {\general-align #Y #UP  \center-align "II"}
-						\ottava #0
-						<\parenthesize d' g'''>8 ^\markup {\center-align "III"}
-						<\parenthesize g c'''>8 ^\markup {\center-align "IV"}
 
-					} \layout {} }
-					\override #'(font-name . "AdobeCaslonPro") 
-					\fontsize #-5  "(Chaotic, extremely fast trill " 
-					\override #'(font-name . "AdobeCaslonPro") 
-					\fontsize #-5 "between stopped note & open string.)" 
-					\vspace #0
- 					\override #'(trills . (#t #t #t #t))
-					\fingering-diagram #'(("dot" . 0.5) ("dot" . 0.5) ("dot" . 0.5) ("dot" . 0.5))
-
-				}
-		}
-
-%%%%
 
 
 %%%
@@ -230,6 +201,17 @@ slash_grace = {
 }
 %%%
 
+#(define (string-staff-transpose grob)
+	(let* (
+		(pitch (ly:event-property (event-cause grob) 'pitch))
+		(new-pitch (cdr (assoc pitch transpose-mapping)))
+	)
+		new-pitch
+	)
+
+)
+
+
 %%%%CLEF FUNCTION
 bracket-clef = {
 	\override Staff.Clef #'stencil = #(lambda (grob)
@@ -280,7 +262,32 @@ body-clef = #(define-music-function (layout props clef-type) (symbol?)
 
 
 %%%%%%%%%%STAFF SWITCH TEMPLATES
+string-staff = {
+		\override Staff.Accidental.stencil = ##f
+		\override Staff.NoteHead.Y-offset = #string-staff-transpose
+		\override Staff.Clef.stencil = #ly:text-interface::print
+		\override Staff.Clef.text = \markup {
+			\override #'(font-name . "AdobeCaslonPro")
+			\fontsize #-2
+			\combine
+			\translate #'(0.7 . 4.9)
+			"I"
+			\combine
+			\translate #'(2.5 . 3.4)
+			"II"
+			\combine
+			\translate #'(0 . 1.9)
+			"III"
+			\translate #'(2.25 . 0.4)
+			"IV"
+		}
+		\override Staff.Glissando.bound-details.left.padding = #0
+		\override Staff.Glissando.bound-details.right.padding = #0
+		\override Staff.StaffSymbol #'line-positions = #'(0 3 6 9)
+}
+
 normal_staff = {
+	\revert Staff.NoteHead.Y-offset
 	\revert Staff.StaffSymbol #'line-positions
 	\revert Staff.StaffSymbol #'line-count
 	\revert Staff.BarLine #'bar-extent
@@ -371,6 +378,19 @@ switch-staff = #(define-music-function (layout position settings) (ly:music?)
 #(define (bow-position-notehead grob)
    (pitch-to-bow-position
     (ly:event-property (event-cause grob) 'pitch)))
+
+#(define transpose-mapping
+   (list
+    (cons (ly:make-pitch 0 6 NATURAL) 4.5)
+    (cons (ly:make-pitch 0 5 NATURAL) 0)
+    (cons (ly:make-pitch 0 4 NATURAL) 3)
+    (cons (ly:make-pitch 0 3 NATURAL) 0)
+    (cons (ly:make-pitch 0 2 NATURAL) 1.5)
+    (cons (ly:make-pitch 0 1 NATURAL) 0)
+    (cons (ly:make-pitch 0 0 NATURAL) 0)
+    ))
+
+
 %%%%%END BOW POSITION FUNCTIONS
 
 ppos = #(define-music-function (layout props pos music) (number? ly:music?)
@@ -454,6 +474,7 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 	    \remove "Default_bar_line_engraver"
 		\remove "Bar_number_engraver"
 		\accepts "BowPositionStaff"
+		\accepts "StringStaff"
 
 		\numericTimeSignature
 		\override MetronomeMark #'staff-padding = #10
@@ -528,6 +549,7 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 		\StaffGroup
 		\accepts "BowPositionStaff"
 		\accepts "HiddenStaff"
+		\accepts "StringStaff"
 
 	}
 	\context {
@@ -704,6 +726,39 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 			(padding . 3)
 		    (stretchability . 0)
 			)		
+	}
+	\context {
+		\Staff
+		\alias Staff
+		\name "StringStaff"
+		\remove "Ledger_line_engraver"
+		\remove "Time_signature_engraver"
+		\remove "Accidental_engraver"
+
+		\override NoteHead.stem-attachment = #'(0 . 0)
+		\override NoteHead.Y-offset = #string-staff-transpose
+		\override Clef.stencil = #ly:text-interface::print
+		\override Clef.text = \markup {
+			\override #'(font-name . "AdobeCaslonPro")
+			\fontsize #-2
+			\combine
+			\translate #'(0.7 . 4.9)
+			"I"
+			\combine
+			\translate #'(2.5 . 3.4)
+			"II"
+			\combine
+			\translate #'(0 . 1.9)
+			"III"
+			\translate #'(2.25 . 0.4)
+			"IV"
+		}
+		\override Glissando.bound-details.left.padding = #0
+		\override Glissando.bound-details.right.padding = #0
+		\override StaffSymbol #'line-positions = #'(0 3 6 9)
+		middleCPosition = #0
+
+	
 	}
 }
 
