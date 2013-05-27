@@ -2,6 +2,43 @@
 \version "2.17.15"
 \include "/pieces/diotima_quartet/code_files/signs_and_symbols.ly"
 
+#(define (trill-diamond-head grob)
+	(let* (	
+		(fsz  (ly:grob-property grob 'font-size 0.0))		
+		(mult (magstep fsz))
+		(stencil (grob-interpret-markup grob 
+					(markup
+						#:scale '(0.6 . 0.65)
+						#:override '(line-join-style . miter)
+						#:override '(filled . #f)
+						#:path 0.35
+						'(
+							(moveto 0 1)
+							(lineto 1 0)
+							(lineto 0 -1)
+							(lineto -1 0)
+							(closepath)
+						) 
+					)
+		))                     
+
+		)
+
+		;; NOTEHEADS
+		(set! (ly:grob-property grob 'stencil) 
+			(ly:stencil-scale stencil mult mult)
+		)
+
+		)
+
+	)
+
+trill_harmonic = { 
+	\override TrillPitchHead.stencil = #trill-diamond-head
+%   	\once\override TrillPitchHead.text = 
+}
+
+
 #(define (scratch-tone grob)
 	(let* 
 		(
@@ -94,6 +131,7 @@
 		)
 
 	)
+
 
 #(define (square-head grob)
 	(let* (
@@ -352,6 +390,8 @@ diamonds = {
 	\override Staff.Tie.extra-offset = #'(0.75 . -0.25)	
 	\override NoteHead #'stencil =  #diamond-head
 }
+
+
 
 squares = {
 	\override NoteHead #'stencil =  #square-head

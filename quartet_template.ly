@@ -779,8 +779,8 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 	}
 }
 
-#(set-global-staff-size 16)
-#(set-default-paper-size "a3" 'portrait)
+#(set-global-staff-size 18)
+#(set-default-paper-size "a3" 'landscape)
 
 \paper {
 	system-system-spacing = #'((basic-distance . 40) (minimum-distance . 40) (padding . 0))

@@ -37,10 +37,10 @@
 			shortInstrumentName = "VNO. I"
 
 		} {
-			\violin_I_pizz_intro
-			\violin_I_second_pizz
+% 			\violin_I_pizz_intro
+% 			\violin_I_second_pizz
 			\violin_I_tuning
-			\violin_I_bichon_frise
+% 			\violin_I_bichon_frise
 		}
 % 		VIOLIN II 
 		\new Staff = "violin_2" \with {
@@ -48,10 +48,10 @@
 			instrumentName = "VIOLON II"
 			shortInstrumentName = "VNO. 2"
 		} {		
-			\violin_II_pizz_intro
-			\violin_II_second_pizz	  
+% 			\violin_II_pizz_intro
+% 			\violin_II_second_pizz	  
 			\violin_II_tuning		
-			\violin_II_bichon_frise
+% 			\violin_II_bichon_frise
 		}
 		%VIOLA
 		\new Staff = "viola" \with {
@@ -59,9 +59,9 @@
 			instrumentName = "ALTO"
 			shortInstrumentName = "VLA."
 		} {
-			\viola_pizz
+% 			\viola_pizz
 			\viola_tuning	
-			\viola_bichon_frise
+% 			\viola_bichon_frise
 		}
 		%CELLO
 		\new Staff = "cello" \with {
@@ -69,10 +69,10 @@
 			shortInstrumentName = "VC."
 			\override BarNumber #'direction = #DOWN
 		} {
-			\cello_pizz_intro
-			\cello_pizz_section
+% 			\cello_pizz_intro
+% 			\cello_pizz_section
 			\cello_tuning
-			\cello_bichon_frise
+% 			\cello_bichon_frise
 		}		
 	>>
 % 	\midi {}
