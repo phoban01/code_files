@@ -508,7 +508,7 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 		\override Beam #'length-fraction = #1.55	
 		\override Stem #'stemlet-length = #1	
 
-		proportionalNotationDuration = #(ly:make-moment 1 20)
+		proportionalNotationDuration = #(ly:make-moment 1 50)
 % 		proportionalNotationDuration = #(ly:make-moment 1 18)
 
 % 		\override SpacingSpanner #'uniform-stretching = ##t
