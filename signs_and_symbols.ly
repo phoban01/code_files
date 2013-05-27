@@ -566,6 +566,11 @@ draw_tuning_arrow = #(define-music-function (parser location start end) (markup?
 		\override TextSpanner.rotation = #'(0 0 0)
 		\override TextSpanner.bound-details.right.padding = #2
 		\override TextSpanner.bound-details.left.padding = #0
+		\override TextSpanner.bound-details.left-broken.padding = #-4
+		\override TextSpanner.bound-details.right-broken.padding = #-3
+		\override TextSpanner.bound-details.left-broken.text = \markup {\scale #'(0.5 . 0.5) \bracket $start }
+		\override TextSpanner.bound-details.right-broken.text = \markup {\scale #'(0.5 . 0.5) \bracket $end }
+
 	#}
 
 )

@@ -228,9 +228,9 @@ slash_grace = {
 #(define (string-staff-transpose grob)
 	(let* (
 		(pitch (ly:event-property (event-cause grob) 'pitch))
-		(new-pitch (cdr (assoc pitch transpose-mapping)))
+		(new-pitch (assoc pitch transpose-mapping))
 	)
-		new-pitch
+		(if (equal? new-pitch #f) 0 (cdr new-pitch))
 	)
 
 )
@@ -287,6 +287,7 @@ body-clef = #(define-music-function (layout props clef-type) (symbol?)
 
 %%%%%%%%%%STAFF SWITCH TEMPLATES
 string-staff = {
+
 		\override Staff.TimeSignature.extra-offset = #'(0 . 0.25)
 		\override Staff.Accidental.stencil = ##f
 		\override Staff.NoteHead.Y-offset = #string-staff-transpose
@@ -507,7 +508,7 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 		\override Beam #'length-fraction = #1.55	
 		\override Stem #'stemlet-length = #1	
 
-		proportionalNotationDuration = #(ly:make-moment 1 40)
+		proportionalNotationDuration = #(ly:make-moment 1 20)
 % 		proportionalNotationDuration = #(ly:make-moment 1 18)
 
 % 		\override SpacingSpanner #'uniform-stretching = ##t
@@ -637,21 +638,15 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 % 		#(add-grace-property 'Voice 'Stem 'length set-stem-position-grace)
 
 		\override TupletBracket #'padding = #1
-
 		\override Beam #'breakable = ##t
 		\override Glissando #'breakable = ##t
-
 		\override Glissando.bound-details.left.padding = #0
 		\override Glissando.bound-details.right.padding = #0
 		\override Glissando.bound-details.right.attach-dir = #0
 		\override Glissando.bound-details.left.attach-dir = #0
-
 		\override TextScript #'outside-staff-priority = ##f	
-% 		\override NoteHead.stem-attachment = #'(0 . 0)	
 		\override NoteHead #'stencil = #pizz-circle-head
 		\override Stem #'direction = #DOWN
-% 		\override Voice.GraceStem #'length = #25
-
 		\override Beam #'positions = #'(-16 . -16)
 		\override Staff.Dots.staff-position = #(lambda (grob) (set-dot-position grob 0))
 
@@ -664,17 +659,13 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 
 		\override Beam #'breakable = ##t
 		\override Glissando #'breakable = ##t
-
 		\override Staff.Dots.staff-position = #(lambda (grob) (set-dot-position grob 22))
-% 		\override DynamicLineSpanner #'Y-offset = #set-pizz-dynamics-position
 		\override DynamicLineSpanner #'direction = #UP
 		\override DynamicLineSpanner #'padding = #2
 		\override DynamicText #'font-size = #-2
 		\override DynamicLineSpanner #'outside-staff-priority = ##f
 		\override NoteHead #'stencil = #fingertip-pizz
-% 		\override Stem #'layer = #1
 		\override Stem #'direction = #UP
-% 		\override Stem #'length = #(lambda (grob) (set-stem-position grob 8))
 		\override Beam #'positions = #'(12 . 12)
 		\override Rest #'font-size = #-2
 
