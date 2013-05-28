@@ -421,6 +421,16 @@ altosulpont = \markup {
 	"ASP"
 }
 
+oltrepont = \markup {
+	\center-align	
+	\override #'(font-family . typewriter)
+	\fontsize #-1
+	\whiteout	
+	\box
+	\pad-markup #0.1	
+	"OSP"
+}
+
 nat = \markup {
 	\center-align	
 	\override #'(font-family . typewriter)

@@ -256,6 +256,7 @@ body-clef = #(define-music-function (layout props clef-type) (symbol?)
 			((equal? clef-type 'fingerboard) fingerboard)
 			((equal? clef-type 'bow-area) bow-area)
 			((equal? clef-type 'fingerboard-small) fingerboard)
+			((equal? clef-type 'bow-area-small) bow-area)
 
 			))
 		(translate (cond
@@ -263,13 +264,15 @@ body-clef = #(define-music-function (layout props clef-type) (symbol?)
 			((equal? clef-type 'fingerboard) '(0 . -5.4))
 			((equal? clef-type 'bow-area) '(0 . -7))
 			((equal? clef-type 'fingerboard-small) '(0 . -2.1))
+			((equal? clef-type 'bow-area-small) '(0 . -3.5))
+
 			))
 		(scale (cond
 			((equal? clef-type 'full) '(18 . 16))
 			((equal? clef-type 'fingerboard) '(18 . 15))
 			((equal? clef-type 'bow-area) '(16 . 20))
 			((equal? clef-type 'fingerboard-small) '(13 . 7.1))
-
+			((equal? clef-type 'bow-area-small) '(8 . 11))
 			))		
 		)
 	#{
@@ -347,6 +350,17 @@ single_line_staff = {
 		\stemUp
 }
 
+body_staff_big = {
+		\override Staff.StaffSymbol #'line-positions = #'(-11 9)
+		\override Staff.NoteHead.no-ledgers = ##t	
+		\override Staff.Accidental.stencil = ##f	
+		\override Staff.Rest.Y-offset = #0
+		\set Staff.middleCPosition = #1
+		\body-clef #'fingerboard-small
+% 		\set Staff.forceClef = ##t
+
+}
+
 body_staff = {
 		\override Staff.StaffSymbol #'line-positions = #'(-6 6)
 		\override Staff.NoteHead.no-ledgers = ##t	
@@ -384,6 +398,7 @@ switch-staff = #(define-music-function (layout position settings) (ly:music?)
 %%%%%BOW POSITION FUNCTIONS
 #(define bow-position-mapping
    (list
+    (cons (ly:make-pitch 0 6 SHARP) oltrepont)
     (cons (ly:make-pitch 0 6 NATURAL) altosulpont)
     (cons (ly:make-pitch 0 5 NATURAL) sulpont)
     (cons (ly:make-pitch 0 4 NATURAL) nat)
@@ -783,8 +798,8 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 #(set-default-paper-size "a3" 'landscape)
 
 \paper {
-	system-system-spacing = #'((basic-distance . 40) (minimum-distance . 40) (padding . 0))
-% 	system-system-spacing = #'((basic-distance . 30) (minimum-distance . 20) (padding . 5))
+% 	system-system-spacing = #'((basic-distance . 40) (minimum-distance . 40) (padding . 0))
+	system-system-spacing = #'((basic-distance . 10) (minimum-distance . 10) (padding . 5))
 }
 
 \header {
