@@ -523,7 +523,7 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 		\override Beam #'length-fraction = #1.55	
 		\override Stem #'stemlet-length = #1	
 
-		proportionalNotationDuration = #(ly:make-moment 1 50)
+		proportionalNotationDuration = #(ly:make-moment 1 30)
 % 		proportionalNotationDuration = #(ly:make-moment 1 18)
 
 % 		\override SpacingSpanner #'uniform-stretching = ##t
@@ -600,7 +600,7 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 		\accepts "RightHandVoice"	
 % 		\override NoteColumn #'after-line-breaking = #cluster-stem-split
 		%if not rest function acts as a gate-keeper only letting through grobs with noteheads...no rests allowed
-		\override NoteColumn #'after-line-breaking = #if-not-rest
+% 		\override NoteColumn #'after-line-breaking = #if-not-rest
 		\override BarNumber #'break-visibility = #'#(#t #t #f)
 		\override BarNumber #'self-alignment-X = #CENTER
 		\override BarNumber #'direction = #UP

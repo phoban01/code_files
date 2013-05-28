@@ -41,10 +41,10 @@
 			shortInstrumentName = "VNO. I"
 
 		} {
-% 			\violin_I_pizz_intro
-% 			\violin_I_second_pizz
-% 			\violin_I_tuning
-% 			\violin_I_bichon_frise
+			\violin_I_pizz_intro
+			\violin_I_second_pizz
+			\violin_I_tuning
+			\violin_I_bichon_frise
 			\violin_I_tuned
 		}
 % 		VIOLIN II 

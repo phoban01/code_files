@@ -387,19 +387,26 @@ trill_harmonic = {
 )
 
 diamonds = {
-	\override Staff.Tie.extra-offset = #'(0.75 . -0.25)	
-	\override NoteHead #'stencil =  #diamond-head
+% 	\override Staff.Tie.extra-offset = #'(0.75 . -0.25)	
+% 	\override NoteHead #'stencil =  #diamond-head
+	\revert NoteHead.stencil
+	\revert NoteHead.stem-attachment
+	\override NoteHead #'style = #'harmonic
 }
 
 
 
 squares = {
+	\revert NoteHead #'style
 	\override NoteHead #'stencil =  #square-head
 }
 
 circles = {
-	\override Staff.Tie.extra-offset = #'(0 . -0.25)		
-	\override NoteHead #'stencil =  #circle-head
+% 	\override Staff.Tie.extra-offset = #'(0 . -0.25)		
+% 	\override NoteHead #'stencil =  #circle-head
+	\revert NoteHead.stem-attachment
+	\revert NoteHead.stencil
+	\revert NoteHead #'style
 }
 
 
