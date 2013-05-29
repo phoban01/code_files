@@ -523,7 +523,7 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 		\override Beam #'length-fraction = #1.55	
 		\override Stem #'stemlet-length = #1	
 
-		proportionalNotationDuration = #(ly:make-moment 1 30)
+		proportionalNotationDuration = #(ly:make-moment 1 32)
 % 		proportionalNotationDuration = #(ly:make-moment 1 18)
 
 % 		\override SpacingSpanner #'uniform-stretching = ##t
@@ -535,7 +535,7 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 % 		\override Tie #'stencil = #flare-tie
 		\override Flag.stencil = #modern-straight-flag
 		\override Glissando #'thickness = #3
-		\override Glissando.bound-details.right.end-on-accidental = ##t
+		\override Glissando.bound-details.right.end-on-accidental = ##f
 		\override Glissando.bound-details.right.padding = #1.75
 
 % 		\override Stem #'length = #10

@@ -401,6 +401,11 @@ squares = {
 	\override NoteHead #'stencil =  #square-head
 }
 
+circleheads = {
+	\revert NoteHead #'style
+	\override NoteHead #'stencil =  #circle-head
+}
+
 circles = {
 % 	\override Staff.Tie.extra-offset = #'(0 . -0.25)		
 % 	\override NoteHead #'stencil =  #circle-head
