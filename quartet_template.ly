@@ -527,7 +527,7 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 % 		proportionalNotationDuration = #(ly:make-moment 1 18)
 
 % 		\override SpacingSpanner #'uniform-stretching = ##t
-% 		\override SpacingSpanner.strict-grace-spacing = ##t
+		\override SpacingSpanner.strict-grace-spacing = ##t
 		
 		tupletFullLength = ##f
 		tupletFullLengthNote = ##f

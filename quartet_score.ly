@@ -39,7 +39,6 @@
 		\new Staff = "violin_1" \with {
 			instrumentName = "VIOLON I"
 			shortInstrumentName = "VNO. I"
-
 		} {
 % 			\violin_I_pizz_intro
 % 			\violin_I_second_pizz
@@ -49,7 +48,7 @@
 		}
 % 		VIOLIN II 
 		\new Staff = "violin_2" \with {
-% 			\remove "Bar_number_engraver"				
+			\remove "Bar_number_engraver"				
 			instrumentName = "VIOLON II"
 			shortInstrumentName = "VNO. 2"
 		} {		
