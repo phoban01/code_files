@@ -49,7 +49,7 @@
 		}
 % 		VIOLIN II 
 		\new Staff = "violin_2" \with {
-% 			\remove "Bar_number_engraver"			
+% 			\remove "Bar_number_engraver"				
 			instrumentName = "VIOLON II"
 			shortInstrumentName = "VNO. 2"
 		} {		
