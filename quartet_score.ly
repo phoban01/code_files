@@ -49,8 +49,8 @@
 % 		VIOLIN II 
 		\new Staff = "violin_2" \with {
 			\remove "Bar_number_engraver"				
-			instrumentName = "VIOLON II"
-			shortInstrumentName = "VNO. 2"
+% 			instrumentName = "VIOLON II"
+% 			shortInstrumentName = "VNO. 2"
 		} {		
 % % 			\violin_II_pizz_intro	
 % % 			\violin_II_second_pizz	  
@@ -59,16 +59,16 @@
 				\violin_II_tuned
 		}
 % 		%VIOLA
-% 		\new Staff = "viola" \with {
+		\new Staff = "viola" \with {
 % 			\remove "Bar_number_engraver"
-% 			instrumentName = "ALTO"
-% 			shortInstrumentName = "VLA."	
-% 		} {
+			instrumentName = "ALTO"
+			shortInstrumentName = "VLA."	
+		} {
 % % 			\viola_pizz
 % % 			\viola_tuning	
 % % 			\viola_bichon_frise
-% % 			\viola_tuned
-% 		}
+				\viola_tuned
+		}
 % 		%CELLO
 % 		\new Staff = "cello" \with {
 % 			instrumentName = "VIOLONCELLE"
