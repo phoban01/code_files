@@ -637,7 +637,7 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 		}
 		\override TimeSignature #'font-size = #3
 		\override Glissando #'thickness = #3
-		\override NoteColumn #'ignore-collision = ##t
+		\override NoteColumn #'ignore-collision = ##f
 
 	}
 	\context {
@@ -795,7 +795,7 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 }
 
 #(set-global-staff-size 18)
-#(set-default-paper-size "a3" 'landscape)
+#(set-default-paper-size "a3" 'portrait)
 
 \paper {
 % 	system-system-spacing = #'((basic-distance . 40) (minimum-distance . 40) (padding . 0))
