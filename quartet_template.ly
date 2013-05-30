@@ -555,9 +555,9 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 % 					    (stretchability . 0)
 % 						)
 		\override StaffGrouper #'staff-staff-spacing = #'(
-						(basic-distance . 5) 
-						(minimum-distance . 5) 
-						(padding . 10)
+						(basic-distance . 20) 
+						(minimum-distance . 20) 
+						(padding . 2)
 					    (stretchability . 0)
 						)
 		\override VerticalAxisGroup #'staffgroup-staff-spacing =
