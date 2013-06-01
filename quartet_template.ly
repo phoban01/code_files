@@ -30,9 +30,9 @@ fingerboard_path = \markup {
 			(curveto 1.5 0.1 2.65 -16 2.2 -20)		
 			)
 		\override #'(line-cap-style . square)
-		\path #0.8 #'(
-			(moveto -0.75 -17.5)
-			(curveto -0.75 -17.5 1 -17.35 2.75 -17.5)	
+		\path #0.7 #'(
+			(moveto -0.75 -17.75)
+			(curveto -0.75 -17.75 1 -17.6 2.75 -17.75)	
 		)
 	}
 
@@ -94,16 +94,16 @@ body-clef = #(define-music-function (layout props clef-type) (symbol?)
 
 			))
 		(translate (cond
-			((equal? clef-type 'full) '(0 . -5))
-			((equal? clef-type 'fingerboard) '(0 . 0))
+			((equal? clef-type 'full) '(0 . 0))
+			((equal? clef-type 'fingerboard) '(1 . 6.5))
 			((equal? clef-type 'bow-area) '(0 . 4))
 			((equal? clef-type 'fingerboard-small) '(1 . 4.8))
 			((equal? clef-type 'bow-area-small) '(0 . 4.85))
 
 			))
 		(scale (cond
-			((equal? clef-type 'full) '(0.55 . 0.35))
-			((equal? clef-type 'fingerboard) '(0.5 . 0.5))
+			((equal? clef-type 'full) '(0.5 . 0.5))
+			((equal? clef-type 'fingerboard) '(0.8 . 0.7))
 			((equal? clef-type 'bow-area) '(0.5 . 0.5))
 			((equal? clef-type 'fingerboard-small) '(0.55 . 0.35))
 			((equal? clef-type 'bow-area-small) '(0.8 . 0.8))
@@ -124,7 +124,15 @@ body-clef = #(define-music-function (layout props clef-type) (symbol?)
 )
 
 
+
 %%%
+dxy = #(define-music-function (layout props vals) (pair?)
+	#{
+		\once \override Staff.DynamicText.extra-offset = $vals
+		\once \override Staff.Hairpin.extra-offset = $vals
+	#}
+)
+
 span-shift = {
 	\once \override TextSpanner.bound-details.left.padding = #2.5
 }
@@ -447,6 +455,7 @@ body_staff = {
 }
 
 pizz_staff = {
+		\set Staff.clefPosition = #2
 		\set Staff.middleCPosition =  #0
 		\override Staff.StaffSymbol #'line-positions = #'(-12 12)
 		\override Staff.TimeSignature #'font-size = #3
@@ -597,7 +606,7 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 		\override Beam #'length-fraction = #1.55	
 		\override Stem #'stemlet-length = #1	
 
-		proportionalNotationDuration = #(ly:make-moment 1 40)
+		proportionalNotationDuration = #(ly:make-moment 1 60)
 % 		proportionalNotationDuration = #(ly:make-moment 1 18)
 
 % 		\override SpacingSpanner #'uniform-stretching = ##t
@@ -725,7 +734,7 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 		\remove "Accidental_engraver"
 
 % 		#(add-grace-property 'Voice 'Stem 'length set-stem-position-grace)
-
+		\override Rest.staff-position = #-7
 		\override TupletBracket #'padding = #1
 		\override Beam #'breakable = ##t
 		\override Glissando #'breakable = ##t
@@ -745,14 +754,12 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 		\alias "Voice"
 		\name "RightHandVoice"
 		\remove "Accidental_engraver"
-
+		\override Rest.staff-position = #7
 		\override Beam #'breakable = ##t
 		\override Glissando #'breakable = ##t
 		\override Staff.Dots.staff-position = #(lambda (grob) (set-dot-position grob 22))
-		\override DynamicLineSpanner #'direction = #UP
-		\override DynamicLineSpanner #'padding = #2
-		\override DynamicText #'font-size = #-2
 		\override DynamicLineSpanner #'outside-staff-priority = ##f
+		\override DynamicText #'font-size = #-2
 		\override NoteHead #'stencil = #fingertip-pizz
 		\override Stem #'direction = #UP
 		\override Beam #'positions = #'(12 . 12)

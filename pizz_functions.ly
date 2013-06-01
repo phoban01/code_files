@@ -8,8 +8,10 @@
 			(fsz  (ly:grob-property grob 'font-size 0.0))
 			(mult (magstep fsz))
 			(custom-note (markup
+					#:translate '(0.5 . 0)
+					#:center-align
 					#:translate (cons 0 4)
-					#:override '(thickness . 0.35)
+					#:override '(thickness . 0.75)
 					#:box
 					#:override '(baseline-skip . 0.35)
 					#:pad-markup 0
@@ -19,18 +21,25 @@
 					#:whiteout start
 					#:override '(thickness . 1.5)
 					;#:draw-line '(0 . -0.65)
-					#:vspace 0.1
+					#:vspace 0.01
 					#:fontsize 1
-					;#:combine
-					#:musicglyph "scripts.arpeggio" 
-					#:musicglyph "scripts.arpeggio" 
-					#:vspace 0.1
+					#:combine 
+					#:rotate 90
+					#:scale '(0.75 . 0.4)
+					#:translate '(0 . 0)
+					#:musicglyph "scripts.prallprall" 
+					#:translate '(-0.235 . -0.6)
+					#:rotate 180
+					#:scale '(0.7 . 0.8)
+					#:musicglyph "noteheads.d2doThin"
+					#:vspace 0.05
 					#:override '(font-name . "AdobeCaslonPro")
 					#:whiteout stop
 					)
 				))
 			(my-stencil (ly:text-interface::interpret-markup layout props custom-note))
 		)
+		(set! (ly:grob-property grob 'layer) 100)
 		(set! (ly:grob-property grob 'stem-attachment) '(0 . 1))
 		(set! (ly:grob-property grob 'stencil) (ly:stencil-scale my-stencil mult mult))
 	)
@@ -67,6 +76,7 @@ arp_pizz_head = #(define-music-function (layout props start stop) (string? strin
 			(my-stencil (ly:text-interface::interpret-markup layout props (markup #:translate '(0.5 . 0) custom-note)))
 		)
 		;(display (string-split text #\space)) (newline)
+		(set! (ly:grob-property grob 'layer) 100)
 		(set! (ly:grob-property grob 'stem-attachment) (if (= dir 1) '(0 . 1) '(0 . -0.25)))
 		(set! (ly:grob-property grob 'stencil) (ly:stencil-scale my-stencil mult mult))
 	)
@@ -107,11 +117,15 @@ pizz_head = #(define-music-function (layout props text) (string?)
 			(mult (magstep fsz))
 			(custom-note (markup
 					#:translate '(0.5 . 0)
-					#:draw-circle 0.5 0.2 filled
+					#:combine
+					#:with-color white
+					#:draw-circle 0.5 0 filled
+					#:draw-circle 0.5 0.2 #f
 				))
 			(my-stencil (ly:text-interface::interpret-markup layout props custom-note))
 		)
 ;		(display (ly:grob-properties (ly:grob-parent grob Y))) (newline)
+		(set! (ly:grob-property grob 'layer) 100)
 		(set! (ly:grob-property grob 'stem-attachment) (cons 0 (+ 24 pitch)))
 		(set! (ly:grob-property grob 'stencil) (ly:stencil-scale my-stencil mult mult))
 	)
