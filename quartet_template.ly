@@ -6,6 +6,124 @@
 \include "/pieces/diotima_quartet/code_files/fingering_diagram_markup.ly"
 \include "/pieces/diotima_quartet/code_files/metronome_mark.ly"
 
+fingerboard_path = \markup {
+		\override #'(line-join-style . miter)
+		\combine
+		\path #0.1 #'(
+			(moveto 0.2 0)
+			(curveto 0.2 0 1 0.5 1.8 0)
+			(lineto 2.65 -14)
+			(moveto 0.2 0)
+			(lineto -0.65 -14)
+			(moveto -0.65 -14)
+			(curveto -0.65 -14 1 -13.5 2.65 -14)
+			)
+		\combine
+		\path #0.01 #'(
+			(moveto 0.5 0.1)
+			(curveto 0.5 0.1 -0.55 -16 -0.1 -20)
+			(moveto 0.8 0.15)
+			(curveto 0.8 0.1 0.5 -16 0.7 -20)
+			(moveto 1.2 0.15)
+			(curveto 1.2 0.1 1.7 -16 1.5 -20)
+			(moveto 1.5 0.1)
+			(curveto 1.5 0.1 2.65 -16 2.2 -20)		
+			)
+		\override #'(line-cap-style . square)
+		\path #0.8 #'(
+			(moveto -0.75 -17.5)
+			(curveto -0.75 -17.5 1 -17.35 2.75 -17.5)	
+		)
+	}
+
+bow_area_path = \markup {
+		\override #'(line-join-style . miter)
+		\combine
+		\path #0.15 #'(
+				(moveto -0.35 2)
+				(lineto -0.5 0)
+				(moveto -0.5 0)
+				(curveto -0.5 0 1 -0.25 3 0)
+				(moveto 3 0)
+				(lineto 2.85 2)
+				(moveto -0.75 -9.5)
+				(lineto 3.4 -9.5)
+				(lineto 2.65 -11)
+				(moveto -0.75 -9.5)
+				(lineto 0 -11)
+			)
+		\combine
+		\path #0.075 #'(
+			(moveto 0.1 3.2)
+			(curveto 0.1 3.2 -0.4 -6 0.1 -10.25)
+			(moveto 0.9 3.2)
+			(curveto 0.9 3.1 0.75 -6 0.9 -10.25)		
+			(moveto 1.7 3.2)
+			(curveto 1.7 3.1 2 -6 1.75 -10.25)
+			(moveto 2.5 3.2)
+			(curveto 2.5 3.1 3 -6 2.5 -10.25)		
+			)
+		\override #'(line-cap-style . square)		
+		\path #0.4 #'(
+			(moveto -0.5 -6.75)
+			(curveto -0.5 -6.75 1.1 -6.75 3 -6.75)	
+		)	
+	}
+
+%%%%CLEF FUNCTION
+bracket-clef = {
+	\override Staff.Clef #'stencil = #(lambda (grob)
+ 	   (bracketify-stencil (ly:clef::print grob) Y 0.1 0.2 0.1))
+}
+
+unbracket-clef = {
+	\revert Staff.Clef #'stencil
+}
+
+body-clef = #(define-music-function (layout props clef-type) (symbol?)
+	(let* (
+		(full "/pieces/diotima_quartet/eps_files/full_violin_clef.eps")
+		(fingerboard "/pieces/diotima_quartet/eps_files/fingerboard_clef.eps")
+		(bow-area "/pieces/diotima_quartet/eps_files/bow_area_clef.eps")
+		(clef (cond
+			((equal? clef-type 'full) fingerboard_path)
+			((equal? clef-type 'fingerboard) fingerboard_path)
+			((equal? clef-type 'bow-area) bow_area_path)
+			((equal? clef-type 'fingerboard-small) fingerboard_path)
+			((equal? clef-type 'bow-area-small) bow_area_path)
+
+			))
+		(translate (cond
+			((equal? clef-type 'full) '(0 . -5))
+			((equal? clef-type 'fingerboard) '(0 . 0))
+			((equal? clef-type 'bow-area) '(0 . 4))
+			((equal? clef-type 'fingerboard-small) '(1 . 4.8))
+			((equal? clef-type 'bow-area-small) '(0 . 4.85))
+
+			))
+		(scale (cond
+			((equal? clef-type 'full) '(0.55 . 0.35))
+			((equal? clef-type 'fingerboard) '(0.5 . 0.5))
+			((equal? clef-type 'bow-area) '(0.5 . 0.5))
+			((equal? clef-type 'fingerboard-small) '(0.55 . 0.35))
+			((equal? clef-type 'bow-area-small) '(0.8 . 0.8))
+			))		
+		)
+	#{
+		\set clefPosition = #0
+		\override Staff.Clef.stencil = #ly:text-interface::print 
+		\override Staff.Clef.text = \markup {
+							\whiteout
+							\pad-markup  #0.25
+							\rotate #180
+							\translate $translate
+							\scale $scale
+							$clef
+		}
+	#})
+)
+
+
 %%%
 span-shift = {
 	\once \override TextSpanner.bound-details.left.padding = #2.5
@@ -236,55 +354,10 @@ slash_grace = {
 )
 
 
-%%%%CLEF FUNCTION
-bracket-clef = {
-	\override Staff.Clef #'stencil = #(lambda (grob)
- 	   (bracketify-stencil (ly:clef::print grob) Y 0.1 0.2 0.1))
-}
 
-unbracket-clef = {
-	\revert Staff.Clef #'stencil
-}
 
-body-clef = #(define-music-function (layout props clef-type) (symbol?)
-	(let* (
-		(full "/pieces/diotima_quartet/eps_files/full_violin_clef.eps")
-		(fingerboard "/pieces/diotima_quartet/eps_files/fingerboard_clef.eps")
-		(bow-area "/pieces/diotima_quartet/eps_files/bow_area_clef.eps")
-		(clef (cond
-			((equal? clef-type 'full) full)
-			((equal? clef-type 'fingerboard) fingerboard)
-			((equal? clef-type 'bow-area) bow-area)
-			((equal? clef-type 'fingerboard-small) fingerboard)
-			((equal? clef-type 'bow-area-small) bow-area)
 
-			))
-		(translate (cond
-			((equal? clef-type 'full) '(0 . -5))
-			((equal? clef-type 'fingerboard) '(0 . -5.4))
-			((equal? clef-type 'bow-area) '(0 . -7))
-			((equal? clef-type 'fingerboard-small) '(0 . -2.1))
-			((equal? clef-type 'bow-area-small) '(0 . -3.5))
 
-			))
-		(scale (cond
-			((equal? clef-type 'full) '(18 . 16))
-			((equal? clef-type 'fingerboard) '(18 . 15))
-			((equal? clef-type 'bow-area) '(16 . 20))
-			((equal? clef-type 'fingerboard-small) '(13 . 7.1))
-			((equal? clef-type 'bow-area-small) '(8 . 11))
-			))		
-		)
-	#{
-		\override Staff.Clef.stencil = #ly:text-interface::print 
-		\override Staff.Clef.text = \markup {
-							\translate $translate
-							\rotate #180
-							\scale $scale
-							\epsfile #Y #1 $clef
-		}
-	#})
-)
 %%%%
 
 
@@ -316,6 +389,7 @@ string-staff = {
 }
 
 normal_staff = {
+	\revert Staff.Rest.Y-offset
 	\revert Staff.TimeSignature.extra-offset
 	\revert Staff.NoteHead.Y-offset
 	\revert Staff.StaffSymbol #'line-positions
@@ -367,7 +441,7 @@ body_staff = {
 		\override Staff.Accidental.stencil = ##f	
 		\override Staff.Rest.Y-offset = #0
 		\set Staff.middleCPosition = #1
-		\body-clef #'fingerboard-small
+% 		\body-clef #'fingerboard-small
 % 		\set Staff.forceClef = ##t
 
 }
@@ -794,12 +868,12 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 	}
 }
 
-#(set-global-staff-size 18)
+#(set-global-staff-size 16)
 #(set-default-paper-size "a3" 'portrait)
 
 \paper {
 % 	system-system-spacing = #'((basic-distance . 40) (minimum-distance . 40) (padding . 0))
-	system-system-spacing = #'((basic-distance . 10) (minimum-distance . 10) (padding . 5))
+	system-system-spacing = #'((basic-distance . 10) (minimum-distance . 10) (padding . 10))
 }
 
 \header {

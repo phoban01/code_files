@@ -131,6 +131,8 @@ eighthToneGlyphs = #'(
     (1/2 . "accidentals.sharp")
     (5/8 . "accidentals.sharp.arrowup")
     (6/8 . "accidentals.sharp.slashslash.stemstemstem")
+    (7/8 . "accidentals.sharp.slashslashslash.stem")
+
   )
 
 
