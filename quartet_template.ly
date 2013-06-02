@@ -391,6 +391,7 @@ string-staff = {
 			\translate #'(2.25 . -1.75)
 			"IV"
 		}
+% 		\override Staff.Rest.Y-offset = #0
 		\override Staff.Glissando.bound-details.left.padding = #0
 		\override Staff.Glissando.bound-details.right.padding = #0
 		\override Staff.StaffSymbol #'line-positions = #'(-4.25 -1.25 1.75 4.75)
@@ -587,8 +588,8 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 \layout {
 	\context {
 		\Score
-	    \remove "Timing_translator"
-	    \remove "Default_bar_line_engraver"
+% 	    \remove "Timing_translator"
+% 	    \remove "Default_bar_line_engraver"
 		\remove "Bar_number_engraver"
 		\accepts "BowPositionStaff"
 		\accepts "StringStaff"
@@ -606,10 +607,10 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 		\override Beam #'length-fraction = #1.55	
 		\override Stem #'stemlet-length = #1	
 
-		proportionalNotationDuration = #(ly:make-moment 1 60)
+		proportionalNotationDuration = #(ly:make-moment 1 28)
 % 		proportionalNotationDuration = #(ly:make-moment 1 18)
 
-% 		\override SpacingSpanner #'uniform-stretching = ##t
+		\override SpacingSpanner #'uniform-stretching = ##t
 		\override SpacingSpanner.strict-grace-spacing = ##t
 		
 		tupletFullLength = ##f
@@ -675,8 +676,8 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 	}
 	\context {
 		\Staff
-	    \consists "Timing_translator"
-	    \consists "Default_bar_line_engraver"
+% 	    \consists "Timing_translator"
+% 	    \consists "Default_bar_line_engraver"
 		\consists "Bar_number_engraver"
 		\remove "Accidental_engraver"
 	    \accepts "LeftHandVoice"
@@ -697,6 +698,8 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 		\override TupletBracket #'padding = #padding-function
 
 		\override Tie #'extra-offset = #'(0 . -0.5)
+
+
 	}
 
 	\context {
@@ -770,13 +773,14 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 		\Staff
 		\alias Staff
 		\name "BowPositionStaff"
-		\remove "Clef_engraver"
+% 	    \consists "Timing_translator"
+% 	    \consists "Default_bar_line_engraver"
+	    \remove "Clef_engraver"
 		\remove "Bar_number_engraver"
 		\remove "Ledger_line_engraver"
 		\remove "Time_signature_engraver"
 		\remove "Accidental_engraver"
-% 	    \consists "Timing_translator"
-% 	    \consists "Default_bar_line_engraver"
+
 
 		\override BarLine.transparent = ##t
 		\override Accidental.stencil = ##f
@@ -804,10 +808,9 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 		\override StaffSymbol #'staff-space = #(magstep 2)
 
 		\override VerticalAxisGroup #'staff-staff-spacing =
-			#'((basic-distance . 0)
-			(minimum-distance . 0)
+			#'((basic-distance . 1)
+			(minimum-distance . 1)
 			(padding . 1)
-		    (stretchability . 0)
 			)		
 	}
 	\context {
@@ -875,12 +878,13 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 	}
 }
 
-#(set-global-staff-size 16)
+#(set-global-staff-size 18)
 #(set-default-paper-size "a3" 'portrait)
 
 \paper {
+	ragged-last = ##t
 % 	system-system-spacing = #'((basic-distance . 40) (minimum-distance . 40) (padding . 0))
-	system-system-spacing = #'((basic-distance . 10) (minimum-distance . 10) (padding . 10))
+% 	system-system-spacing = #'((basic-distance . 10) (minimum-distance . 10) (padding . 10))
 }
 
 \header {

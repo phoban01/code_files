@@ -1,3 +1,22 @@
+tremolo_markup = \markup {
+			\center-align
+					\scale #'(0.75 . 0.75)
+					\score {
+						\new Staff \with {
+							\remove "Time_signature_engraver"
+							\remove "Clef_engraver"
+							\override Stem #'stencil = ##f
+							\override StaffSymbol.transparent = ##t
+							\override NoteHead.transparent = ##t
+							\override StemTremolo.extra-offset = #'(0 . 1)
+						}{
+							\clef treble
+							e'4:32 
+						}
+					 \layout {} 
+				}
+			}
+
 violin_first = \markup {  
 					\center-align
 					\scale #'(0.75 . 0.75)
@@ -563,7 +582,7 @@ draw_line_arrow = #(define-music-function (parser location start end) (markup? m
 
 draw_tuning_arrow = #(define-music-function (parser location start end) (markup? markup?)
 	#{
-		\override Voice.TextSpanner.outside-staff-priority = #1000
+% 		\override Voice.TextSpanner.outside-staff-priority = #1000
 		\override TextSpanner.bound-details.right.arrow = ##t			
 		\override TextSpanner.bound-details.left.text = $start
 		\override TextSpanner.bound-details.right.text = $end
