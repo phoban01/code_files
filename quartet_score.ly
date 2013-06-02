@@ -42,7 +42,7 @@
 		} {
 % 			\violin_I_pizz_intro
 % 			\violin_I_second_pizz
-% 			\violin_I_tuning
+			\violin_I_tuning
 % 			\violin_I_bichon_frise
 % 			\violin_I_tuned
 		}
@@ -54,7 +54,7 @@
 		} {		
 % 			\violin_II_pizz_intro	
 % 			\violin_II_second_pizz	  
-% 			\violin_II_tuning		
+			\violin_II_tuning		
 % 			\violin_II_bichon_frise
 % 			\violin_II_tuned
 		}
@@ -77,7 +77,7 @@
 		} {
 % 			\cello_pizz_intro
 % 			\cello_pizz_section
-% 			\cello_tuning
+			\cello_tuning
 % 			\cello_bichon_frise
 % 			\cello_tuned
 		}		
