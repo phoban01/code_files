@@ -6,6 +6,34 @@
 \include "/pieces/diotima_quartet/code_files/fingering_diagram_markup.ly"
 \include "/pieces/diotima_quartet/code_files/metronome_mark.ly"
 
+sub_ppp = #(make-dynamic-script
+  (markup #:line
+	  (#:normal-text
+	   #:italic "subito"
+	   #:dynamic "ppp"
+	   #:hspace 7.1)))
+
+sub_p = #(make-dynamic-script
+  (markup #:line
+	  (#:normal-text
+	   #:italic "subito"
+	   #:dynamic "p"
+	   #:hspace 7.1)))
+
+sub_pp = #(make-dynamic-script
+  (markup #:line
+	  (#:normal-text
+	   #:italic "subito"
+	   #:dynamic "pp"
+	   #:hspace 7.1)))
+
+sub_fff = #(make-dynamic-script
+  (markup #:line
+	  (#:normal-text
+	   #:italic "subito"
+	   #:dynamic "fff"
+	   #:hspace 7.1)))
+
 fingerboard_path = \markup {
 		\override #'(line-join-style . miter)
 		\combine
@@ -276,6 +304,13 @@ effort = #(define-event-function (parser location arg) (markup?)
 
 %%%MISC
 
+mfpp = #(make-dynamic-script (markup #:dynamic "mf" #:dynamic "pp"))
+
+mfp = #(make-dynamic-script (markup #:dynamic "mf" #:dynamic "p"))
+
+
+fpp = #(make-dynamic-script (markup #:dynamic "f" #:dynamic "pp"))
+
 fposs = #(make-dynamic-script (markup
 				  #:override '(word-space . 0.25)
 				  #:line (
@@ -408,6 +443,8 @@ normal_staff = {
 	\revert Staff.NoteHead.no-ledgers
 	\revert Staff.Accidental.stencil
 	\revert Staff.TimeSignature #'font-size
+	\override Staff.Glissando.bound-details.right.end-on-accidental = ##f
+	\override Staff.Glissando.bound-details.right.padding = #1.75	
 	\unset Staff.middleCPosition
 	\stemNeutral
 % 	\set Staff.forceClef = ##t
@@ -449,7 +486,10 @@ body_staff = {
 		\override Staff.NoteHead.no-ledgers = ##t	
 		\override Staff.Accidental.stencil = ##f	
 		\override Staff.Rest.Y-offset = #0
+		\override Staff.Glissando.bound-details.left.padding = #0
+		\override Staff.Glissando.bound-details.right.padding = #0		
 		\set Staff.middleCPosition = #1
+		\circleheads
 % 		\body-clef #'fingerboard-small
 % 		\set Staff.forceClef = ##t
 
@@ -607,11 +647,11 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 		\override Beam #'length-fraction = #1.55	
 		\override Stem #'stemlet-length = #1	
 
-		proportionalNotationDuration = #(ly:make-moment 1 28)
+		proportionalNotationDuration = #(ly:make-moment 1 30)
 % 		proportionalNotationDuration = #(ly:make-moment 1 18)
 
-		\override SpacingSpanner #'uniform-stretching = ##t
-		\override SpacingSpanner.strict-grace-spacing = ##t
+% 		\override SpacingSpanner #'uniform-stretching = ##t
+% 		\override SpacingSpanner.strict-grace-spacing = ##t
 		
 		tupletFullLength = ##f
 		tupletFullLengthNote = ##f
@@ -630,7 +670,7 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 		\override TupletNumber #'text = #tuplet-number::calc-fraction-text
 		\override TupletNumber #'font-name = #"Optima"
 		\override TupletNumber #'font-size = #'-3
-		\override TupletBracket #'staff-padding = #2
+% 		\override TupletBracket #'staff-padding = #2
 
 % 		\override StaffGrouper #'staff-staff-spacing = #'(
 % 						(basic-distance . 35) 
@@ -660,6 +700,14 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 		       (if (= UP (ly:grob-property grob 'direction))
 		       ((alter-lv-tie-curve '(0 0 0.75 0.7 2.25 0.7 3 0)) grob)
 		       ((alter-lv-tie-curve '(0 0 0.75 -0.7 2.25 -0.7 3 0)) grob)))
+
+		\override DynamicText.staff-padding = #4
+		\override DynamicLineSpanner.staff-padding = #4
+
+		\override Hairpin.to-barline = ##f
+		\override Hairpin.minimum-length = #8
+
+		\override Glissando.minimum-length = #8
 
 	}
 
@@ -884,7 +932,7 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 \paper {
 	ragged-last = ##t
 % 	system-system-spacing = #'((basic-distance . 40) (minimum-distance . 40) (padding . 0))
-% 	system-system-spacing = #'((basic-distance . 10) (minimum-distance . 10) (padding . 10))
+	system-system-spacing = #'((basic-distance . 10) (minimum-distance . 10) (padding . 10))
 }
 
 \header {

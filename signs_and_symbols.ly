@@ -254,8 +254,8 @@ up_bow = \markup {
 }
 
 down_bow = \markup {
-	\center-align
-	\scale #'(1.5 . 1.5)
+	\left-align
+	\scale #'(1.75 . 1.75)
 	\epsfile #Y #1 #"/pieces/diotima_quartet/eps_files/down_bow.eps"
 }
 
@@ -276,6 +276,7 @@ up_bow_light = \markup {
 }
 
 down_bow_light = \markup {
+	\translate #'(1 . 0)
 	\center-align
 	\override #'(on . 0.3)
 	\override #'(off . 0.1)
@@ -362,7 +363,8 @@ up_bow_heavy = \markup {
 }
 
 down_bow_heavy = \markup {
-	\center-align
+	\translate #'(0.25 . 0)
+	\left-align
 	\scale #'(2 . 2)
 	\epsfile #Y #1 #"/pieces/diotima_quartet/eps_files/down_bow_heavy.eps"
 }
@@ -380,12 +382,14 @@ down_bow_very_heavy = \markup {
 }
 
 circular_bow = \markup {
+	\translate #'(1 . 0)
 	\center-align
 	\scale #'(4 . 4.1)
 	\epsfile #Y #1 #"/pieces/diotima_quartet/eps_files/circular_bow.eps"
 }
 
 horz_bow = \markup {
+	\translate #'(1 . 0)
 	\center-align	
 	\scale #'(5 . 5)
 	\epsfile #X #1 #"/pieces/diotima_quartet/eps_files/horz_bow.eps"
@@ -396,12 +400,6 @@ vertical_bow = \markup {
 	\rotate #90
 	\scale #'(4 . 5.25)
 	\epsfile #X #1 #"/pieces/diotima_quartet/eps_files/horz_bow.eps"
-}
-
-angle_bow = \markup {
-	\center-align
-	\scale #'(2 . 2)
-	\epsfile #Y #1 #"/pieces/diotima_quartet/eps_files/angle_bow.eps"
 }
 
 angle_bow = \markup {
