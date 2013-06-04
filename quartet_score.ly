@@ -48,7 +48,7 @@
 		}
 % 		VIOLIN II 
 		\new Staff = "violin_2" \with {
-% 			\remove "Bar_number_engraver"				
+			\remove "Bar_number_engraver"				
 			instrumentName = "VIOLON II"
 			shortInstrumentName = "VNO. 2"
 		} {		
@@ -59,17 +59,17 @@
 			\violin_II_tuned
 		}
 % 		%VIOLA
-% 		\new Staff = "viola" \with {
-% 			\remove "Bar_number_engraver"
-% 			instrumentName = "ALTO"
-% 			shortInstrumentName = "VLA."
-% 		} {
+		\new Staff = "viola" \with {
+			\remove "Bar_number_engraver"
+			instrumentName = "ALTO"
+			shortInstrumentName = "VLA."
+		} {
 % 			\viola_pizz
 % 			\viola_tuning	
 % 			\viola_bichon_frise
-% 			\viola_tuned
-% 		}
-% 		CELLO
+			\viola_tuned
+		}
+% 		CELLOx
 % 		\new Staff = "cello" \with {	
 % 			instrumentName = "VIOLONCELLE"
 % 			shortInstrumentName = "VC."
@@ -86,9 +86,12 @@
 % 		\new BowPositionStaff \with {alignAboveContext="violin_1"} {
 % 			\violin_one_pos_tuned
 % 		}
-		\new BowPositionStaff \with {alignAboveContext="violin_2"} {
-			\violin_two_pos_tuned
-		}
+% 		\new BowPositionStaff \with {alignAboveContext="violin_2"} {
+% 			\violin_two_pos_tuned
+% 		}
+% 		\new BowPositionStaff \with {alignAboveContext="viola"} {
+% 			\viola_pos_tuned
+% 		}
 	>>
 
 % 	\midi {}
