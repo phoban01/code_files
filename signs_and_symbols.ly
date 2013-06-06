@@ -1,3 +1,5 @@
+\include "/pieces/diotima_quartet/code_files/fingering_diagram_markup.ly"
+
 tremolo_markup = \markup {
 			\center-align
 					\scale #'(0.75 . 0.75)
@@ -356,9 +358,31 @@ anti-clockhead = {
 % 	}
 % }
 
+nutmute = \markup {
+				\center-align
+				\center-column {
+					\small \italic "barré au sillet"
+					\fingering-diagram #'(("mute" . 0.5) ("mute" . 0.5) ("mute" . 0.5) ("mute" . 0.5))
+				}
+		}
+
+nutharm = \markup {
+				\center-align
+				\center-column {
+					\small \italic "barré au sillet"
+					\fingering-diagram #'(("di" . 0.5) ("di" . 0.5) ("di" . 0.5) ("di" . 0.5))
+				}
+		}
+
+pizz = \markup {
+	\center-align
+	\small
+	\italic "pizz"
+}
+
 up_bow_heavy = \markup {
 	\center-align
-	\scale #'(1.7 . 1.7)
+	\scale #'(2.2 . 2.2)
 	\epsfile #Y #1 #"/pieces/diotima_quartet/eps_files/up_bow_heavy.eps"
 }
 

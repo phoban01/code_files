@@ -6,6 +6,22 @@
 \include "/pieces/diotima_quartet/code_files/fingering_diagram_markup.ly"
 \include "/pieces/diotima_quartet/code_files/metronome_mark.ly"
 
+#(define-markup-command (long-pause layout props text) (markup?)
+	(interpret-markup layout props
+		(markup
+			#:center-align
+			#:center-column (
+			#:hspace 5
+			#:override '(font-name . "AdobeCaslonPro")	
+			#:fontsize 5 (format "~a\"" text)
+			#:fontsize 4
+			#:musicglyph "scripts.ulongfermata"	
+			#:vspace 0.1
+			)
+		)
+	)
+)
+
 sub_ppp = #(make-dynamic-script
   (markup #:line
 	  (#:normal-text
@@ -124,7 +140,7 @@ body-clef = #(define-music-function (layout props clef-type) (symbol?)
 		(translate (cond
 			((equal? clef-type 'full) '(0 . 0))
 			((equal? clef-type 'fingerboard) '(1 . 6.5))
-			((equal? clef-type 'bow-area) '(0 . 4))
+			((equal? clef-type 'bow-area) '(0 . 6.5))
 			((equal? clef-type 'fingerboard-small) '(1 . 4.8))
 			((equal? clef-type 'bow-area-small) '(0 . 4.85))
 
@@ -132,7 +148,7 @@ body-clef = #(define-music-function (layout props clef-type) (symbol?)
 		(scale (cond
 			((equal? clef-type 'full) '(0.5 . 0.5))
 			((equal? clef-type 'fingerboard) '(0.8 . 0.7))
-			((equal? clef-type 'bow-area) '(0.5 . 0.5))
+			((equal? clef-type 'bow-area) '(1.2 . 1.4))
 			((equal? clef-type 'fingerboard-small) '(0.55 . 0.35))
 			((equal? clef-type 'bow-area-small) '(0.8 . 0.8))
 			))		
@@ -161,8 +177,14 @@ dxy = #(define-music-function (layout props vals) (pair?)
 	#}
 )
 
+span-shift-x = #(define-music-function (layout props val) (number?)
+	#{
+		\once \override TextSpanner.bound-details.left.padding = #(+ 2.5 val)
+	#}
+)
+
 span-shift = {
-	\once \override TextSpanner.bound-details.left.padding = #2.5
+	\once \override Staff.TextSpanner.bound-details.left.padding = #2.5
 }
 
 %%%%%
@@ -303,6 +325,9 @@ effort = #(define-event-function (parser location arg) (markup?)
 %%%
 
 %%%MISC
+
+sfzp = #(make-dynamic-script (markup #:dynamic "sfz" #:dynamic "p"))
+
 
 mfpp = #(make-dynamic-script (markup #:dynamic "mf" #:dynamic "pp"))
 
@@ -647,7 +672,7 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 		\override Beam #'length-fraction = #1.55	
 		\override Stem #'stemlet-length = #1	
 
-		proportionalNotationDuration = #(ly:make-moment 1 30)
+		proportionalNotationDuration = #(ly:make-moment 1 40)
 % 		proportionalNotationDuration = #(ly:make-moment 1 18)
 
 % 		\override SpacingSpanner #'uniform-stretching = ##t
@@ -926,7 +951,7 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 	}
 }
 
-#(set-global-staff-size 18)
+#(set-global-staff-size 12)
 #(set-default-paper-size "a3" 'portrait)
 
 \paper {

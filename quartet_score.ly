@@ -56,7 +56,7 @@
 % 			\violin_II_second_pizz	  
 % 			\violin_II_tuning		
 % 			\violin_II_bichon_frise
-			\violin_II_tuned
+% 			\violin_II_tuned
 		}
 % 		%VIOLA/
 		\new Staff = "viola" \with {
@@ -67,7 +67,7 @@
 % 			\viola_pizz
 % 			\viola_tuning	
 % 			\viola_bichon_frise
-			\viola_tuned
+% 			\viola_tuned
 		}
 % 		CELLOx
 		\new Staff = "cello" \with {	
@@ -79,13 +79,13 @@
 % 			\cello_pizz_section
 % 			\cello_tuning
 % 			\cello_bichon_frise
-			\cello_tuned
+% 			\cello_tuned
 		}	
 
 		%%%%% BOW POSITION STAVES %%%%% 	
-% 		\new BowPositionStaff \with {alignAboveContext="violin_1"} {
-% 			\violin_one_pos_tuned
-% 		}
+		\new BowPositionStaff \with {alignAboveContext="violin_1"} {
+			\violin_one_pos_tuned
+		}
 % 		\new BowPositionStaff \with {alignAboveContext="violin_2"} {
 % 			\violin_two_pos_tuned
 % 		}
