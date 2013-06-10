@@ -15,24 +15,11 @@
 					#:box
 					#:override '(baseline-skip . 0.35)
 					#:pad-markup 0
-					#:fontsize -7					
-					#:center-column (
+					#:fontsize -3					
+					#:line (
 					#:override '(font-name . "AdobeCaslonPro")	
 					#:whiteout start
-					#:override '(thickness . 1.5)
-					;#:draw-line '(0 . -0.65)
-					#:vspace 0.01
-					#:fontsize 1
-					#:combine 
-					#:rotate 90
-					#:scale '(0.75 . 0.4)
-					#:translate '(0 . 0)
-					#:musicglyph "scripts.prallprall" 
-					#:translate '(-0.235 . -0.6)
-					#:rotate 180
-					#:scale '(0.7 . 0.8)
-					#:musicglyph "noteheads.d2doThin"
-					#:vspace 0.05
+					"->"
 					#:override '(font-name . "AdobeCaslonPro")
 					#:whiteout stop
 					)
@@ -64,7 +51,7 @@ arp_pizz_head = #(define-music-function (layout props start stop) (string? strin
 			(dir (ly:grob-property stem 'direction))					
 			(custom-note (markup
 					#:center-align
-					#:fontsize -6
+					#:fontsize -3
 					#:override '(font-name . "AdobeCaslonPro")
 					#:override '(thickness . 0.75)
 					#:box

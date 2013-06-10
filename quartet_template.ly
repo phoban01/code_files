@@ -654,6 +654,7 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 
 
 \layout {
+	indent = 0\cm
 	\context {
 		\Score
 	    \remove "Timing_translator"
@@ -676,7 +677,7 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 		\override Stem #'stemlet-length = #1	
 
 % 		proportionalNotationDuration = #(ly:make-moment 1 40)
-		proportionalNotationDuration = #(ly:make-moment 1 70)
+		proportionalNotationDuration = #(ly:make-moment 1 58)
 
 % 		proportionalNotationDuration = #(ly:make-moment 1 18)
 
@@ -702,15 +703,9 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 		\override TupletNumber #'font-size = #'-3
 % 		\override TupletBracket #'staff-padding = #2
 
-% 		\override StaffGrouper #'staff-staff-spacing = #'(
-% 						(basic-distance . 35) 
-% 						(minimum-distance . 35) 
-% 						(padding . 0)
-% 					    (stretchability . 0)
-% 						)
 		\override StaffGrouper #'staff-staff-spacing = #'(
-						(basic-distance . 35) 
-						(minimum-distance . 35) 
+						(basic-distance . 40) 
+						(minimum-distance . 40) 
 						(padding . 2)
 					    (stretchability . 0)
 						)
@@ -771,6 +766,7 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 		\override BarNumber #'padding = #2
 		\override BarNumber #'whiteout = ##t
 		\override BarNumber #'stencil = #(make-stencil-circler 0.1 0.5 ly:text-interface::print)			
+		\override BarNumber.outside-staff-priority =  #1000
 		barNumberVisibility = #(every-nth-bar-number-visible 1)
 
 		\override TupletBracket #'padding = #padding-function
@@ -967,13 +963,19 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 	}
 }
 
-#(set-global-staff-size 12)
+#(set-global-staff-size 13)
 #(set-default-paper-size "a3" 'portrait)
 
 \paper {
+	top-margin = 1.5\cm
+	left-margin = 2\cm
+	right-margin = 0.75\cm
+	bottom-margin = 0.25\cm
 	ragged-last = ##t
+% 	ragged-right = ##t
+	min-systems-per-page = #2
 % 	system-system-spacing = #'((basic-distance . 40) (minimum-distance . 40) (padding . 0))
-	system-system-spacing = #'((basic-distance . 10) (minimum-distance . 10) (padding . 10))
+% 	system-system-spacing = #'((basic-distance . 5) (minimum-distance . 5) (padding . 1))
 }
 
 \header {
