@@ -656,8 +656,8 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 \layout {
 	\context {
 		\Score
-% 	    \remove "Timing_translator"
-% 	    \remove "Default_bar_line_engraver"
+	    \remove "Timing_translator"
+	    \remove "Default_bar_line_engraver"
 		\remove "Bar_number_engraver"
 		\accepts "BowPositionStaff"
 		\accepts "StringStaff"
@@ -709,8 +709,8 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 % 					    (stretchability . 0)
 % 						)
 		\override StaffGrouper #'staff-staff-spacing = #'(
-						(basic-distance . 20) 
-						(minimum-distance . 20) 
+						(basic-distance . 35) 
+						(minimum-distance . 35) 
 						(padding . 2)
 					    (stretchability . 0)
 						)
@@ -754,8 +754,8 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 	}
 	\context {
 		\Staff
-% 	    \consists "Timing_translator"
-% 	    \consists "Default_bar_line_engraver"
+	    \consists "Timing_translator"
+	    \consists "Default_bar_line_engraver"
 		\consists "Bar_number_engraver"
 		\remove "Accidental_engraver"
 	    \accepts "LeftHandVoice"
@@ -830,6 +830,7 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 		\override Beam #'positions = #'(-20 . -20)
 % 		\override Beam #'positions = #'(-16 . -16)
 		\override NoteColumn.ignore-collision = ##t
+		\override Rest #'font-size = #-2		
 % 		\override Staff.Dots.staff-position = #(lambda (grob) (set-dot-position grob 0))
 
 	}
