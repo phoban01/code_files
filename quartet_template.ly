@@ -866,6 +866,8 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 		\override NoteHead #'stem-attachment = #'(0 . 1)
 		\override Beam #'positions = #'(5 . 5)
 		\override Beam #'color = #grey
+		\override Flag #'color = #grey
+
 		\override Beam.beam-thickness = #0.45
 		\override Beam.length-fraction = #0.85
 		\override Stem #'color = #grey
