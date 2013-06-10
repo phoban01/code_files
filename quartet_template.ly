@@ -773,6 +773,8 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 
 		\override Tie #'extra-offset = #'(0 . -0.5)
 
+		\override TextSpanner.outside-staff-priority = #150
+		\override TextScript.outside-staff-priority = #10
 
 	}
 
@@ -970,12 +972,32 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 	top-margin = 1.5\cm
 	left-margin = 2\cm
 	right-margin = 0.75\cm
-	bottom-margin = 0.25\cm
+	bottom-margin = 1\cm
 	ragged-last = ##t
-% 	ragged-right = ##t
 	min-systems-per-page = #2
-% 	system-system-spacing = #'((basic-distance . 40) (minimum-distance . 40) (padding . 0))
-% 	system-system-spacing = #'((basic-distance . 5) (minimum-distance . 5) (padding . 1))
+
+	evenHeaderMarkup = ##f
+	oddHeaderMarkup = ##f
+
+	system-separator-markup = #(markup
+										#:combine
+										#:beam 7 0.6 3
+										#:lower 4.25
+										#:beam 7 0.6 3
+							)	
+
+	evenFooterMarkup = \markup {
+			\override #'(font-size . 10)
+			\override #'(font-name . "Optima")
+						\fill-line { 
+							\line {"-" \fromproperty #'page:page-number-string "-"} 
+						}
+					}
+	oddFooterMarkup = \evenFooterMarkup 
+	two-sided = ##t
+	inner-margin = 1.25\cm
+	outer-margin = 1.25\cm
+	binding-offset = 1\cm
 }
 
 \header {
