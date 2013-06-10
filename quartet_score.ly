@@ -1,4 +1,4 @@
-\version "2.17.15"
+\version "2.17.20"
 \language "english"
 
 %%%%INCLUDES
@@ -36,16 +36,16 @@
 	\new StaffGroup <<
 		#(set-accidental-style 'dodecaphonic 'StaffGroup)
 		%%%VIOLIN I
-		\new Staff = "violin_1" \with {
-			instrumentName = "VIOLON I"
-			shortInstrumentName = "VNO. I"
-		} {
+% 		\new Staff = "violin_1" \with {
+% 			instrumentName = "VIOLON I"
+% 			shortInstrumentName = "VNO. I"
+% 		} {
 % 			\violin_I_pizz_intro
-			\violin_I_second_pizz
+% 			\violin_I_second_pizz
 % 			\violin_I_tuning
 % 			\violin_I_bichon_frise
 % 			\violin_I_tuned
-		}
+% 		}
 % 		VIOLIN II 
 % 		\new Staff = "violin_2" \with {
 % 			\remove "Bar_number_engraver"				
@@ -59,16 +59,16 @@
 % 			\violin_II_tuned
 % 		}
 % 		%VIOLA/
-% 		\new Staff = "viola" \with {
+		\new Staff = "viola" \with {
 % 			\remove "Bar_number_engraver"
 % 			instrumentName = "ALTO"
 % 			shortInstrumentName = "VLA."
-% 		} {
-% 			\viola_pizz
+		} {
+			\viola_pizz
 % 			\viola_tuning	
 % 			\viola_bichon_frise
 % 			\viola_tuned
-% 		}
+		}
 % 		CELLOx
 % 		\new Staff = "cello" \with {	
 % 			instrumentName = "VIOLONCELLE"

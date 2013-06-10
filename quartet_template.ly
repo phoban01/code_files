@@ -170,8 +170,11 @@ body-clef = #(define-music-function (layout props clef-type) (symbol?)
 
 
 %%%
+
+
 dxy = #(define-music-function (layout props vals) (pair?)
 	#{
+		\once \override DynamicText.extra-offset = $vals		
 		\once \override Staff.DynamicText.extra-offset = $vals
 		\once \override Staff.Hairpin.extra-offset = $vals
 	#}
@@ -510,7 +513,7 @@ body_staff = {
 		\override Staff.StaffSymbol #'line-positions = #'(-6 6)
 		\override Staff.NoteHead.no-ledgers = ##t	
 		\override Staff.Accidental.stencil = ##f	
-		\override Staff.Rest.Y-offset = #0
+% 		\override Staff.Rest.Y-offset = #0
 		\override Staff.Glissando.bound-details.left.padding = #0
 		\override Staff.Glissando.bound-details.right.padding = #0		
 		\set Staff.middleCPosition = #1
@@ -672,7 +675,9 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 		\override Beam #'length-fraction = #1.55	
 		\override Stem #'stemlet-length = #1	
 
-		proportionalNotationDuration = #(ly:make-moment 1 40)
+% 		proportionalNotationDuration = #(ly:make-moment 1 40)
+		proportionalNotationDuration = #(ly:make-moment 1 70)
+
 % 		proportionalNotationDuration = #(ly:make-moment 1 18)
 
 % 		\override SpacingSpanner #'uniform-stretching = ##t
@@ -819,10 +824,13 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 		\override Glissando.bound-details.right.attach-dir = #0
 		\override Glissando.bound-details.left.attach-dir = #0
 		\override TextScript #'outside-staff-priority = ##f	
+		\override TextScript.extra-offset = #'(0 . -4)
 		\override NoteHead #'stencil = #pizz-circle-head
 		\override Stem #'direction = #DOWN
-		\override Beam #'positions = #'(-16 . -16)
-		\override Staff.Dots.staff-position = #(lambda (grob) (set-dot-position grob 0))
+		\override Beam #'positions = #'(-20 . -20)
+% 		\override Beam #'positions = #'(-16 . -16)
+		\override NoteColumn.ignore-collision = ##t
+% 		\override Staff.Dots.staff-position = #(lambda (grob) (set-dot-position grob 0))
 
 	}
 	\context {
@@ -833,8 +841,13 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 		\override Rest.staff-position = #7
 		\override Beam #'breakable = ##t
 		\override Glissando #'breakable = ##t
-		\override Staff.Dots.staff-position = #(lambda (grob) (set-dot-position grob 22))
-		\override DynamicLineSpanner #'outside-staff-priority = ##f
+% 		\override Staff.Dots.staff-position = #(lambda (grob) (set-dot-position grob 22))
+		\override DynamicLineSpanner #'direction = #DOWN
+		\override DynamicLineSpanner.outside-staff-priority = ##f
+		\override DynamicLineSpanner.extra-offset = #'(0 . 2)
+		\override DynamicText.extra-offset = #'(0 . 3)
+		\override Hairpin.extra-offset = #'(0 . 3)
+		\override NoteColumn.ignore-collision = ##t
 		\override DynamicText #'font-size = #-2
 		\override NoteHead #'stencil = #fingertip-pizz
 		\override Stem #'direction = #UP
