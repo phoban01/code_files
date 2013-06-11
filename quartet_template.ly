@@ -6,6 +6,9 @@
 \include "/pieces/diotima_quartet/code_files/fingering_diagram_markup.ly"
 \include "/pieces/diotima_quartet/code_files/metronome_mark.ly"
 
+
+
+
 #(define-markup-command (long-pause layout props text) (markup?)
 	(interpret-markup layout props
 		(markup
@@ -473,6 +476,8 @@ normal_staff = {
 	\revert Staff.TimeSignature #'font-size
 	\override Staff.Glissando.bound-details.right.end-on-accidental = ##f
 	\override Staff.Glissando.bound-details.right.padding = #1.75	
+	\override Glissando.style = #'solid
+	\set Staff.clefPosition = #-2
 	\unset Staff.middleCPosition
 	\stemNeutral
 % 	\set Staff.forceClef = ##t
@@ -485,6 +490,7 @@ no_line_staff = {
 		\override Staff.StaffSymbol #'line-positions = #'(-1)
 		\override Staff.BarLine #'bar-extent = #'(-2 . 2)
 		\set Staff.middleCPosition = #0
+		\override Glissando.style = #'solid
 }
 
 single_line_staff = {
@@ -495,6 +501,7 @@ single_line_staff = {
 		\override Staff.StaffSymbol #'line-positions = #'(0)
 		\override Staff.BarLine #'bar-extent = #'(-2 . 2)
 		\set Staff.middleCPosition = #0
+		\override Glissando.style = #'solid
 		\stemUp
 }
 
@@ -516,6 +523,7 @@ body_staff = {
 % 		\override Staff.Rest.Y-offset = #0
 		\override Staff.Glissando.bound-details.left.padding = #0
 		\override Staff.Glissando.bound-details.right.padding = #0		
+		\override Glissando.style = #'solid
 		\set Staff.middleCPosition = #1
 		\circleheads
 % 		\body-clef #'fingerboard-small
@@ -663,7 +671,7 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 		\remove "Bar_number_engraver"
 		\accepts "BowPositionStaff"
 		\accepts "StringStaff"
-
+		\accepts "TimeStaff"
 		\numericTimeSignature
 		\override MetronomeMark #'staff-padding = #10
 		\override MetronomeMark #'padding = #5
@@ -677,7 +685,7 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 		\override Beam #'length-fraction = #1.55	
 		\override Stem #'stemlet-length = #1	
 
-		proportionalNotationDuration = #(ly:make-moment 1 100)
+% 		proportionalNotationDuration = #(ly:make-moment 1 100)
 
 		\override SpacingSpanner #'uniform-stretching = ##t
 % 		\override SpacingSpanner.strict-grace-spacing = ##t
@@ -702,17 +710,30 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 % 		\override TupletBracket #'staff-padding = #2
 
 		\override StaffGrouper #'staff-staff-spacing = #'(
-						(basic-distance . 40) 
-						(minimum-distance . 40) 
-						(padding . 0)
+						(basic-distance . 30) 
+						(minimum-distance . 30) 
+						(padding . 7)
 					    (stretchability . 0)
 						)
-		\override VerticalAxisGroup #'staffgroup-staff-spacing =
-			#'((basic-distance . 30)
-			(minimum-distance . 30)
-			(padding . 0)
-		    (stretchability . 0)
-			)		
+
+		\override BreakAlignment #'break-align-orders =
+% 		      ##((
+%       				staff-bar 
+% 		      		left-edge 
+%       				clef
+%       				;time-signature 
+%       				))
+				  #(make-vector 3 '(
+				  		span-bar
+	                    breathing-sign
+	                    staff-bar
+	                    key
+	                    left-edge
+	                    clef
+	                    ;time-signature
+	                    ))
+
+		
 		\override StemTremolo #'style = #'rectangle
 		\override StemTremolo #'beam-thickness = #0.6
 
@@ -734,14 +755,24 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 
 		\override Beam.damping = #5
 
+% 		\override BarLine #'space-alist #'clef = #'(minimum-space . 1)
+
+ 		\override StaffBar #'space-alist #'clef = #'(minimum-space-space . 5) 	    
+
 	}
+
+  	\context { 
+    	\RemoveEmptyStaffContext 
+    % To use the setting globally, uncomment the following line:
+    \override VerticalAxisGroup #'remove-first = ##t
+  	}
 
 	\context {
 		\StaffGroup
 		\accepts "BowPositionStaff"
 		\accepts "HiddenStaff"
 		\accepts "StringStaff"
-
+		\accepts "TimeStaff"
 	}
 	\context {
 		\Voice 
@@ -756,6 +787,7 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 		\remove "Accidental_engraver"
 	    \accepts "LeftHandVoice"
 		\accepts "RightHandVoice"	
+		\remove "Time_signature_engraver"
 % 		\override NoteColumn #'after-line-breaking = #cluster-stem-split
 		%if not rest function acts as a gate-keeper only letting through grobs with noteheads...no rests allowed
 % 		\override NoteColumn #'after-line-breaking = #if-not-rest
@@ -776,6 +808,19 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 
 		\override TextSpanner.outside-staff-priority = #150
 		\override TextScript.outside-staff-priority = #10
+
+		\override VerticalAxisGroup #'remove-empty = ##f
+
+% 		\override BarLine #'space-alist =
+% 		    #'((time-signature extra-space . 0.75)
+% 		       (custos minimum-space . 2.0)
+% 		       (clef minimum-space . 1.0)
+% 		       (key-signature extra-space . 1.0)
+% 		       (key-cancellation extra-space . 1.0)
+% 		       (first-note fixed-space . 1.3)
+% 		       (next-note semi-fixed-space . 0.9)
+% 		       (right-edge extra-space . 0.0))
+
 
 	}
 
@@ -862,7 +907,6 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 		\remove "Time_signature_engraver"
 		\remove "Accidental_engraver"
 
-
 		\override BarLine.transparent = ##t
 		\override Accidental.stencil = ##f
 		\override Stem #'direction = #UP
@@ -872,7 +916,7 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 		\override NoteHead #'stencil = #ly:text-interface::print
 		\override NoteHead #'text = #bow-position-notehead
 		\override NoteHead #'stem-attachment = #'(0 . 1)
-		\override Beam #'positions = #'(5 . 5)
+		\override Beam #'positions = #'(4.5 . 4.5)
 		\override Beam #'color = #grey
 		\override Flag #'color = #grey
 
@@ -889,10 +933,12 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 		\override TupletNumber #'font-size = #1
 		fontSize = #-4
 		\override StaffSymbol #'staff-space = #(magstep 2)
+		
+		\override VerticalAxisGroup #'remove-empty = ##t
 
 		\override VerticalAxisGroup #'staff-staff-spacing =
-			#'((basic-distance . 1)
-			(minimum-distance . 1)
+			#'((basic-distance . 2)
+			(minimum-distance . 2)
 			(padding . 1)
 			)		
 	}
@@ -958,20 +1004,57 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 			(padding . 1)
 		    (stretchability . 0)
 			)
-	
 	}
+	\context {
+		\Staff
+		\alias "Staff"
+		\name "TimeStaff"
+		\consists "Metronome_mark_engraver"
+		\consists "Time_signature_engraver"
+		\remove "Clef_engraver"
+		\remove "Bar_number_engraver"
+
+		\override MetronomeMark #'stencil = #metro-stencil
+		\override MetronomeMark #'staff-padding = #12
+		\override MetronomeMark #'padding = #3
+
+		\override StaffSymbol #'line-count = #1
+		\override StaffSymbol #'transparent = ##t
+		\override VerticalAxisGroup #'staff-staff-spacing =
+						#'((basic-distance . 8)
+						(minimum-distance . 8)
+						(padding . 0)
+					    (stretchability . 0)
+					)	
+		\override TimeSignature.whiteout = ##t
+		\override TimeSignature #'break-visibility = #end-of-line-invisible
+		\override TimeSignature #'stencil = #me-time-sig
+		\override TimeSignature #'Y-offset = #4
+	  	\override TimeSignature #'break-align-symbol = ##f
+	    \override TimeSignature #'X-offset = #ly:self-alignment-interface::x-aligned-on-self
+	    \override TimeSignature #'self-alignment-X = #CENTER
+		\override TimeSignature #'after-line-breaking = #shift-start-of-line-time-sig
+	  	\override TimeSignature #'space-alist =
+							    	#'((first-note . (fixed-space . 0.0))
+								       (right-edge . (extra-space . 0.5))
+								       (staff-bar . (fixed-space . 12 )))
+		\override TimeSignature #'font-size = #4
+	}
+
+
 }
 
-#(set-global-staff-size 13)
-#(set-default-paper-size "a3" 'portrait)
+% #(set-global-staff-size 13)
+#(set-global-staff-size 18)
+#(set-default-paper-size "a3" 'landscape)
 
 \paper {
-	top-margin = 1.5\cm
+	top-margin = 1.25\cm
 	left-margin = 2\cm
 	right-margin = 0.75\cm
 	bottom-margin = 1\cm
 	ragged-last = ##t
-	min-systems-per-page = #2
+	min-systems-per-page = #1
 
 	evenHeaderMarkup = ##f
 	oddHeaderMarkup = ##f
@@ -992,11 +1075,25 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 					}
 	oddFooterMarkup = \evenFooterMarkup 
 	two-sided = ##t
-	inner-margin = 1.25\cm
-	outer-margin = 1.25\cm
-	binding-offset = 1\cm
+	inner-margin = 1.5\cm
+	outer-margin = 2\cm
+	binding-offset = 0.75\cm
 }
 
 \header {
 	tagline = ""
+}
+
+jete = \markup {
+	\center-align
+	\score {
+		\new HiddenStaff {
+			\stemUp
+			\circles
+			\override Staff.NoteHead #'transparent = ##t
+    		c'32 \staccato[ ^\markup {\center-align \small \italic "jeté"} 
+    		c'32 \staccato c'32 \staccato c'32 ] \staccato
+		}
+	\layout {}
+	}
 }
