@@ -738,6 +738,7 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 		\override StemTremolo #'beam-thickness = #0.6
 
 		\override InstrumentName #'font-name = #"Optima"
+		\override InstrumentName.font-size = #-1
 % 		\override StemTremolo #'slope = #0.1
 
 		\override LaissezVibrerTie #'control-points = #(lambda (grob)
@@ -754,6 +755,7 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 		\override Glissando.minimum-length = #8
 
 		\override Beam.damping = #5
+
 
 % 		\override BarLine #'space-alist #'clef = #'(minimum-space . 1)
 
@@ -811,6 +813,8 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 
 		\override VerticalAxisGroup #'remove-empty = ##f
 
+		\override Clef #'break-visibility = #begin-of-line-visible
+		explicitClefVisibility = #end-of-line-invisible
 % 		\override BarLine #'space-alist =
 % 		    #'((time-signature extra-space . 0.75)
 % 		       (custos minimum-space . 2.0)
@@ -820,6 +824,7 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 % 		       (first-note fixed-space . 1.3)
 % 		       (next-note semi-fixed-space . 0.9)
 % 		       (right-edge extra-space . 0.0))
+
 
 
 	}
@@ -1039,13 +1044,14 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 								       (right-edge . (extra-space . 0.5))
 								       (staff-bar . (fixed-space . 12 )))
 		\override TimeSignature #'font-size = #4
+
 	}
 
 
 }
 
 % #(set-global-staff-size 13)
-#(set-global-staff-size 18)
+#(set-global-staff-size 17)
 #(set-default-paper-size "a3" 'landscape)
 
 \paper {
@@ -1076,7 +1082,7 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 	oddFooterMarkup = \evenFooterMarkup 
 	two-sided = ##t
 	inner-margin = 1.5\cm
-	outer-margin = 2\cm
+	outer-margin = 1.75\cm
 	binding-offset = 0.75\cm
 }
 

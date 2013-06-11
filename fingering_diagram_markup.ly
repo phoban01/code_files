@@ -243,7 +243,7 @@
 
 		))
 	)
-	(interpret-markup layout props output)
+	(interpret-markup layout props (markup #:translate '(1 . 0) output))
 	)
 
 )
