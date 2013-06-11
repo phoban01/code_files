@@ -757,7 +757,7 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 
 % 		\override BarLine #'space-alist #'clef = #'(minimum-space . 1)
 
- 		\override StaffBar #'space-alist #'clef = #'(minimum-space-space . 5) 	    
+%  		\override StaffBar #'space-alist #'clef = #'(minimum-space-space . 5) 	    
 
 	}
 

@@ -44,13 +44,13 @@ def write_to_file(outfile,music,local_name):
 	outfile.close()	
 
 basepath = "/pieces/diotima_quartet/music_files/skips/"
-paths = ["frise_skips.ly"]
+paths = ["skips_tuned.ly"]
 
 for fn in paths:
 	time_sigs = extract_time_sigs(basepath+fn)
 	print time_sigs
 	fileo = open(basepath+fn,"w")
-	write_to_file(fileo,make_voice(time_sigs),"frise_skips")
+	write_to_file(fileo,make_voice(time_sigs),"skips_tuned")
 
 
 

@@ -30,10 +30,19 @@
 \include "/pieces/diotima_quartet/music_files/frise_skips.ly"
 \include "/pieces/diotima_quartet/music_files/skips_pizz.ly"
 \include "/pieces/diotima_quartet/music_files/skips_tuning.ly"
+\include "/pieces/diotima_quartet/music_files/skips_tuned.ly"
 
 %TO DO 
 %FIX CLUSTER GRACE NOTES
 %ADD DYNAMICS AND MARKS TO PRETUNING, TUNING AND TUNING TRANSITION
+
+time_skips = {
+	\skips_pizz
+	\skips_tuning
+	\frise_skips
+	\skips_pressed_bow			
+	\skips_tuned
+}
 
 
 
@@ -46,17 +55,15 @@
 			shortInstrumentName = "VNO. I"
 		} {
 			\violin_I_pizz_intro
-% 			\violin_I_second_pizz
-% 			\violin_I_tuning
-% 			\violin_I_bichon_frise
-% 			\violin_one_pressed_bow
-% 			\violin_I_tuned
+			\violin_I_second_pizz
+			\violin_I_tuning
+			\violin_I_bichon_frise
+			\violin_one_pressed_bow
+			\violin_I_tuned
 		}
 		\new TimeStaff {
 			\numericTimeSignature
-			\skips_pizz
-% 			\skips_tuning
-% 			\frise_skips
+			\time_skips
 		}		
 % 		VIOLIN II 
 		\new Staff = "violin_2" \with {
@@ -65,17 +72,15 @@
 			shortInstrumentName = "VNO. 2"
 		} {		
 			\violin_II_pizz_intro	
-% 			\violin_II_second_pizz	  
-% 			\violin_II_tuning		
-% 			\violin_II_bichon_frise
-% 			\violin_two_pressed_bow
-% 			\violin_II_tuned
+			\violin_II_second_pizz	  
+			\violin_II_tuning		
+			\violin_II_bichon_frise
+			\violin_two_pressed_bow
+			\violin_II_tuned
 		}
 		\new TimeStaff {
 			\numericTimeSignature
-			\skips_pizz
-			\skips_tuning
-% 			\frise_skips
+			\time_skips
 		}		
 % 		%VIOLA/
 		\new Staff = "viola" \with {
@@ -84,16 +89,14 @@
 			shortInstrumentName = "VLA."
 		} {
 			\viola_pizz
-% 			\viola_tuning	
-% 			\viola_bichon_frise
-% 			\viola_pressed_bow
-% 			\viola_tuned
+			\viola_tuning	
+			\viola_bichon_frise
+			\viola_pressed_bow
+			\viola_tuned
 		}
 		\new TimeStaff {
 			\numericTimeSignature
-			\skips_pizz
-% 			\skips_tuning
-% 			\frise_skips
+			\time_skips
 		}		
 % 		CELLO
 		\new Staff = "cello" \with {	
@@ -102,45 +105,45 @@
 			\override BarNumber #'direction = #DOWN
 		} {
 			\cello_pizz_intro
-% 			\cello_pizz_section
-% 			\cello_tuning
-% 			\cello_bichon_frise
-% 			\cello_pressed_bow
-% 			\cello_tuned
+			\cello_pizz_section
+			\cello_tuning
+			\cello_bichon_frise
+			\cello_pressed_bow
+			\cello_tuned
 		}	
 
 
 
 
 		%%%% BOW POSITION STAVES %%%%% 	
-% 		\new BowPositionStaff \with {alignAboveContext="violin_1"} {
-% 			\skips_pizz
-% 			\skips_tuning
-% 			\frise_skips
-% % 			\skips_pressed_bow			
-% % 			\violin_one_pos_tuned
-% 		}
-% 		\new BowPositionStaff \with {alignAboveContext="violin_2"} {
-% 			\skips_pizz
-% 			\skips_tuning
-% 			\frise_skips
-% % 			\skips_pressed_bow			
-% % 			\violin_two_pos_tuned
-% 		}
-% 		\new BowPositionStaff \with {alignAboveContext="viola"} {
-% 			\skips_pizz
-% 			\skips_tuning
-% 			\frise_skips
-% % 			\skips_pressed_bow			
-% % 			\viola_pos_tuned
-% 		}
-% 		\new BowPositionStaff \with {alignAboveContext="cello"} {
-% 			\skips_pizz
-% 			\skips_tuning
-% 			\frise_skips
-% % 			\skips_pressed_bow			
-% % 			\cello_pos_tuned
-% 		}
+		\new BowPositionStaff \with {alignAboveContext="violin_1"} {
+			\skips_pizz
+			\skips_tuning
+			\frise_skips
+			\skips_pressed_bow			
+			\violin_one_pos_tuned
+		}
+		\new BowPositionStaff \with {alignAboveContext="violin_2"} {
+			\skips_pizz
+			\skips_tuning
+			\frise_skips
+			\skips_pressed_bow			
+			\violin_two_pos_tuned
+		}
+		\new BowPositionStaff \with {alignAboveContext="viola"} {
+			\skips_pizz
+			\skips_tuning
+			\frise_skips
+			\skips_pressed_bow			
+			\viola_pos_tuned
+		}
+		\new BowPositionStaff \with {alignAboveContext="cello"} {
+			\skips_pizz
+			\skips_tuning
+			\frise_skips
+			\skips_pressed_bow			
+			\cello_pos_tuned
+		}
 	>>
 
 % 	\midi {}
