@@ -428,7 +428,7 @@ vertical_bow = \markup {
 
 angle_bow = \markup {
 	\center-align
-	\scale #'(2 . 2)
+	\scale #'(3.5 . 3.5)
 	\epsfile #Y #1 #"/pieces/diotima_quartet/eps_files/angle_bow.eps"
 }
 

@@ -412,10 +412,12 @@ circles = {
 	\revert NoteHead.stem-attachment
 	\revert NoteHead.stencil
 	\revert NoteHead #'style
+	\revert TextScript.extra-offset
 }
 
 
 highest_harmonic = {
+	\once\override Accidental.stencil = ##f
 	\once \override Staff.Tie.extra-offset = #'(1 . -0.25)	
 	\once\override NoteColumn #'X-offset = #0.35
 	\once\override NoteHead #'no-ledgers = ##t
@@ -463,6 +465,7 @@ mute_head = {
 }
 
 natural_notehead = {
+	\once\override Accidental.stencil = ##f
 	\once \override Staff.Tie.extra-offset = #'(1 . -0.25)	
 % 	\once\override NoteColumn #'X-offset = #0.35
 	\once\override NoteHead #'no-ledgers = ##t
@@ -474,6 +477,7 @@ natural_notehead = {
 }
 
 flat_notehead = {
+	\once\override Accidental.stencil = ##f
 	\once \override Staff.Tie.extra-offset = #'(1 . -0.25)	
 % 	\once\override NoteColumn #'X-offset = #0.1
 	\once\override NoteHead #'no-ledgers = ##t
@@ -485,6 +489,7 @@ flat_notehead = {
 }
 
 sharp_notehead = {
+	\once\override Accidental.stencil = ##f
 	\once \override Staff.Tie.extra-offset = #'(1 . -0.25)	
 % 	\once\override NoteColumn #'X-offset = #0.1
 	\once\override NoteHead #'no-ledgers = ##t

@@ -657,8 +657,9 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 	indent = 0\cm
 	\context {
 		\Score
-	    \remove "Timing_translator"
-	    \remove "Default_bar_line_engraver"
+% 	    \remove "Timing_translator"
+% 	    \remove "Default_bar_line_engraver"
+ 		\remove "Separating_line_group_engraver"
 		\remove "Bar_number_engraver"
 		\accepts "BowPositionStaff"
 		\accepts "StringStaff"
@@ -676,12 +677,9 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 		\override Beam #'length-fraction = #1.55	
 		\override Stem #'stemlet-length = #1	
 
-% 		proportionalNotationDuration = #(ly:make-moment 1 40)
-		proportionalNotationDuration = #(ly:make-moment 1 58)
+		proportionalNotationDuration = #(ly:make-moment 1 100)
 
-% 		proportionalNotationDuration = #(ly:make-moment 1 18)
-
-% 		\override SpacingSpanner #'uniform-stretching = ##t
+		\override SpacingSpanner #'uniform-stretching = ##t
 % 		\override SpacingSpanner.strict-grace-spacing = ##t
 		
 		tupletFullLength = ##f
@@ -706,7 +704,7 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 		\override StaffGrouper #'staff-staff-spacing = #'(
 						(basic-distance . 40) 
 						(minimum-distance . 40) 
-						(padding . 2)
+						(padding . 0)
 					    (stretchability . 0)
 						)
 		\override VerticalAxisGroup #'staffgroup-staff-spacing =
@@ -734,6 +732,8 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 
 		\override Glissando.minimum-length = #8
 
+		\override Beam.damping = #5
+
 	}
 
 	\context {
@@ -746,11 +746,12 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 	\context {
 		\Voice 
 		\consists "Accidental_engraver"
+		\remove "Forbid_line_break_engraver"
 	}
 	\context {
 		\Staff
-	    \consists "Timing_translator"
-	    \consists "Default_bar_line_engraver"
+% 	    \consists "Timing_translator"
+% 	    \consists "Default_bar_line_engraver"
 		\consists "Bar_number_engraver"
 		\remove "Accidental_engraver"
 	    \accepts "LeftHandVoice"
@@ -802,17 +803,13 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 		\override NoteColumn #'ignore-collision = ##f
 
 	}
-	\context {
-		\Voice
-		    \remove "Forbid_line_break_engraver"
-	}
+
 	\context {
 		\Voice
 		\alias "Voice"
 		\name "LeftHandVoice"
 		\remove "Accidental_engraver"
-
-% 		#(add-grace-property 'Voice 'Stem 'length set-stem-position-grace)
+		\remove "Forbid_line_break_engraver"
 		\override Rest.staff-position = #-7
 		\override TupletBracket #'padding = #1
 		\override Beam #'breakable = ##t
@@ -826,10 +823,8 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 		\override NoteHead #'stencil = #pizz-circle-head
 		\override Stem #'direction = #DOWN
 		\override Beam #'positions = #'(-20 . -20)
-% 		\override Beam #'positions = #'(-16 . -16)
 		\override NoteColumn.ignore-collision = ##t
 		\override Rest #'font-size = #-2		
-% 		\override Staff.Dots.staff-position = #(lambda (grob) (set-dot-position grob 0))
 
 	}
 	\context {
@@ -837,6 +832,7 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 		\alias "Voice"
 		\name "RightHandVoice"
 		\remove "Accidental_engraver"
+		\remove "Forbid_line_break_engraver"		
 		\override Rest.staff-position = #7
 		\override Beam #'breakable = ##t
 		\override Glissando #'breakable = ##t
@@ -908,6 +904,7 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 		\remove "Ledger_line_engraver"
 		\remove "Time_signature_engraver"
 		\remove "Accidental_engraver"
+		\remove "Bar_number_engraver"
 
 		\override Accidental.stencil = ##f
 
@@ -918,7 +915,7 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 		\override VerticalAxisGroup #'staff-staff-spacing =
 			#'((basic-distance . 0)
 			(minimum-distance . 0)
-			(padding . 3)
+			(padding . 1)
 		    (stretchability . 0)
 			)		
 	}
