@@ -25,7 +25,7 @@
 \include "/pieces/diotima_quartet/music_files/violin_I_tuned.ly"
 \include "/pieces/diotima_quartet/music_files/violin_II_tuned.ly"
 \include "/pieces/diotima_quartet/music_files/viola_tuned.ly"
-\include "/pieces/diotima_quartet/music_files/cello_tuned.ly"
+\include "/pieces/diotima_quartet/music_files/cello_tuned.ly" 
 \include "/pieces/diotima_quartet/music_files/pressed_bow_gliss.ly"
 \include "/pieces/diotima_quartet/music_files/frise_skips.ly"
 \include "/pieces/diotima_quartet/music_files/skips_pizz.ly"

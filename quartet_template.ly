@@ -1118,8 +1118,8 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 
 	max-systems-per-page = #3
 
-	evenFooterMarkup = ##f
-	oddFooterMarkup = ##f
+	evenHeaderMarkup = ##f
+	oddHeaderMarkup = ##f
 
 	system-separator-markup = #(markup
 										#:combine
@@ -1128,17 +1128,17 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 										#:beam 7 0.6 3
 							)	
 
-	evenHeaderMarkup = \markup {
-			\override #'(font-size . 10)
-			\override #'(font-name . "Optima")
+	evenFooterMarkup = \markup {
+			\override #'(font-size . 12)
+			\override #'(font-name . "AdobeMyungjoStd")
 						\fill-line { 
 							\line {"-" \fromproperty #'page:page-number-string "-"} 
 						}
 					}
-	oddHeaderMarkup = \evenHeaderMarkup 
+	oddFooterMarkup = \evenFooterMarkup 
 	two-sided = ##t
-	inner-margin = 1.25\cm
-	outer-margin = 1.25\cm
+	inner-margin = 1\cm
+	outer-margin = 1\cm
 	binding-offset = 0.75\cm
 }
 
