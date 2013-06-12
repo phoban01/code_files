@@ -125,7 +125,6 @@ time_skips = {
 
 
 
-
 		%%%% BOW POSITION STAVES %%%%% 	
 		\new BowPositionStaff \with {alignAboveContext="violin_1"} {
 			\skips_pizz

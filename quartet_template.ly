@@ -754,8 +754,8 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 % 		\override TupletBracket #'staff-padding = #2
 
 		\override StaffGrouper #'staff-staff-spacing = #'(
-						(basic-distance . 30) 
-						(minimum-distance . 30) 
+						(basic-distance . 27) 
+						(minimum-distance . 27) 
 						(padding . 7)
 					    (stretchability . 0)
 						)
@@ -1109,15 +1109,17 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 #(set-default-paper-size "a3" 'landscape)
 
 \paper {
-	top-margin = 1.25\cm
+	top-margin = 0.5\cm
 	left-margin = 2\cm
 	right-margin = 0.75\cm
-	bottom-margin = 1\cm
+	bottom-margin = 0.5\cm
 	ragged-last = ##t
-	min-systems-per-page = #2
+	min-systems-per-page = #1
 
-	evenHeaderMarkup = ##f
-	oddHeaderMarkup = ##f
+	max-systems-per-page = #3
+
+	evenFooterMarkup = ##f
+	oddFooterMarkup = ##f
 
 	system-separator-markup = #(markup
 										#:combine
@@ -1126,17 +1128,17 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 										#:beam 7 0.6 3
 							)	
 
-	evenFooterMarkup = \markup {
+	evenHeaderMarkup = \markup {
 			\override #'(font-size . 10)
 			\override #'(font-name . "Optima")
 						\fill-line { 
 							\line {"-" \fromproperty #'page:page-number-string "-"} 
 						}
 					}
-	oddFooterMarkup = \evenFooterMarkup 
+	oddHeaderMarkup = \evenHeaderMarkup 
 	two-sided = ##t
-	inner-margin = 1.5\cm
-	outer-margin = 1.75\cm
+	inner-margin = 1.25\cm
+	outer-margin = 1.25\cm
 	binding-offset = 0.75\cm
 }
 
