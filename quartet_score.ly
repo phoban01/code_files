@@ -61,10 +61,10 @@ time_skips = {
 			\violin_one_pressed_bow
 			\violin_I_tuned
 		}
-		\new TimeStaff {
-			\numericTimeSignature
-			\time_skips
-		}		
+% 		\new TimeStaff {
+% 			\numericTimeSignature
+% 			\time_skips
+% 		}		
 % 		VIOLIN II 
 		\new Staff = "violin_2" \with {
 			\remove "Bar_number_engraver"				
@@ -78,7 +78,16 @@ time_skips = {
 			\violin_two_pressed_bow
 			\violin_II_tuned
 		}
-		\new TimeStaff {
+		\new TimeStaff \with {
+			\consists "Metronome_mark_engraver"
+			\override VerticalAxisGroup.staff-staff-spacing = #'(
+								(basic-distance . 10) 
+								(minimum-distance . 10) 
+								(padding . 5)
+							    (stretchability . 0)
+							)
+		}
+		{
 			\numericTimeSignature
 			\time_skips
 		}		
@@ -94,15 +103,17 @@ time_skips = {
 			\viola_pressed_bow
 			\viola_tuned
 		}
-		\new TimeStaff {
-			\numericTimeSignature
-			\time_skips
-		}		
+% 		\new TimeStaff {
+% 			\numericTimeSignature
+% 			\time_skips
+% 		}		
 % 		CELLO
 		\new Staff = "cello" \with {	
+			\consists "Mark_engraver"
 			instrumentName = "VIOLONCELLE"
 			shortInstrumentName = "VC."
-			\override BarNumber #'direction = #DOWN
+			\override BarNumber.direction = #DOWN
+			\override RehearsalMark.direction = #DOWN
 		} {
 			\cello_pizz_intro
 			\cello_pizz_section

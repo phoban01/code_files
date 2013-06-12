@@ -6,7 +6,52 @@
 \include "/pieces/diotima_quartet/code_files/fingering_diagram_markup.ly"
 \include "/pieces/diotima_quartet/code_files/metronome_mark.ly"
 
+attach_tuner = \markup {
+	\override #'(thickness . 2) 	
+	\box
+	\pad-markup  #0.75
+	\override #'(font-name . "Optima") 	
+	\fontsize #0.35
+	"ATTACH TUNER"
+}
 
+lay_flat = \markup {
+	\override #'(thickness . 2) 	
+	\box
+	\pad-markup  #0.75
+	\override #'(font-name . "Optima") 	
+	\fontsize #0.35
+	"LAY INSTRUMENT FLAT"
+}
+
+normal_hold = \markup {
+	\override #'(thickness . 2) 	
+	\box
+	\pad-markup  #0.75
+	\override #'(font-name . "Optima") 	
+	\fontsize #0.35
+	"LIFT INSTRUMENT TO NORMAL POSITION"
+}
+
+remove_tuner = \markup {
+	\override #'(thickness . 2) 	
+	\box
+	\pad-markup  #0.75
+	\override #'(font-name . "Optima") 	
+	\fontsize #0.35
+	"REMOVE TUNER"
+}
+
+my_mark = #(define-music-function (parser location text) (string?)
+	#{
+		\mark \markup {
+			\override #'(thickness . 4)
+			\override #'(font-name . "Optima") 
+			\override #'(font-size . 6) 
+			\box \pad-markup #0.75 $text
+		}
+	#}	
+)
 
 
 #(define-markup-command (long-pause layout props text) (markup?)
@@ -196,17 +241,17 @@ span-shift = {
 %%%%%
 fast-zigzag = {
 		\override Glissando.dash-fraction = #0.1
-		\override Glissando.dash-period = #0.8
+		\override Glissando.dash-period = #1.25
 }
 
 med-zigzag = {
 		\override Glissando.dash-fraction = #0.1
-		\override Glissando.dash-period = #2.25
+		\override Glissando.dash-period = #2.4
 }
 
 slow-zigzag = {
 		\override Glissando.dash-fraction = #0.1
-		\override Glissando.dash-period = #4
+		\override Glissando.dash-period = #4.5
 }
 
 
@@ -672,11 +717,10 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 		\accepts "BowPositionStaff"
 		\accepts "StringStaff"
 		\accepts "TimeStaff"
+		\remove "Metronome_mark_engraver"
+
 		\numericTimeSignature
-		\override MetronomeMark #'staff-padding = #10
-		\override MetronomeMark #'padding = #5
-		\override MetronomeMark #'extra-offset = #'(0 . 2)
-		\override MetronomeMark #'stencil = #metro-stencil
+
 
 		\override Beam #'breakable = ##t
 		\override Glissando #'breakable = ##t
@@ -773,6 +817,8 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 
 	\context {
 		\StaffGroup
+		\remove "Metronome_mark_engraver"
+
 		\accepts "BowPositionStaff"
 		\accepts "HiddenStaff"
 		\accepts "StringStaff"
@@ -787,6 +833,8 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 		\Staff
 % 	    \consists "Timing_translator"
 % 	    \consists "Default_bar_line_engraver"
+		\remove "Metronome_mark_engraver"
+
 		\consists "Bar_number_engraver"
 		\remove "Accidental_engraver"
 	    \accepts "LeftHandVoice"
@@ -795,7 +843,7 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 % 		\override NoteColumn #'after-line-breaking = #cluster-stem-split
 		%if not rest function acts as a gate-keeper only letting through grobs with noteheads...no rests allowed
 % 		\override NoteColumn #'after-line-breaking = #if-not-rest
-		\override BarNumber #'break-visibility = #'#(#t #t #f)
+		\override BarNumber #'break-visibility = #'#(#f #f #t)
 		\override BarNumber #'self-alignment-X = #CENTER
 		\override BarNumber #'direction = #UP
 		\override BarNumber #'font-size = #2
@@ -804,7 +852,7 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 		\override BarNumber #'whiteout = ##t
 		\override BarNumber #'stencil = #(make-stencil-circler 0.1 0.5 ly:text-interface::print)			
 		\override BarNumber.outside-staff-priority =  #1000
-		barNumberVisibility = #(every-nth-bar-number-visible 1)
+% 		barNumberVisibility = #(every-nth-bar-number-visible 1)
 
 		\override TupletBracket #'padding = #padding-function
 
@@ -913,6 +961,7 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 		\remove "Ledger_line_engraver"
 		\remove "Time_signature_engraver"
 		\remove "Accidental_engraver"
+		\consists "Mark_engraver"
 
 		\override BarLine.transparent = ##t
 		\override Accidental.stencil = ##f
@@ -1016,15 +1065,17 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 		\Staff
 		\alias "Staff"
 		\name "TimeStaff"
-		\consists "Metronome_mark_engraver"
+% 		\consists "Metronome_mark_engraver"
 		\consists "Time_signature_engraver"
 		\remove "Clef_engraver"
 		\remove "Bar_number_engraver"
 		\remove "Volta_engraver"
 
 		\override MetronomeMark #'stencil = #metro-stencil
-		\override MetronomeMark #'staff-padding = #12
-		\override MetronomeMark #'padding = #3
+% 		\override MetronomeMark #'staff-padding = #12
+% 		\override MetronomeMark #'padding = #3
+		\override MetronomeMark #'extra-offset = #'(3 . 0)
+
 
 		\override StaffSymbol #'line-count = #1
 		\override StaffSymbol #'transparent = ##t
@@ -1054,8 +1105,8 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 }
 
 % #(set-global-staff-size 13)
-#(set-global-staff-size 12)
-#(set-default-paper-size "a3" 'portrairt)
+#(set-global-staff-size 10)
+#(set-default-paper-size "a3" 'landscape)
 
 \paper {
 	top-margin = 1.25\cm
@@ -1100,7 +1151,7 @@ jete = \markup {
 			\stemUp
 			\circles
 			\override Staff.NoteHead #'transparent = ##t
-    		c'32 \staccato[ ^\markup {\right-align \small \italic "jeté"} 
+    		c'32 \staccato[ ^\markup {\small \italic "jeté"} 
     		c'32 \staccato c'32 \staccato c'32 ] \staccato
 		}
 	\layout {}

@@ -111,7 +111,7 @@
 		(markup
 		 	#:override '(box-padding . 1)
 		 	#:override '(thickness . 2.5)
-			#:override '(font-size . 1)
+			#:override '(font-size . 4)
 			#:raise 2
 			#:box
 				#:override '(baseline-skip . 3)
@@ -120,54 +120,48 @@
 					#:raise 0.75
 					#:scale '(0.85 . 0.85)
 					unit
-					#:override '(font-size . 0)
 					#:raise 1
-					#:override '(font-name . "Contax")
+					#:override '(font-name . "AdobeCaslonPro")
 					" =" 
-					#:override '(font-name . "Contax")
-					#:raise 1
-					#:override '(font-size . 0) 
+					#:override '(font-name . "AdobeCaslonPro")
+					#:raise 1 
 					(number->string metro)
 					)
-					#:override '(font-size . 0.5)
+					#:override '(font-size . 3.5)
 					#:override '(font-name . "AdobeCaslonPro Italic")					
 					#:raise 3.25
-					(string-append "(" text ")")			
+					text
 ))
 
 #(define-public (metro-pair unit metro text)
 		(markup
 		 	#:override '(box-padding . 1)
 		 	#:override '(thickness . 2.5)
-			#:override '(font-size . 1)
+			#:override '(font-size . 4)
 			#:raise 2
 			#:box
 				#:override '(baseline-skip . 3)
 					#:line (
 					#:override '(thickness . 0.85)
 					#:raise 0.75
-					#:scale '(0.85 . 0.85)
+					#:scale '(1 . 1)
 					unit
-					#:override '(font-size . 0)
 					#:raise 1
-					#:override '(font-name . "Contax")
+					#:override '(font-name . "AdobeCaslonPro")
 					" =" 
-					#:override '(font-name . "Contax")
-					#:raise 1
-					#:override '(font-size . 0) 
+					#:override '(font-name . "AdobeCaslonPro")
+					#:raise 1 
 					(number->string (car metro))
-					#:override '(font-name . "Contax")
-					#:raise 1
-					#:override '(font-size . 0) 
-					"-" 
-					#:override '(font-name . "Contax")
-					#:raise 1
-					#:override '(font-size . 0) 
+					#:override '(font-name . "AdobeCaslonPro")
+					#:raise 1 
+					"~" 
+					#:override '(font-name . "AdobeCaslonPro")
+					#:raise 1 
 					(number->string (cdr metro)))
-					#:override '(font-size . 0.5)
+					#:override '(font-size . 3.5)
 					#:override '(font-name . "AdobeCaslonPro Italic")					
 					#:raise 3.25
-					(string-append "(" text ")")
+					text
 			)
 )
 
