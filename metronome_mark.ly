@@ -17,16 +17,17 @@
 					#:musicglyph "noteheads.s0"
 			  ))
 			  (half (markup
-			  		#:scale '(0.85 . 0.85)			  	
+			  		#:scale '(1 . 1)			  	
 					#:combine
-					#:translate '(1.5 . 0.85)
-					#:draw-line '(0 . 3.5)
+					#:translate '(1.58 . 0.75)
+					#:draw-line '(0 . 3.75)
 					#:translate '(0 . 0.0)
-					#:override '(font-family . typewriter)
+					#:override '(font-name . "Optima")
+					#:override '(font-size . 10)					
 					#:combine
-					#:translate (cons offset 0)
+					#:translate (cons (+ offset 1.25) 0)
 					(number->string num)
-					#:override '(font-size . 1)
+					#:override '(font-size . 2)
 					#:translate '(0 . 0.5)
 					#:musicglyph "noteheads.s1"
 			    ))

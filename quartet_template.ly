@@ -716,13 +716,15 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 					    (stretchability . 0)
 						)
 
+
+		\override StaffGrouper #'staff-staff-spacing = #'(
+						(basic-distance . 15) 
+						(minimum-distance . 15) 
+						(padding . 7)
+					    (stretchability . 0)
+						)
+
 		\override BreakAlignment #'break-align-orders =
-% 		      ##((
-%       				staff-bar 
-% 		      		left-edge 
-%       				clef
-%       				;time-signature 
-%       				))
 				  #(make-vector 3 '(
 				  		span-bar
 	                    breathing-sign
@@ -1018,6 +1020,7 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 		\consists "Time_signature_engraver"
 		\remove "Clef_engraver"
 		\remove "Bar_number_engraver"
+		\remove "Volta_engraver"
 
 		\override MetronomeMark #'stencil = #metro-stencil
 		\override MetronomeMark #'staff-padding = #12
@@ -1051,8 +1054,8 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 }
 
 % #(set-global-staff-size 13)
-#(set-global-staff-size 17)
-#(set-default-paper-size "a3" 'landscape)
+#(set-global-staff-size 12)
+#(set-default-paper-size "a3" 'portrairt)
 
 \paper {
 	top-margin = 1.25\cm
@@ -1060,7 +1063,7 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 	right-margin = 0.75\cm
 	bottom-margin = 1\cm
 	ragged-last = ##t
-	min-systems-per-page = #1
+	min-systems-per-page = #2
 
 	evenHeaderMarkup = ##f
 	oddHeaderMarkup = ##f
@@ -1091,13 +1094,13 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 }
 
 jete = \markup {
-	\center-align
+	\left-align
 	\score {
 		\new HiddenStaff {
 			\stemUp
 			\circles
 			\override Staff.NoteHead #'transparent = ##t
-    		c'32 \staccato[ ^\markup {\center-align \small \italic "jeté"} 
+    		c'32 \staccato[ ^\markup {\right-align \small \italic "jeté"} 
     		c'32 \staccato c'32 \staccato c'32 ] \staccato
 		}
 	\layout {}

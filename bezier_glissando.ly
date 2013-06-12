@@ -176,7 +176,7 @@ bezier_gliss_double = #(define-music-function (parser location curves padding) (
 wavy_vibrato = #(define-music-function (parser location scale) (number?)
 	#{
 		\once \override Dots #'extra-offset = #'(-0.25 . -0.85)
-% 		\once \override Glissando #'after-line-breaking = #(lambda (grob) (wavy-vibrato grob scale))
+		\once \override Glissando #'after-line-breaking = #(lambda (grob) (wavy-vibrato grob scale))
 	#}
 )
 
@@ -221,7 +221,7 @@ wavy_vibrato = #(define-music-function (parser location scale) (number?)
 wavy_line = #(define-music-function (parser location scale) (number?)
 	#{
 		\once \override Dots #'extra-offset = #'(-0.25 . -0.85)
-% 		\once \override Glissando #'after-line-breaking = #(lambda (grob) (wavy-line grob scale))
+		\once \override Glissando #'after-line-breaking = #(lambda (grob) (wavy-line grob scale))
 	#}
 )
 

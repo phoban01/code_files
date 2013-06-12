@@ -15,11 +15,18 @@
 					#:box
 					#:override '(baseline-skip . 0.35)
 					#:pad-markup 0
-					#:fontsize -3					
+					#:fontsize -3
+					#:override '(word-space . 0.05)
 					#:line (
 					#:override '(font-name . "AdobeCaslonPro")	
+					#:vcenter					
 					#:whiteout start
-					"->"
+					#:combine
+					#:translate '(1.25 . 0)
+					#:arrow-head X RIGHT #t
+					#:scale '(1 . 0.6)
+					#:musicglyph "scripts.prall"
+					#:vcenter					
 					#:override '(font-name . "AdobeCaslonPro")
 					#:whiteout stop
 					)
