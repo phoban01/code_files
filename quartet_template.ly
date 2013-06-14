@@ -24,7 +24,9 @@ pizz_hold = \markup {
 	\pad-markup  #0.75
 	\override #'(font-name . "Optima") 	
 	\fontsize #0.35
-	"GAMBA POSITION (BOW DOWN)"
+	"GAMBA POSITION" 
+	\fontsize #0.25
+	"(PIZZ. BOW DOWN)"
 }
 
 attach_tuner = \markup {
