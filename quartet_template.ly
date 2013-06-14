@@ -6,6 +6,27 @@
 \include "/pieces/diotima_quartet/code_files/fingering_diagram_markup.ly"
 \include "/pieces/diotima_quartet/code_files/metronome_mark.ly"
 
+
+
+
+take_bow = \markup {
+	\override #'(thickness . 2) 	
+	\box
+	\pad-markup  #0.75
+	\override #'(font-name . "Optima") 	
+	\fontsize #0.35
+	"TAKE BOW"
+}
+
+pizz_hold = \markup {
+	\override #'(thickness . 2) 	
+	\box
+	\pad-markup  #0.75
+	\override #'(font-name . "Optima") 	
+	\fontsize #0.35
+	"GAMBA POSITION (BOW DOWN)"
+}
+
 attach_tuner = \markup {
 	\override #'(thickness . 2) 	
 	\box
@@ -45,10 +66,10 @@ remove_tuner = \markup {
 my_mark = #(define-music-function (parser location text) (string?)
 	#{
 		\mark \markup {
-			\override #'(thickness . 4)
-			\override #'(font-name . "Optima") 
-			\override #'(font-size . 6) 
-			\box \pad-markup #0.75 $text
+			\override #'(thickness . 2.5)
+			\override #'(font-name . "AdobeMyungjoStd") 
+			\override #'(font-size . 8) 
+			\box \pad-markup #1.25 $text
 		}
 	#}	
 )
@@ -521,7 +542,10 @@ normal_staff = {
 	\revert Staff.TimeSignature #'font-size
 	\override Staff.Glissando.bound-details.right.end-on-accidental = ##f
 	\override Staff.Glissando.bound-details.right.padding = #1.75	
+	\override Staff.Glissando.style = #'solid
 	\override Glissando.style = #'solid
+	\override Voice.Glissando.style = #'solid
+
 	\set Staff.clefPosition = #-2
 	\unset Staff.middleCPosition
 	\stemNeutral
@@ -770,11 +794,11 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 
 		\override BreakAlignment #'break-align-orders =
 				  #(make-vector 3 '(
+	                    left-edge
 				  		span-bar
 	                    breathing-sign
 	                    staff-bar
 	                    key
-	                    left-edge
 	                    clef
 	                    ;time-signature
 	                    ))
@@ -801,6 +825,7 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 		\override Glissando.minimum-length = #8
 
 		\override Beam.damping = #5
+
 
 
 % 		\override BarLine #'space-alist #'clef = #'(minimum-space . 1)
@@ -1104,19 +1129,18 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 
 }
 
-% #(set-global-staff-size 13)
-#(set-global-staff-size 10)
-#(set-default-paper-size "a3" 'landscape)
+#(set-global-staff-size 12)
+#(set-default-paper-size "a3" 'portrait)
 
 \paper {
 	top-margin = 0.5\cm
-	left-margin = 2\cm
-	right-margin = 0.75\cm
+	left-margin = 1.5\cm
+	right-margin = 1\cm
 	bottom-margin = 0.5\cm
 	ragged-last = ##t
-	min-systems-per-page = #1
+	min-systems-per-page = #2
 
-	max-systems-per-page = #3
+	max-systems-per-page = #2
 
 	evenHeaderMarkup = ##f
 	oddHeaderMarkup = ##f
@@ -1129,17 +1153,17 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 							)	
 
 	evenFooterMarkup = \markup {
-			\override #'(font-size . 12)
+			\override #'(font-size . 9)
 			\override #'(font-name . "AdobeMyungjoStd")
 						\fill-line { 
 							\line {"-" \fromproperty #'page:page-number-string "-"} 
 						}
 					}
 	oddFooterMarkup = \evenFooterMarkup 
-	two-sided = ##t
-	inner-margin = 1\cm
-	outer-margin = 1\cm
-	binding-offset = 0.75\cm
+% 	two-sided = ##t
+% 	inner-margin = 1\cm
+% 	outer-margin = 1\cm
+% 	binding-offset = 0.75\cm
 }
 
 \header {
