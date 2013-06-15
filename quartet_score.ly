@@ -123,8 +123,6 @@ time_skips = {
 			\cello_tuned
 		}	
 
-
-
 		%%%% BOW POSITION STAVES %%%%% 	
 		\new BowPositionStaff \with {alignAboveContext="violin_1"} {
 			\skips_pizz
@@ -156,5 +154,43 @@ time_skips = {
 		}
 	>>
 
-% 	\midi {}
 }
+
+\header {
+		tag = ""
+		dedication = \markup {
+					
+					\override #'(font-name . "AdobeCaslonPro Italic")
+					\override #'(font-size . 7)
+					"pour le Quatour Diotima" 
+				}
+		title = \markup {
+					\vspace #3
+					\override #'(font-name . "Optima")
+					\override #'(font-size . 8)
+					\line {chassa : en stamma : le passage}
+				}
+		composer = \markup {
+					\vspace #4
+					\override #'(font-name . "Optima")
+					\override #'(font-size . 3)
+					\right-column {
+						"Piaras Hoban"
+						"2012"
+					}
+				}	
+% 		poet = \markup {
+% 					\override #'(font-name . "AdobeCaslonPro")
+% 					\override #'(font-size . 2)
+% 					\override #'(line-width . 47)
+% 					\override #'(baseline-skip . 5)
+% 					\justify {2012}
+% 		}		
+		subsubtitle = \markup {
+					\vspace #3	
+					\override #'(font-name . "Optima")
+					\override #'(font-size . 6)
+					\italic "quatuor à cordes"
+
+				}
+	}
