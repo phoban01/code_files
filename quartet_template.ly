@@ -6,7 +6,14 @@
 \include "/pieces/diotima_quartet/code_files/fingering_diagram_markup.ly"
 \include "/pieces/diotima_quartet/code_files/metronome_mark.ly"
 
-
+gamba = \markup {
+	\override #'(thickness . 2) 	
+	\box
+	\pad-markup  #0.75
+	\override #'(font-name . "Optima") 	
+	\fontsize #0.35
+	"GAMBA POSITION" 
+}
 
 
 take_bow = \markup {
@@ -124,7 +131,7 @@ sub_fff = #(make-dynamic-script
 fingerboard_path = \markup {
 		\override #'(line-join-style . miter)
 		\combine
-		\path #0.1 #'(
+		\path #0.15 #'(
 			(moveto 0.2 0)
 			(curveto 0.2 0 1 0.5 1.8 0)
 			(lineto 2.65 -14)
@@ -134,7 +141,7 @@ fingerboard_path = \markup {
 			(curveto -0.65 -14 1 -13.5 2.65 -14)
 			)
 		\combine
-		\path #0.01 #'(
+		\path #0.09 #'(
 			(moveto 0.5 0.1)
 			(curveto 0.5 0.1 -0.55 -16 -0.1 -20)
 			(moveto 0.8 0.15)
@@ -810,7 +817,7 @@ pposr = #(define-music-function (layout props pos music) (number? ly:music?)
 		\override StemTremolo #'beam-thickness = #0.6
 
 		\override InstrumentName #'font-name = #"Optima"
-		\override InstrumentName.font-size = #-1
+		\override InstrumentName.font-size = #-2
 % 		\override StemTremolo #'slope = #0.1
 
 		\override LaissezVibrerTie #'control-points = #(lambda (grob)

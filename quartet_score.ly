@@ -47,6 +47,7 @@ time_skips = {
 
 
 \score {
+	\keepWithTag #'score
 	\new StaffGroup <<
 		#(set-accidental-style 'dodecaphonic 'StaffGroup)
 		%%%VIOLIN I
@@ -176,16 +177,9 @@ time_skips = {
 					\override #'(font-size . 3)
 					\right-column {
 						"Piaras Hoban"
-						"2012"
+						"[2012]"
 					}
-				}	
-% 		poet = \markup {
-% 					\override #'(font-name . "AdobeCaslonPro")
-% 					\override #'(font-size . 2)
-% 					\override #'(line-width . 47)
-% 					\override #'(baseline-skip . 5)
-% 					\justify {2012}
-% 		}		
+				}			
 		subsubtitle = \markup {
 					\vspace #3	
 					\override #'(font-name . "Optima")
